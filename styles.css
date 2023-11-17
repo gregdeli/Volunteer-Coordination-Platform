@@ -2,6 +2,8 @@ html, body {
     height: 100%;
     margin: 0;
 }
+
+ /* Mapa  */
 .leaflet-container {
     height: 600px;
     width: 500px;
