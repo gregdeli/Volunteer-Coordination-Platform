@@ -1,0 +1,41 @@
+body{
+    background-color: rgb(203, 239, 215);  
+    background-image: url(BG_volunteer2.jpg);
+    background-repeat: repeat-x;
+    background-position-y: 210%; 
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+h2{
+    text-align: center;
+}
+
+form{
+    text-align: center;
+    margin: 8%;
+}
+
+.labelLeft{
+    margin-right: 18%;
+    text-align: left;
+}
+
+input[type=text], input[type=password] {
+    width: 25%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 3px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: rgb(10, 144, 92);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 10%;
+  }
+
