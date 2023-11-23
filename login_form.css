@@ -1,8 +1,8 @@
 body{
     background-color: rgb(203, 239, 215);  
-    background-image: url(BG_volunteer2.jpg);
-    background-repeat: repeat-x;
-    background-position-y: 210%; 
+    /* background-image: url(BG_volunteer2.jpg); */
+    /* background-repeat: repeat-x; */
+    /* background-position-y: 210%;  */
     font-family: "Lucida Console", "Courier New", monospace;
 }
 
@@ -11,17 +11,23 @@ h2{
 }
 
 form{
+    background-color: rgb(20, 144, 92);
+    border-radius: 8px;
     text-align: center;
-    margin: 8%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    margin-top: 5%;
+    margin-left: 30%;
+    margin-right: 30%;
+
 }
 
 .labelLeft{
-    margin-right: 18%;
-    text-align: left;
+    margin-right: 30%;
 }
 
 input[type=text], input[type=password] {
-    width: 25%;
+    width: 50%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -30,12 +36,12 @@ input[type=text], input[type=password] {
 }
 
 button {
-    background-color: rgb(10, 144, 92);
+    background-color: rgb(43, 90, 63);
     color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
+    padding: 15px;
+    margin: 20px;
     border: none;
     cursor: pointer;
-    width: 10%;
+    width: 15%;
   }
 
