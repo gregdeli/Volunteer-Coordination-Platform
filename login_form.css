@@ -37,11 +37,14 @@ input[type=text], input[type=password] {
 
 button {
     background-color: rgb(43, 90, 63);
+    border-radius: 8px;
     color: white;
     padding: 15px;
     margin: 20px;
     border: none;
     cursor: pointer;
     width: 15%;
+    font-family: "Lucida Console", "Courier New", monospace;
+
   }
 
