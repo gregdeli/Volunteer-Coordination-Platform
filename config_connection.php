@@ -1,4 +1,5 @@
 <?php
+
     $db_server = "localhost";
     $db_user = "root"; 
     $db_pass = "";
@@ -16,5 +17,6 @@
     if($conn){
         echo "You are connected! <br>";
     }
+
 ?>
 

@@ -1,6 +1,6 @@
 <?php
 
-@include 'isConnected.php';
+   @include 'isConnected.php';
 
 ?>
 
