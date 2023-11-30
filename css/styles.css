@@ -6,22 +6,47 @@ html, body {
 * { font-family: Cambria, Georgia, "Times New Roman", serif; }
 
 
-ul.menu_horizontal li {
+/* Page menu */
+#menu_horizontal{
+    text-align: center;
+}
+#menu_horizontal a:link, #menu_horizontal a:visited, #menu_horizontal a:hover, #menu_horizontal a:active{
+    color: black;
+    text-decoration: none;
+}
+ul#menu_horizontal li {
     display: inline-block;
     list-style-type: none;
+    padding-right: 3em;
 }
 
+
+.page_title {
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+    margin:2em;
+}
+
+/* Footer */
+#footer {
+    padding-top:3em;
+}
+
+
+
+/* Site logo */
 #logo {
     margin: 0 auto;
     padding: 30px;
     width: 200px;
-    
+    font-size: 2.5em;
+    font-weight: bold;
 }
-
-
 
  /* Mapa  */
 .leaflet-container {
+    margin: 0 auto;
     height: 600px;
     width: 500px;
     max-width: 100%;

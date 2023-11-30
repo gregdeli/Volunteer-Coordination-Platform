@@ -22,27 +22,33 @@
         <!-- Our js -->
         <script src="/js/header.js"></script>
 
+
+        <!-- icons -->
+        <script src="https://kit.fontawesome.com/38d3be8e01.js" crossorigin="anonymous"></script>
+        <!-- favicon -->
+        <link rel="shortcut icon" href="favicon.svg" type="image/x-icon">
+
     </head>
 
-    <body>
-
-
+    <body onload="header_footer().js">
         <div id="header"></div>
+        
 
-
-        <a href='page2.html'>go next page</a>
         <main>
-            <h2>
-                The mapa
-            </h2>
-
+            <div class="page_title">
+                    The mapa
+            </div>
             <section>
                 <div id="map"></div>
                 <script src="/js/map.js"></script>
 
             </section>
-            <section>
-                <br/><br/>
+
+            <section hidden="true">
+                <i class="fa-solid fa-truck"></i>
+                <i class="fa-solid fa-hand-holding-heart" style="color: #ff0026;"></i>
+                <br/>
+                <br/>
                 <article>
                     <h3>
                         Instructions:
@@ -81,10 +87,8 @@
             </section>
         </main>
 
-        <br/>
-        <footer>
-            Report a bug
-        </footer>
+        
+        <div id="footer"></div>
 
     </body>
 </html>
