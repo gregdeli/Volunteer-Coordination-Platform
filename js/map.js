@@ -64,8 +64,19 @@ for (let i = 0; i < trucks.length; i++) {
       marker5.addTo(all_layer);
 }
 
-L.marker(base, {icon: building}, {draggable:true}).addTo(map)
-      .bindPopup('<b>Fire!!!</b>');
+let marker6 = L.marker(base, {icon: building, draggable:true, autoPan:true}).addTo(map)
+    .bindPopup('<b>Fire!!!</b>');
+
+let markxy;
+
+marker6.on('dragstart', function(e) {
+    markxy = [marker6.getLatLng().lat, marker6.getLatLng().lng];
+});
+marker6.on('dragend', function(e) {
+    if (!confirm("Move?")) {
+        marker6.setLatLng(markxy)
+    }
+});
 
 
 let lines_list = [];
@@ -96,37 +107,12 @@ const layerControl = L.control.layers(overlays).addTo(map);
 
 
 /*--------------------
-const crownHill = L.marker([39.75, -105.09]).bindPopup('This is Crown Hill Park.');
-const rubyHill = L.marker([39.68, -105.00]).bindPopup('This is Ruby Hill Park.');
-
-const parks = L.layerGroup([crownHill, rubyHill]);
-
-const overlays = {
-	'Cities': cities,
-    'Parks': parks
-};
-
-
-const layerControl = L.control.layers(overlays).addTo(map);
-
-
-
 
 function onMapClick(e) {
     L.popup(e.latlng, {content: `You clicked the map at ${e.latlng.toString()}`})
     .openOn(map);
 }
 map.on('click', onMapClick);
-
-
-const marker = L.marker([38.3, 23]).addTo(map)
-    .bindPopup('<b>Fire!!!</b>').openPopup();
-
-const polygon = L.polygon([
-    [8.3, 23],
-    [51.503, -0.06],
-    [51.51, -0.047]
-]).addTo(map).bindPopup('I am a polygon.');
 
 const popup = L.popup()
     .setLatLng([51.513, -0.09])
