@@ -10,9 +10,13 @@ function LoginCheck(event) {
         data: {username: uname, password: pw},
         success: function(response) {
             if (response.trim() === "admin") {
-                window.location.href = "admin_page.php";
+                //u can use also href but then u can go back
+                //with replace u cant return to login_form.html 
+                window.location.replace("admin_page.php"); 
             } else {
                 document.getElementById("message").innerHTML = response;
+                document.getElementById("username").value = "";
+                document.getElementById("password").value = "";
             }
         },
         error: function (request, status, error) {

@@ -22,7 +22,6 @@
             echo "admin";
          }elseif($row["role"] == "RESCUER"){
             $_SESSION["rescuer_name"] = $row["full_name"];
-            //header("location:rescuer_page.php");
          }
 
       }else{
