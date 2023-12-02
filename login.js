@@ -12,7 +12,7 @@ function LoginCheck(event) {
             if (response.trim() === "admin") {
                 //u can use also href but then u can go back
                 //with replace u cant return to login_form.html 
-                window.location.replace("admin_page.php"); 
+                window.location.replace("admin_page.html"); 
             } else {
                 document.getElementById("message").innerHTML = response;
                 document.getElementById("username").value = "";
