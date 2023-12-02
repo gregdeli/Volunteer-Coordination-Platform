@@ -10,10 +10,10 @@ html, body {
 /* Page menu */
 .menu_horizontal{
     text-align: center;
-    background-color: #ff6961;
+    background-color: orange;
     box-sizing: border-box;
     border: solid 0.1em;
-    border-color: black white ;
+    border-color: black orange ;
     padding: 1.2em;
     margin: 0;
 }
@@ -37,7 +37,11 @@ ul.menu_horizontal li {
 
 /* Footer */
 #footer {
+    z-index: 1000;
+    width: 100%;
     padding-top:3em;
+    position: fixed;
+    bottom: 0;
 }
 
 
@@ -52,18 +56,20 @@ ul.menu_horizontal li {
 }
 #logo_container {
     box-sizing: border-box;
-    background-color: #A7C7E7;
+    background-color: #ffe5b4;
 }
 
  /* Mapa  */
 .leaflet-container {
     margin: 0 auto;
-    height: 600px;
-    width: 500px;
+    width: 50em;
+    height: 44em;
     max-width: 100%;
     max-height: 100%;
+    margin-bottom: 10em;
 }
 #map {
-    width: 600px;
-    height: 500px;
+    width: 50em;
+    height: 44em;
+    margin-bottom: 10em;
 }
