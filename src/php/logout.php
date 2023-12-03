@@ -2,7 +2,7 @@
 
     session_start();
     session_destroy();
-    header("Location: login_form.html"); 
+    header("Location: /src/pages/login/index.html"); 
     exit();
 
 ?>

@@ -15,12 +15,12 @@ const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // images of pins
 let iconSize = [40, 40];
-let redex = L.icon({iconUrl: '/img/redex.png', iconSize: iconSize});
-let redgift = L.icon({iconUrl: '/img/redgift.png', iconSize: [40, 40]});
-let blackex = L.icon({iconUrl: '/img/blackex.png', iconSize: [40, 40]});
-let blackgift = L.icon({iconUrl: '/img/blackgift.png', iconSize: [40, 40]});
-let truck = L.icon({iconUrl: '/img/truck.png',iconSize: [40, 40]});
-let building = L.icon({iconUrl: '/img/building.png',iconSize: [80, 80]});
+let redex = L.icon({iconUrl: '/src/img/redex.png', iconSize: iconSize});
+let redgift = L.icon({iconUrl: '/src/img/redgift.png', iconSize: [40, 40]});
+let blackex = L.icon({iconUrl: '/src/img/blackex.png', iconSize: [40, 40]});
+let blackgift = L.icon({iconUrl: '/src/img/blackgift.png', iconSize: [40, 40]});
+let truck = L.icon({iconUrl: '/src/img/truck.png',iconSize: [40, 40]});
+let building = L.icon({iconUrl: '/src/img/building.png',iconSize: [80, 80]});
 
 
 // layers

@@ -1,9 +1,9 @@
 $.ajax({
     type: "POST",
-    url: "isConnected.php",
+    url: "/src/php/is_connected.php",
     success: function(response) {
         if (response.trim() === "notConnected") {
-            window.location.replace("login_form.html"); 
+            window.location.replace("/src/pages/index.html"); 
         } else {
             document.getElementById("admin_name").innerHTML = response;
             console.log("connected");

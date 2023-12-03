@@ -1,5 +1,5 @@
 <?php
-include('database_conn.php');
+include('config_connection.php');
 
 // Fetch JSON data
 $repURL = 'http://usidas.ceid.upatras.gr/web/2023/export.php';
