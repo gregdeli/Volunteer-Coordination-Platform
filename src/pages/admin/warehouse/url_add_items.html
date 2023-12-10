@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="el">
   <head>
-    <title>Base Management</title>
+    <title>Warehouse Management</title>
     <meta charset="utf-8" />
 
     <link rel="stylesheet" href="/src/css/styles.css" />
@@ -16,18 +16,17 @@
 
     <div id="add_items_menu"></div>
 
-    <h2>Add Category</h2>
-    <form method="post" action="" id="category_form">
-      <table>
-        <tr>
-          <td>Category name</td>
-          <td><input type="text" name="catname" id="catname" required /></td>
-        </tr>
-      </table>
-
-      <input type="button" value="Submit" onclick="sendCategory()" />
+    <form id="url_form">
+      <label for="url_input">Enter URL:</label>
+      <input
+        type="text"
+        id="url_input"
+        name="url_input"
+        required
+        value="http://usidas.ceid.upatras.gr/web/2023/export.php"
+      />
+      <button type="button" onclick="addUrlItems()">Submit</button>
     </form>
-    <hr />
 
     <div id="footer"></div>
   </body>

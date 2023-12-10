@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="el">
+  <head>
+    <title>Base Management</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/src/css/styles.css" />
+    <script src="/src/js/header_footer.js"></script>
+    <script src="/src/js/element_replacements.js"></script>
+  </head>
+  <body onload="header_footer(); warehouseMainMenu();">
+    <div id="header"></div>
+
+    <div id="warehouse_main_menu"></div>
+
+    <div id="content">
+      <h2>Add Available Item</h2>
+      <form id="addItemForm" action="/submit_available_item.php" method="post">
+        <label for="category">Select Category:</label>
+        <select id="category" name="category">
+          <!-- Options for categories will be populated dynamically from the database -->
+          <!-- You can populate these options using server-side scripting or JavaScript -->
+          <option value="category_id_1">Category 1</option>
+          <option value="category_id_2">Category 2</option>
+          <!-- Add more options as per your database -->
+        </select>
+        <br /><br />
+
+        <label for="specifiedItem">Select Specified Item:</label>
+        <select id="specifiedItem" name="specifiedItem">
+          <!-- Options for specified items will be populated dynamically based on the selected category -->
+          <!-- This will also be populated dynamically using server-side scripting or JavaScript -->
+          <option value="item_id_1">Item 1</option>
+          <option value="item_id_2">Item 2</option>
+          <!-- Add more options as per your database -->
+        </select>
+        <br /><br />
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="1" required />
+        <br /><br />
+
+        <input type="submit" value="Add Item" />
+      </form>
+    </div>
+
+    <div id="footer"></div>
+  </body>
+</html>

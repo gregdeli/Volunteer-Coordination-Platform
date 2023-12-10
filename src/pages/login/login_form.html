@@ -3,30 +3,37 @@
   <head>
     <title>Login</title>
     <!-- <link rel="icon" type="image/x-icon" href="/images/favicon.ico"> -->
-    <link rel="stylesheet" href="/src/css/login_form.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/css/login_form.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="/src/js/login.js"></script>
   </head>
   <body>
     <h2>Volunteering System</h2>
-      <form method="post" id="form"> 
+    <form method="post" id="form">
+      <label class="labelLeft" for="uname">Username:</label><br />
+      <input
+        type="text"
+        id="username"
+        placeholder="Enter Username"
+        name="username"
+        required
+      /><br />
 
-        <label class="labelLeft" for="uname">Username:</label><br>
-        <input type="text" id="username"placeholder="Enter Username" name="username" required><br>
+      <label class="labelLeft" for="pw">Password:</label><br />
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter Password"
+        name="password"
+        required
+      /><br />
 
-        <label class="labelLeft" for="pw">Password:</label><br>
-        <input type="password" id="password" placeholder="Enter Password" name="password" required><br>
+      <button type="submit" onclick="LoginCheck(event)">Log in</button><br />
 
-        <button type="submit" onclick="LoginCheck(event)">Log in</button><br>
-
-        <label>
-          <input type="checkbox" checked="checked" name="remember"> Remember me
-        </label>
-      
-      </form>
-      <p id="message"></p>
+      <label> <input type="checkbox" checked="checked" name="remember" /> Remember me </label>
+    </form>
+    <p id="message"></p>
   </body>
 </html>
-
