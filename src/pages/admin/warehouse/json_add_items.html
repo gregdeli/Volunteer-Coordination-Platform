@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="el">
   <head>
-    <title>Base Management</title>
+    <title>Warehouse Management</title>
     <meta charset="utf-8" />
 
     <link rel="stylesheet" href="/src/css/styles.css" />
@@ -16,18 +16,11 @@
 
     <div id="add_items_menu"></div>
 
-    <h2>Add Category</h2>
-    <form method="post" action="" id="category_form">
-      <table>
-        <tr>
-          <td>Category name</td>
-          <td><input type="text" name="catname" id="catname" required /></td>
-        </tr>
-      </table>
-
-      <input type="button" value="Submit" onclick="sendCategory()" />
+    <form id="json_form">
+      <label for="json_file">Select JSON file:</label>
+      <input type="file" id="json_file" name="json_file" accept=".json" required /> <br />
+      <button type="button" onclick="addJsonItems()">Submit</button>
     </form>
-    <hr />
 
     <div id="footer"></div>
   </body>
