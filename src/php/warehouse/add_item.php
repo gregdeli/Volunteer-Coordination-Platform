@@ -28,13 +28,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 if($detail_name==""){
                     header("HTTP/1.1 400 Bad Request");
                     echo json_encode(array("error" => "No detail_name"));
-                    //exit();
+                    exit();
 
                 }
                 else if($detail_value==""){
                     header("HTTP/1.1 400 Bad Request");
                     echo json_encode(array("error" => "No detail_value"));
-                    //exit();
+                    exit();
                 }
                 else{
                     // Insert detail data into specified_items_details table
@@ -43,23 +43,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 }
             }
             else{
-                echo "item added without details"; //del
+                echo "Item added without details"; 
             }
         }
-
-        /*// Insert details of the item
-
-        $detail_name = $_POST["detailname"];
-        $detail_value = $_POST["detailvalue"];
-
-        if(!empty($detail_name) && !empty($detail_value)){
-            // Insert detail data into specified_items_details table
-            $sql = "INSERT IGNORE INTO item_details (item_id, name, value) VALUES ('$item_id', '$detail_name', '$detail_value')";
-
-            $result = $conn->query($sql);
-        }*/
         
-
         $conn->close();
     }
 } else {

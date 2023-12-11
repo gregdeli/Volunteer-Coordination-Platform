@@ -1,0 +1,739 @@
+{
+  "items": [
+    {
+      "id": "16",
+      "name": "Water",
+      "category": "6",
+      "details": [
+        { "detail_name": "volume", "detail_value": "1.5l" },
+        { "detail_name": "pack size", "detail_value": "6" }
+      ]
+    },
+    {
+      "id": "17",
+      "name": "Orange juice",
+      "category": "6",
+      "details": [
+        { "detail_name": "volume", "detail_value": "250ml" },
+        { "detail_name": "pack size", "detail_value": "12" }
+      ]
+    },
+    {
+      "id": "18",
+      "name": "Sardines",
+      "category": "5",
+      "details": [
+        { "detail_name": "brand", "detail_value": "Trata" },
+        { "detail_name": "weight", "detail_value": "200g" }
+      ]
+    },
+    {
+      "id": "19",
+      "name": "Canned corn",
+      "category": "5",
+      "details": [{ "detail_name": "weight", "detail_value": "500g" }]
+    },
+    {
+      "id": "20",
+      "name": "Bread",
+      "category": "5",
+      "details": [
+        { "detail_name": "weight", "detail_value": "1kg" },
+        { "detail_name": "type", "detail_value": "white" }
+      ]
+    },
+    {
+      "id": "21",
+      "name": "Chocolate",
+      "category": "5",
+      "details": [
+        { "detail_name": "weight", "detail_value": "100g" },
+        { "detail_name": "type", "detail_value": "milk chocolate" },
+        { "detail_name": "brand", "detail_value": "ION" }
+      ]
+    },
+    {
+      "id": "22",
+      "name": "Men Sneakers",
+      "category": "7",
+      "details": [{ "detail_name": "size", "detail_value": "44" }]
+    },
+    {
+      "id": "23",
+      "name": "Test Product",
+      "category": "9",
+      "details": [
+        { "detail_name": "weight", "detail_value": "500g" },
+        { "detail_name": "pack size", "detail_value": "12" },
+        { "detail_name": "expiry date", "detail_value": "13/12/1978" }
+      ]
+    },
+    {
+      "id": "24",
+      "name": "Test Val",
+      "category": "14",
+      "details": [{ "detail_name": "Details", "detail_value": "600ml" }]
+    },
+    {
+      "id": "25",
+      "name": "Spaghetti",
+      "category": "5",
+      "details": [{ "detail_name": "grams", "detail_value": "500" }]
+    },
+    {
+      "id": "26",
+      "name": "Croissant",
+      "category": "5",
+      "details": [{ "detail_name": "calories", "detail_value": "200" }]
+    },
+    {
+      "id": "28",
+      "name": "",
+      "category": "10",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "29",
+      "name": "Biscuits",
+      "category": "5",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "30",
+      "name": "Bandages",
+      "category": "16",
+      "details": [{ "detail_name": "", "detail_value": "25 pcs" }]
+    },
+    {
+      "id": "31",
+      "name": "Disposable gloves",
+      "category": "16",
+      "details": [{ "detail_name": "", "detail_value": "100 pcs" }]
+    },
+    {
+      "id": "32",
+      "name": "Gauze",
+      "category": "16",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "33",
+      "name": "Antiseptic",
+      "category": "16",
+      "details": [{ "detail_name": "", "detail_value": "250ml" }]
+    },
+    {
+      "id": "34",
+      "name": "First Aid Kit",
+      "category": "16",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "35",
+      "name": "Painkillers",
+      "category": "16",
+      "details": [{ "detail_name": "volume", "detail_value": "200mg" }]
+    },
+    {
+      "id": "36",
+      "name": "Blanket",
+      "category": "7",
+      "details": [{ "detail_name": "size", "detail_value": "50\" x 60\"" }]
+    },
+    {
+      "id": "37",
+      "name": "Fakes",
+      "category": "5",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "38",
+      "name": "Menstrual Pads",
+      "category": "21",
+      "details": [
+        { "detail_name": "stock", "detail_value": "500" },
+        { "detail_name": "size", "detail_value": "3" },
+        { "detail_name": "", "detail_value": "" }
+      ]
+    },
+    {
+      "id": "39",
+      "name": "Tampon",
+      "category": "21",
+      "details": [
+        { "detail_name": "stock", "detail_value": "500" },
+        { "detail_name": "size", "detail_value": "regular" }
+      ]
+    },
+    {
+      "id": "40",
+      "name": "Toilet Paper",
+      "category": "21",
+      "details": [
+        { "detail_name": "stock", "detail_value": "300" },
+        { "detail_name": "ply", "detail_value": "3" }
+      ]
+    },
+    {
+      "id": "41",
+      "name": "Baby wipes",
+      "category": "21",
+      "details": [
+        { "detail_name": "volume", "detail_value": "500gr" },
+        { "detail_name": "stock ", "detail_value": "500" },
+        { "detail_name": "scent", "detail_value": "aloe" }
+      ]
+    },
+    {
+      "id": "42",
+      "name": "Toothbrush",
+      "category": "21",
+      "details": [{ "detail_name": "stock", "detail_value": "500" }]
+    },
+    {
+      "id": "43",
+      "name": "Toothpaste",
+      "category": "21",
+      "details": [{ "detail_name": "stock", "detail_value": "250" }]
+    },
+    {
+      "id": "44",
+      "name": "Vitamin C",
+      "category": "16",
+      "details": [{ "detail_name": "stock", "detail_value": "200" }]
+    },
+    {
+      "id": "45",
+      "name": "Multivitamines",
+      "category": "16",
+      "details": [{ "detail_name": "stock", "detail_value": "200" }]
+    },
+    {
+      "id": "46",
+      "name": "Paracetamol",
+      "category": "16",
+      "details": [
+        { "detail_name": "stock", "detail_value": "2000" },
+        { "detail_name": "dosage", "detail_value": "500mg" }
+      ]
+    },
+    {
+      "id": "47",
+      "name": "Ibuprofen",
+      "category": "16",
+      "details": [
+        { "detail_name": "stock ", "detail_value": "10" },
+        { "detail_name": "dosage", "detail_value": "200mg" }
+      ]
+    },
+    {
+      "id": "48",
+      "name": "",
+      "category": "10",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "49",
+      "name": "",
+      "category": "10",
+      "details": [
+        { "detail_name": "", "detail_value": "" },
+        { "detail_name": "", "detail_value": "" },
+        { "detail_name": "", "detail_value": "" }
+      ]
+    },
+    {
+      "id": "50",
+      "name": "",
+      "category": "10",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "51",
+      "name": "Cleaning rag",
+      "category": "22",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "52",
+      "name": "Detergent",
+      "category": "22",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "53",
+      "name": "Disinfectant",
+      "category": "22",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "54",
+      "name": "Mop",
+      "category": "22",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "55",
+      "name": "Plastic bucket",
+      "category": "22",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "56",
+      "name": "Scrub brush",
+      "category": "22",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "57",
+      "name": "Dust mask",
+      "category": "22",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "58",
+      "name": "Broom",
+      "category": "22",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "59",
+      "name": "Hammer",
+      "category": "23",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "60",
+      "name": "Skillsaw",
+      "category": "23",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "61",
+      "name": "Prybar",
+      "category": "23",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "62",
+      "name": "Shovel",
+      "category": "23",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "63",
+      "name": "Flashlight",
+      "category": "23",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "64",
+      "name": "Duct tape",
+      "category": "23",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "65",
+      "name": "Underwear",
+      "category": "7",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "66",
+      "name": "Socks",
+      "category": "7",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "67",
+      "name": "Warm Jacket",
+      "category": "7",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "68",
+      "name": "Raincoat",
+      "category": "7",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "69",
+      "name": "Gloves",
+      "category": "7",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "70",
+      "name": "Pants",
+      "category": "7",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "71",
+      "name": "Boots",
+      "category": "7",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "72",
+      "name": "Dishes",
+      "category": "24",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "73",
+      "name": "Pots",
+      "category": "24",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "74",
+      "name": "Paring knives",
+      "category": "24",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "75",
+      "name": "Pan",
+      "category": "24",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "76",
+      "name": "Glass",
+      "category": "24",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "77",
+      "name": "",
+      "category": "10",
+      "details": [
+        { "detail_name": "", "detail_value": "" },
+        { "detail_name": "", "detail_value": "" },
+        { "detail_name": "", "detail_value": "" }
+      ]
+    },
+    {
+      "id": "78",
+      "name": "",
+      "category": "10",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "79",
+      "name": "",
+      "category": "10",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "80",
+      "name": "",
+      "category": "10",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "81",
+      "name": "",
+      "category": "10",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "82",
+      "name": "",
+      "category": "10",
+      "details": [
+        { "detail_name": "", "detail_value": "" },
+        { "detail_name": "", "detail_value": "" },
+        { "detail_name": "", "detail_value": "" },
+        { "detail_name": "ghw56", "detail_value": "twhwhrwh" },
+        { "detail_name": "", "detail_value": "" }
+      ]
+    },
+    {
+      "id": "83",
+      "name": "t22",
+      "category": "9",
+      "details": [{ "detail_name": "wtwty", "detail_value": "wytwty" }]
+    },
+    {
+      "id": "84",
+      "name": "water ",
+      "category": "6",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "85",
+      "name": "Coca Cola",
+      "category": "6",
+      "details": [{ "detail_name": "Volume", "detail_value": "500ml" }]
+    },
+    {
+      "id": "86",
+      "name": "spray",
+      "category": "26",
+      "details": [{ "detail_name": "volume", "detail_value": "75ml" }]
+    },
+    {
+      "id": "87",
+      "name": "Outdoor spiral",
+      "category": "26",
+      "details": [{ "detail_name": "duration", "detail_value": "7 hours" }]
+    },
+    {
+      "id": "88",
+      "name": "Baby bottle",
+      "category": "25",
+      "details": [{ "detail_name": "volume", "detail_value": "250ml" }]
+    },
+    {
+      "id": "89",
+      "name": "Pacifier",
+      "category": "25",
+      "details": [{ "detail_name": "material", "detail_value": "silicone" }]
+    },
+    {
+      "id": "90",
+      "name": "Condensed milk",
+      "category": "5",
+      "details": [{ "detail_name": "weight", "detail_value": "400gr" }]
+    },
+    {
+      "id": "91",
+      "name": "Cereal bar",
+      "category": "5",
+      "details": [{ "detail_name": "weight", "detail_value": "23,5gr" }]
+    },
+    {
+      "id": "92",
+      "name": "Pocket Knife",
+      "category": "23",
+      "details": [
+        { "detail_name": "Number of different tools", "detail_value": "3" },
+        { "detail_name": "Tool", "detail_value": "Knife" },
+        { "detail_name": "Tool", "detail_value": "Screwdriver" },
+        { "detail_name": "Tool", "detail_value": "Spoon" }
+      ]
+    },
+    {
+      "id": "93",
+      "name": "Water Disinfection Tablets",
+      "category": "16",
+      "details": [
+        { "detail_name": "Basic Ingredients", "detail_value": "Iodine" },
+        { "detail_name": "Suggested for", "detail_value": "Everyone expept pregnant women" }
+      ]
+    },
+    {
+      "id": "94",
+      "name": "Radio",
+      "category": "27",
+      "details": [
+        { "detail_name": "Power", "detail_value": "Batteries" },
+        { "detail_name": "Frequencies Range", "detail_value": "3 kHz - 3000 GHz" }
+      ]
+    },
+    {
+      "id": "95",
+      "name": "Kitchen appliances",
+      "category": "14",
+      "details": [
+        {
+          "detail_name": "",
+          "detail_value": "(scrubbers, rubber gloves, kitchen detergent, laundry soap)"
+        }
+      ]
+    },
+    {
+      "id": "96",
+      "name": "Winter hat",
+      "category": "28",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "97",
+      "name": "Winter gloves",
+      "category": "28",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "98",
+      "name": "Scarf",
+      "category": "28",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "99",
+      "name": "Thermos",
+      "category": "28",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "100",
+      "name": "Tea",
+      "category": "6",
+      "details": [{ "detail_name": "volume", "detail_value": "500ml" }]
+    },
+    {
+      "id": "101",
+      "name": "Dog Food ",
+      "category": "29",
+      "details": [{ "detail_name": "volume", "detail_value": "500g" }]
+    },
+    {
+      "id": "102",
+      "name": "Cat Food",
+      "category": "29",
+      "details": [{ "detail_name": "volume", "detail_value": "500g" }]
+    },
+    {
+      "id": "103",
+      "name": "Canned",
+      "category": "5",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "104",
+      "name": "Chlorine",
+      "category": "22",
+      "details": [{ "detail_name": "volume", "detail_value": "500ml" }]
+    },
+    {
+      "id": "105",
+      "name": "Medical gloves",
+      "category": "22",
+      "details": [{ "detail_name": "volume", "detail_value": "20pieces" }]
+    },
+    {
+      "id": "106",
+      "name": "T-Shirt",
+      "category": "7",
+      "details": [{ "detail_name": "size", "detail_value": "XL" }]
+    },
+    {
+      "id": "107",
+      "name": "Cooling Fan",
+      "category": "34",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "108",
+      "name": "Cool Scarf",
+      "category": "34",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "109",
+      "name": "Whistle",
+      "category": "23",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "110",
+      "name": "Blankets",
+      "category": "28",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "111",
+      "name": "Sleeping Bag",
+      "category": "28",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "112",
+      "name": "Toothbrush",
+      "category": "21",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "113",
+      "name": "Toothpaste",
+      "category": "21",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "114",
+      "name": "Thermometer",
+      "category": "16",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "115",
+      "name": "Rice",
+      "category": "5",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "116",
+      "name": "Bread",
+      "category": "5",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "117",
+      "name": "Towels",
+      "category": "22",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "118",
+      "name": "Wet Wipes",
+      "category": "22",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "119",
+      "name": "Fire Extinguisher",
+      "category": "23",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "120",
+      "name": "Fruits",
+      "category": "5",
+      "details": [
+        { "detail_name": "", "detail_value": "" },
+        { "detail_name": "", "detail_value": "" }
+      ]
+    },
+    {
+      "id": "121",
+      "name": "Duct Tape",
+      "category": "23",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    },
+    {
+      "id": "122",
+      "name": "",
+      "category": "10",
+      "details": [{ "detail_name": "", "detail_value": "" }]
+    }
+  ],
+  "categories": [
+    { "id": "10", "category_name": "" },
+    { "id": "13", "category_name": "-----" },
+    { "id": "9", "category_name": "2d hacker" },
+    { "id": "29", "category_name": "Animal Food" },
+    { "id": "25", "category_name": "Baby Essentials" },
+    { "id": "6", "category_name": "Beverages" },
+    { "id": "22", "category_name": "Cleaning Supplies" },
+    { "id": "33", "category_name": "Cleaning Supplies." },
+    { "id": "7", "category_name": "Clothing" },
+    { "id": "28", "category_name": "Cold weather" },
+    { "id": "27", "category_name": "Electronic Devices" },
+    { "id": "30", "category_name": "Financial support" },
+    { "id": "14", "category_name": "Flood" },
+    { "id": "5", "category_name": "Food" },
+    { "id": "8", "category_name": "Hacker of class" },
+    { "id": "34", "category_name": "Hot Weather" },
+    { "id": "26", "category_name": "Insect Repellents" },
+    { "id": "24", "category_name": "Kitchen Supplies" },
+    { "id": "16", "category_name": "Medical Supplies" },
+    { "id": "15", "category_name": "new cat" },
+    { "id": "21", "category_name": "Personal Hygiene " },
+    { "id": "19", "category_name": "Shoes" },
+    { "id": "11", "category_name": "Test" },
+    { "id": "23", "category_name": "Tools" }
+  ]
+}

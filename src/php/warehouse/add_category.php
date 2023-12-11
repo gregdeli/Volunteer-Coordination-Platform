@@ -22,14 +22,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // Insert item if no duplicates found
             $insert_sql = "INSERT IGNORE INTO item_categories (name) VALUES ('$category_name')";
             $conn->query($insert_sql);
-            $conn->close();
         }
     }
-    $conn->close();
 } else {
     // If it's not a POST request, return a method not allowed error
     header("HTTP/1.1 405 Method Not Allowed");
     echo json_encode(array("error" => "Method not allowed"));
 }
+$conn->close();
 
 ?>

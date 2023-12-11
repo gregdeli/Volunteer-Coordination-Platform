@@ -2,8 +2,6 @@ function sendItem() {
   var form = document.getElementById("item_form");
   var itemName = document.getElementById("itname").value;
   var itemCategory = document.getElementById("itcats").value;
-  //var detailName = document.getElementById("itdname").value;
-  //var detailValue = document.getElementById("itdvalue").value;
   var detailsTable = document.getElementById("itemdetails").children[0];
 
   // Check if any of the required fields are empty
@@ -20,8 +18,6 @@ function sendItem() {
   data.append("itemcategory", itemCategory);
 
   // Add the details to the form
-  /*data.append("detailname", detailName);
-  data.append("detailvalue", detailValue);*/
   for (i = 1; i <= detailsTable.childElementCount; i++) {
     data.append(
       "detailname" + i.toString(),
@@ -99,6 +95,95 @@ function getCategories() {
         opt.innerHTML = data[i]["name"];
         select.appendChild(opt);
       }
+
+      // This function runs on the add available items page only
+      if (document.getElementById("specified_item")) {
+        getSpecifiedItems();
+      }
+    }
+  };
+}
+
+// Wrap your JavaScript in a function to ensure it runs after the DOM is loaded
+document.addEventListener("DOMContentLoaded", function () {
+  // Attach an event listener to the itcats select element,
+  // to get the items for every new category that gets selected
+  var selectCategory = document.getElementById("itcats");
+  selectCategory.addEventListener("change", function () {
+    // Check if a category has been selected
+    if (selectCategory.value !== "") {
+      getSpecifiedItems();
+    } else {
+      // Clear specified items select if no category is selected
+      var selectSpecifiedItem = document.getElementById("specified_item");
+      selectSpecifiedItem.innerHTML = "";
+    }
+  });
+});
+
+// This function populates the specifiedItems select element with the items
+// that correspond to the selected category
+function getSpecifiedItems() {
+  var select = document.getElementById("specified_item");
+  select.innerHTML = "";
+  var selectedCat = document.getElementById("itcats").value;
+
+  var xhr = new XMLHttpRequest();
+
+  var url =
+    "/src/php/warehouse/get_specified_items.php?selectedCat=" + encodeURIComponent(selectedCat);
+  xhr.open("GET", url);
+  xhr.send();
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      data = JSON.parse(this.responseText)["items"];
+      // Add all the items as options to the select element
+      for (i = 0; i < data.length; i++) {
+        var opt = document.createElement("option");
+        opt.setAttribute("value", data[i]["id"]);
+        opt.innerHTML = data[i]["item"];
+        select.appendChild(opt);
+      }
+    }
+  };
+}
+
+function sendAvailItems() {
+  var form = document.getElementById("add_avail_item_form");
+  var itemId = document.getElementById("specified_item").value;
+  var quantity = document.getElementById("quantity").value;
+
+  // Check if the Item field is empy
+  if (itemId === undefined || itemId == "") {
+    alert("Please select an Item.");
+    return;
+  }
+
+  // Check if the quantity field is empy
+  if (quantity === "") {
+    alert("Please fill Quantity field.");
+    return;
+  }
+
+  var xhr = new XMLHttpRequest();
+  var data = new FormData();
+
+  // Add the name and category of the item to the form
+  data.append("item_id", itemId);
+  data.append("quantity", quantity);
+
+  // Open the request
+  xhr.open("POST", "/src/php/warehouse/add_avail_item.php");
+  xhr.send(data);
+
+  // Listen for a successful response
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        alert("Available Item submitted successfully!");
+        form.reset();
+      }
     }
   };
 }
@@ -153,7 +238,7 @@ function addUrlItems() {
   xhr.onreadystatechange = function () {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
-        alert("Items loaded successfully");
+        alert("Items loaded successfully!");
       } else {
         console.log("Error in form submission");
       }
@@ -179,7 +264,7 @@ function addJsonItems() {
     xhr.onreadystatechange = function () {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         if (xhr.status === 200) {
-          alert("JSON file uploaded successfully");
+          alert("JSON file uploaded successfully!");
         } else {
           alert("Error uploading JSON file");
         }

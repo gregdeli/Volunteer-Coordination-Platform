@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2023 at 08:43 PM
+-- Generation Time: Dec 11, 2023 at 05:45 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -52,8 +52,7 @@ CREATE TABLE `announcement_items` (
 
 CREATE TABLE `available_items` (
   `item_id` int(11) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `base_id` int(11) DEFAULT NULL
+  `quantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -89,7 +88,7 @@ CREATE TABLE `item_details` (
   `id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `value` int(11) NOT NULL
+  `value` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -161,7 +160,7 @@ CREATE TABLE `request_history` (
 
 CREATE TABLE `specified_items` (
   `id` int(11) NOT NULL,
-  `item` varchar(255) DEFAULT NULL,
+  `item` varchar(255) NOT NULL,
   `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -244,8 +243,7 @@ ALTER TABLE `announcement_items`
 -- Indexes for table `available_items`
 --
 ALTER TABLE `available_items`
-  ADD KEY `item_id` (`item_id`),
-  ADD KEY `base_id` (`base_id`);
+  ADD KEY `item_id` (`item_id`);
 
 --
 -- Indexes for table `base`
@@ -351,13 +349,13 @@ ALTER TABLE `base`
 -- AUTO_INCREMENT for table `item_categories`
 --
 ALTER TABLE `item_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `item_details`
 --
 ALTER TABLE `item_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=651;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3110;
 
 --
 -- AUTO_INCREMENT for table `offers`
@@ -375,7 +373,7 @@ ALTER TABLE `requests`
 -- AUTO_INCREMENT for table `specified_items`
 --
 ALTER TABLE `specified_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -410,8 +408,7 @@ ALTER TABLE `announcement_items`
 -- Constraints for table `available_items`
 --
 ALTER TABLE `available_items`
-  ADD CONSTRAINT `available_items_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `specified_items` (`id`),
-  ADD CONSTRAINT `available_items_ibfk_2` FOREIGN KEY (`base_id`) REFERENCES `base` (`id`);
+  ADD CONSTRAINT `available_items_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `specified_items` (`id`);
 
 --
 -- Constraints for table `item_details`
