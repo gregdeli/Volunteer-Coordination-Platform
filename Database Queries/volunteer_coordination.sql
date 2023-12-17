@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2023 at 07:18 PM
+-- Generation Time: Dec 17, 2023 at 07:27 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,7 +41,7 @@ CREATE TABLE `announcements` (
 
 CREATE TABLE `announcement_items` (
   `announcement_id` int(11) DEFAULT NULL,
-  `specified_item_id` int(11) DEFAULT NULL
+  `item_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -220,7 +220,7 @@ ALTER TABLE `announcements`
 --
 ALTER TABLE `announcement_items`
   ADD KEY `announcement_id` (`announcement_id`),
-  ADD KEY `specified_item_id` (`specified_item_id`);
+  ADD KEY `specified_item_id` (`item_id`);
 
 --
 -- Indexes for table `base`
@@ -365,7 +365,7 @@ ALTER TABLE `announcements`
 --
 ALTER TABLE `announcement_items`
   ADD CONSTRAINT `announcement_items_ibfk_1` FOREIGN KEY (`announcement_id`) REFERENCES `announcements` (`id`),
-  ADD CONSTRAINT `announcement_items_ibfk_2` FOREIGN KEY (`specified_item_id`) REFERENCES `item` (`id`);
+  ADD CONSTRAINT `announcement_items_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
 
 --
 -- Constraints for table `description`
