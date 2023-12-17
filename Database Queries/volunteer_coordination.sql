@@ -131,6 +131,7 @@ CREATE TABLE `requests` (
   `id` int(11) NOT NULL,
   `civ_id` int(11) DEFAULT NULL,
   `date_submitted` datetime DEFAULT NULL,
+  `announcement_id` int(11) DEFAULT NULL,
   `num_people` int(11) DEFAULT NULL,
   `undertaken` tinyint(1) DEFAULT NULL,
   `completed` tinyint(1) DEFAULT NULL
@@ -280,7 +281,8 @@ ALTER TABLE `offer_history`
 --
 ALTER TABLE `requests`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `civ_id` (`civ_id`);
+  ADD KEY `civ_id` (`civ_id`),
+  ADD KEY `announcement_id` (`announcement_id`);
 
 --
 -- Indexes for table `request_history`
@@ -428,8 +430,9 @@ ALTER TABLE `offer_history`
 -- Constraints for table `requests`
 --
 ALTER TABLE `requests`
-  ADD CONSTRAINT `requests_ibfk_1` FOREIGN KEY (`civ_id`) REFERENCES `users` (`id`);
-
+  ADD CONSTRAINT `requests_ibfk_1` FOREIGN KEY (`civ_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `requests_ibfk_2` FOREIGN KEY (`announcement_id`) REFERENCES `announcements` (`id`);
+ 
 --
 -- Constraints for table `request_history`
 --
