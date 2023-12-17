@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2023 at 07:27 PM
+-- Generation Time: Dec 17, 2023 at 08:40 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `announcements`
+-- Table structure for table `announcement`
 --
 
-CREATE TABLE `announcements` (
+CREATE TABLE `announcement` (
   `id` int(11) NOT NULL,
   `admin_id` int(11) DEFAULT NULL,
   `date_announced` datetime DEFAULT NULL
@@ -36,10 +36,10 @@ CREATE TABLE `announcements` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `announcement_items`
+-- Table structure for table `announcement_item`
 --
 
-CREATE TABLE `announcement_items` (
+CREATE TABLE `announcement_item` (
   `announcement_id` int(11) DEFAULT NULL,
   `item_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -95,10 +95,10 @@ CREATE TABLE `item` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `offers`
+-- Table structure for table `offer`
 --
 
-CREATE TABLE `offers` (
+CREATE TABLE `offer` (
   `id` int(11) NOT NULL,
   `civ_id` int(11) DEFAULT NULL,
   `date_submitted` datetime DEFAULT NULL,
@@ -123,10 +123,10 @@ CREATE TABLE `offer_history` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `requests`
+-- Table structure for table `request`
 --
 
-CREATE TABLE `requests` (
+CREATE TABLE `request` (
   `id` int(11) NOT NULL,
   `civ_id` int(11) DEFAULT NULL,
   `date_submitted` datetime DEFAULT NULL,
@@ -151,10 +151,10 @@ CREATE TABLE `request_history` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `user`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
@@ -168,40 +168,36 @@ CREATE TABLE `users` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vehicles`
+-- Table structure for table `vehicle`
 --
 
-CREATE TABLE `vehicles` (
+CREATE TABLE `vehicle` (
   `id` int(11) NOT NULL,
-  `driver_id` int(11) DEFAULT NULL,
-  `max_load` int(11) DEFAULT NULL,
-  `max_tasks` int(11) DEFAULT NULL
+  `driver_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vehicle_items`
+-- Table structure for table `vehicle_item`
 --
 
-CREATE TABLE `vehicle_items` (
+CREATE TABLE `vehicle_item` (
   `vehicle_id` int(11) DEFAULT NULL,
-  `category` varchar(255) DEFAULT NULL,
-  `item` varchar(255) DEFAULT NULL,
+  `item_id` int(11) NOT NULL,
   `quantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vehicle_tasks`
+-- Table structure for table `vehicle_task`
 --
 
-CREATE TABLE `vehicle_tasks` (
+CREATE TABLE `vehicle_task` (
   `vehicle_id` int(11) DEFAULT NULL,
   `request_id` int(11) DEFAULT NULL,
-  `offer_id` int(11) DEFAULT NULL,
-  `date_undertaken` datetime DEFAULT NULL
+  `offer_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -209,16 +205,16 @@ CREATE TABLE `vehicle_tasks` (
 --
 
 --
--- Indexes for table `announcements`
+-- Indexes for table `announcement`
 --
-ALTER TABLE `announcements`
+ALTER TABLE `announcement`
   ADD PRIMARY KEY (`id`),
   ADD KEY `admin_id` (`admin_id`);
 
 --
--- Indexes for table `announcement_items`
+-- Indexes for table `announcement_item`
 --
-ALTER TABLE `announcement_items`
+ALTER TABLE `announcement_item`
   ADD KEY `announcement_id` (`announcement_id`),
   ADD KEY `specified_item_id` (`item_id`);
 
@@ -248,9 +244,9 @@ ALTER TABLE `item`
   ADD KEY `item_ibfk_1` (`category_id`);
 
 --
--- Indexes for table `offers`
+-- Indexes for table `offer`
 --
-ALTER TABLE `offers`
+ALTER TABLE `offer`
   ADD PRIMARY KEY (`id`),
   ADD KEY `civ_id` (`civ_id`),
   ADD KEY `announcement_id` (`announcement_id`);
@@ -263,9 +259,9 @@ ALTER TABLE `offer_history`
   ADD KEY `request_id` (`request_id`);
 
 --
--- Indexes for table `requests`
+-- Indexes for table `request`
 --
-ALTER TABLE `requests`
+ALTER TABLE `request`
   ADD PRIMARY KEY (`id`),
   ADD KEY `civ_id` (`civ_id`),
   ADD KEY `announcement_id` (`announcement_id`);
@@ -278,29 +274,30 @@ ALTER TABLE `request_history`
   ADD KEY `request_id` (`request_id`);
 
 --
--- Indexes for table `users`
+-- Indexes for table `user`
 --
-ALTER TABLE `users`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- Indexes for table `vehicles`
+-- Indexes for table `vehicle`
 --
-ALTER TABLE `vehicles`
+ALTER TABLE `vehicle`
   ADD PRIMARY KEY (`id`),
   ADD KEY `driver_id` (`driver_id`);
 
 --
--- Indexes for table `vehicle_items`
+-- Indexes for table `vehicle_item`
 --
-ALTER TABLE `vehicle_items`
-  ADD KEY `vehicle_id` (`vehicle_id`);
+ALTER TABLE `vehicle_item`
+  ADD KEY `vehicle_id` (`vehicle_id`),
+  ADD KEY `vehicle_items_ibfk_2` (`item_id`);
 
 --
--- Indexes for table `vehicle_tasks`
+-- Indexes for table `vehicle_task`
 --
-ALTER TABLE `vehicle_tasks`
+ALTER TABLE `vehicle_task`
   ADD KEY `request_id` (`request_id`),
   ADD KEY `offer_id` (`offer_id`);
 
@@ -309,9 +306,9 @@ ALTER TABLE `vehicle_tasks`
 --
 
 --
--- AUTO_INCREMENT for table `announcements`
+-- AUTO_INCREMENT for table `announcement`
 --
-ALTER TABLE `announcements`
+ALTER TABLE `announcement`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -327,27 +324,27 @@ ALTER TABLE `item`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
 
 --
--- AUTO_INCREMENT for table `offers`
+-- AUTO_INCREMENT for table `offer`
 --
-ALTER TABLE `offers`
+ALTER TABLE `offer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `requests`
+-- AUTO_INCREMENT for table `request`
 --
-ALTER TABLE `requests`
+ALTER TABLE `request`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT for table `user`
 --
-ALTER TABLE `users`
+ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `vehicles`
+-- AUTO_INCREMENT for table `vehicle`
 --
-ALTER TABLE `vehicles`
+ALTER TABLE `vehicle`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -355,17 +352,17 @@ ALTER TABLE `vehicles`
 --
 
 --
--- Constraints for table `announcements`
+-- Constraints for table `announcement`
 --
-ALTER TABLE `announcements`
-  ADD CONSTRAINT `announcements_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `users` (`id`);
+ALTER TABLE `announcement`
+  ADD CONSTRAINT `announcement_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `user` (`id`);
 
 --
--- Constraints for table `announcement_items`
+-- Constraints for table `announcement_item`
 --
-ALTER TABLE `announcement_items`
-  ADD CONSTRAINT `announcement_items_ibfk_1` FOREIGN KEY (`announcement_id`) REFERENCES `announcements` (`id`),
-  ADD CONSTRAINT `announcement_items_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
+ALTER TABLE `announcement_item`
+  ADD CONSTRAINT `announcement_item_ibfk_1` FOREIGN KEY (`announcement_id`) REFERENCES `announcement` (`id`),
+  ADD CONSTRAINT `announcement_item_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
 
 --
 -- Constraints for table `description`
@@ -380,52 +377,53 @@ ALTER TABLE `item`
   ADD CONSTRAINT `item_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
 
 --
--- Constraints for table `offers`
+-- Constraints for table `offer`
 --
-ALTER TABLE `offers`
-  ADD CONSTRAINT `offers_ibfk_1` FOREIGN KEY (`civ_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `offers_ibfk_2` FOREIGN KEY (`announcement_id`) REFERENCES `announcements` (`id`);
+ALTER TABLE `offer`
+  ADD CONSTRAINT `offer_ibfk_1` FOREIGN KEY (`civ_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `offer_ibfk_2` FOREIGN KEY (`announcement_id`) REFERENCES `announcement` (`id`);
 
 --
 -- Constraints for table `offer_history`
 --
 ALTER TABLE `offer_history`
-  ADD CONSTRAINT `offer_history_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `offer_history_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `offers` (`id`);
+  ADD CONSTRAINT `offer_history_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `offer_history_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `offer` (`id`);
 
 --
--- Constraints for table `requests`
+-- Constraints for table `request`
 --
-ALTER TABLE `requests`
-  ADD CONSTRAINT `requests_ibfk_1` FOREIGN KEY (`civ_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `requests_ibfk_2` FOREIGN KEY (`announcement_id`) REFERENCES `announcements` (`id`);
+ALTER TABLE `request`
+  ADD CONSTRAINT `request_ibfk_1` FOREIGN KEY (`civ_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `request_ibfk_2` FOREIGN KEY (`announcement_id`) REFERENCES `announcement` (`id`);
 
 --
 -- Constraints for table `request_history`
 --
 ALTER TABLE `request_history`
-  ADD CONSTRAINT `request_history_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `request_history_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`);
+  ADD CONSTRAINT `request_history_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `request_history_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `request` (`id`);
 
 --
--- Constraints for table `vehicles`
+-- Constraints for table `vehicle`
 --
-ALTER TABLE `vehicles`
-  ADD CONSTRAINT `vehicles_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `users` (`id`);
+ALTER TABLE `vehicle`
+  ADD CONSTRAINT `vehicle_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `user` (`id`);
 
 --
--- Constraints for table `vehicle_items`
+-- Constraints for table `vehicle_item`
 --
-ALTER TABLE `vehicle_items`
-  ADD CONSTRAINT `vehicle_items_ibfk_1` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicles` (`id`);
+ALTER TABLE `vehicle_item`
+  ADD CONSTRAINT `vehicle_item_ibfk_1` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`id`),
+  ADD CONSTRAINT `vehicle_item_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
 
 --
--- Constraints for table `vehicle_tasks`
+-- Constraints for table `vehicle_task`
 --
-ALTER TABLE `vehicle_tasks`
-  ADD CONSTRAINT `vehicle_tasks_ibfk_1` FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`),
-  ADD CONSTRAINT `vehicle_tasks_ibfk_2` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`),
-  ADD CONSTRAINT `vehicle_tasks_ibfk_3` FOREIGN KEY (`request_id`) REFERENCES `vehicles` (`id`);
+ALTER TABLE `vehicle_task`
+  ADD CONSTRAINT `vehicle_task_ibfk_1` FOREIGN KEY (`request_id`) REFERENCES `request` (`id`),
+  ADD CONSTRAINT `vehicle_task_ibfk_2` FOREIGN KEY (`offer_id`) REFERENCES `offer` (`id`),
+  ADD CONSTRAINT `vehicle_task_ibfk_3` FOREIGN KEY (`request_id`) REFERENCES `vehicle` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
