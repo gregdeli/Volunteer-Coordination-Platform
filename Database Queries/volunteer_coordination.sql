@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2023 at 02:04 PM
+-- Generation Time: Dec 17, 2023 at 02:37 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -85,8 +85,8 @@ CREATE TABLE `item_categories` (
 --
 
 CREATE TABLE `item_details` (
-  `id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -104,9 +104,7 @@ CREATE TABLE `offers` (
   `announcement_id` int(11) DEFAULT NULL,
   `quantity_offered` int(11) DEFAULT NULL,
   `undertaken` tinyint(1) DEFAULT NULL,
-  `completed` tinyint(1) DEFAULT NULL,
-  `latitude` decimal(10,6) DEFAULT NULL,
-  `longitude` decimal(10,6) DEFAULT NULL
+  `completed` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -258,7 +256,6 @@ ALTER TABLE `item_categories`
 -- Indexes for table `item_details`
 --
 ALTER TABLE `item_details`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_item_id` (`item_id`);
 
 --
@@ -348,12 +345,6 @@ ALTER TABLE `item_categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
--- AUTO_INCREMENT for table `item_details`
---
-ALTER TABLE `item_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3110;
-
---
 -- AUTO_INCREMENT for table `offers`
 --
 ALTER TABLE `offers`
@@ -432,7 +423,7 @@ ALTER TABLE `offer_history`
 ALTER TABLE `requests`
   ADD CONSTRAINT `requests_ibfk_1` FOREIGN KEY (`civ_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `requests_ibfk_2` FOREIGN KEY (`announcement_id`) REFERENCES `announcements` (`id`);
- 
+
 --
 -- Constraints for table `request_history`
 --
