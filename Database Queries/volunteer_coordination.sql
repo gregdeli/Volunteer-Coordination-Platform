@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2023 at 02:37 PM
+-- Generation Time: Dec 17, 2023 at 05:16 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -47,17 +47,6 @@ CREATE TABLE `announcement_items` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `available_items`
---
-
-CREATE TABLE `available_items` (
-  `item_id` int(11) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `base`
 --
 
@@ -70,10 +59,10 @@ CREATE TABLE `base` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `item_categories`
+-- Table structure for table `category`
 --
 
-CREATE TABLE `item_categories` (
+CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -81,14 +70,26 @@ CREATE TABLE `item_categories` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `item_details`
+-- Table structure for table `description`
 --
 
-CREATE TABLE `item_details` (
+CREATE TABLE `description` (
   `item_id` int(11) NOT NULL,
+  `detail_name` varchar(255) NOT NULL,
+  `detail_value` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item`
+--
+
+CREATE TABLE `item` (
+  `id` int(11) NOT NULL,
+  `item` varchar(255) NOT NULL,
   `category_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL
+  `quantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -145,18 +146,6 @@ CREATE TABLE `request_history` (
   `user_id` int(11) DEFAULT NULL,
   `request_id` int(11) DEFAULT NULL,
   `date_completed` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `specified_items`
---
-
-CREATE TABLE `specified_items` (
-  `id` int(11) NOT NULL,
-  `item` varchar(255) NOT NULL,
-  `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -234,29 +223,29 @@ ALTER TABLE `announcement_items`
   ADD KEY `specified_item_id` (`specified_item_id`);
 
 --
--- Indexes for table `available_items`
---
-ALTER TABLE `available_items`
-  ADD KEY `item_id` (`item_id`);
-
---
 -- Indexes for table `base`
 --
 ALTER TABLE `base`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `item_categories`
+-- Indexes for table `category`
 --
-ALTER TABLE `item_categories`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `item_details`
+-- Indexes for table `description`
 --
-ALTER TABLE `item_details`
-  ADD KEY `fk_item_id` (`item_id`);
+ALTER TABLE `description`
+  ADD KEY `description_ibfk_1` (`item_id`);
+
+--
+-- Indexes for table `item`
+--
+ALTER TABLE `item`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `item_ibfk_1` (`category_id`);
 
 --
 -- Indexes for table `offers`
@@ -287,13 +276,6 @@ ALTER TABLE `requests`
 ALTER TABLE `request_history`
   ADD KEY `user_id` (`user_id`),
   ADD KEY `request_id` (`request_id`);
-
---
--- Indexes for table `specified_items`
---
-ALTER TABLE `specified_items`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_categ_id` (`category_id`);
 
 --
 -- Indexes for table `users`
@@ -339,10 +321,10 @@ ALTER TABLE `base`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `item_categories`
+-- AUTO_INCREMENT for table `item`
 --
-ALTER TABLE `item_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+ALTER TABLE `item`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
 
 --
 -- AUTO_INCREMENT for table `offers`
@@ -355,12 +337,6 @@ ALTER TABLE `offers`
 --
 ALTER TABLE `requests`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `specified_items`
---
-ALTER TABLE `specified_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -389,19 +365,19 @@ ALTER TABLE `announcements`
 --
 ALTER TABLE `announcement_items`
   ADD CONSTRAINT `announcement_items_ibfk_1` FOREIGN KEY (`announcement_id`) REFERENCES `announcements` (`id`),
-  ADD CONSTRAINT `announcement_items_ibfk_2` FOREIGN KEY (`specified_item_id`) REFERENCES `specified_items` (`id`);
+  ADD CONSTRAINT `announcement_items_ibfk_2` FOREIGN KEY (`specified_item_id`) REFERENCES `item` (`id`);
 
 --
--- Constraints for table `available_items`
+-- Constraints for table `description`
 --
-ALTER TABLE `available_items`
-  ADD CONSTRAINT `available_items_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `specified_items` (`id`);
+ALTER TABLE `description`
+  ADD CONSTRAINT `description_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
 
 --
--- Constraints for table `item_details`
+-- Constraints for table `item`
 --
-ALTER TABLE `item_details`
-  ADD CONSTRAINT `fk_item_id` FOREIGN KEY (`item_id`) REFERENCES `specified_items` (`id`) ON DELETE CASCADE;
+ALTER TABLE `item`
+  ADD CONSTRAINT `item_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
 
 --
 -- Constraints for table `offers`
@@ -430,12 +406,6 @@ ALTER TABLE `requests`
 ALTER TABLE `request_history`
   ADD CONSTRAINT `request_history_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `request_history_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`);
-
---
--- Constraints for table `specified_items`
---
-ALTER TABLE `specified_items`
-  ADD CONSTRAINT `fk_categ_id` FOREIGN KEY (`category_id`) REFERENCES `item_categories` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `vehicles`
