@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2023 at 05:45 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Dec 17, 2023 at 02:04 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -131,13 +131,9 @@ CREATE TABLE `requests` (
   `id` int(11) NOT NULL,
   `civ_id` int(11) DEFAULT NULL,
   `date_submitted` datetime DEFAULT NULL,
-  `category` varchar(255) DEFAULT NULL,
-  `item` varchar(255) DEFAULT NULL,
   `num_people` int(11) DEFAULT NULL,
   `undertaken` tinyint(1) DEFAULT NULL,
-  `completed` tinyint(1) DEFAULT NULL,
-  `latitude` decimal(10,6) DEFAULT NULL,
-  `longitude` decimal(10,6) DEFAULT NULL
+  `completed` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -176,7 +172,9 @@ CREATE TABLE `users` (
   `password` varchar(255) DEFAULT NULL,
   `role` enum('ADMIN','RESCUER','CIVILIAN') DEFAULT NULL,
   `full_name` varchar(255) DEFAULT NULL,
-  `phone` int(11) DEFAULT NULL
+  `phone` int(11) DEFAULT NULL,
+  `latitude` decimal(10,6) DEFAULT NULL,
+  `longitude` decimal(10,6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -187,11 +185,7 @@ CREATE TABLE `users` (
 
 CREATE TABLE `vehicles` (
   `id` int(11) NOT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
   `driver_id` int(11) DEFAULT NULL,
-  `latitude` decimal(10,6) DEFAULT NULL,
-  `longitude` decimal(10,6) DEFAULT NULL,
   `max_load` int(11) DEFAULT NULL,
   `max_tasks` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -216,6 +210,7 @@ CREATE TABLE `vehicle_items` (
 --
 
 CREATE TABLE `vehicle_tasks` (
+  `vehicle_id` int(11) DEFAULT NULL,
   `request_id` int(11) DEFAULT NULL,
   `offer_id` int(11) DEFAULT NULL,
   `date_undertaken` datetime DEFAULT NULL
@@ -313,7 +308,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `vehicles`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`),
   ADD KEY `driver_id` (`driver_id`);
 
 --
@@ -466,7 +460,8 @@ ALTER TABLE `vehicle_items`
 --
 ALTER TABLE `vehicle_tasks`
   ADD CONSTRAINT `vehicle_tasks_ibfk_1` FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`),
-  ADD CONSTRAINT `vehicle_tasks_ibfk_2` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`);
+  ADD CONSTRAINT `vehicle_tasks_ibfk_2` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`),
+  ADD CONSTRAINT `vehicle_tasks_ibfk_3` FOREIGN KEY (`request_id`) REFERENCES `vehicles` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
