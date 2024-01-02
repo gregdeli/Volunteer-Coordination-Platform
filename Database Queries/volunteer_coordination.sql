@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2023 at 08:40 PM
+-- Generation Time: Jan 02, 2024 at 05:08 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -103,6 +103,7 @@ CREATE TABLE `offer` (
   `civ_id` int(11) DEFAULT NULL,
   `date_submitted` datetime DEFAULT NULL,
   `announcement_id` int(11) DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
   `quantity_offered` int(11) DEFAULT NULL,
   `undertaken` tinyint(1) DEFAULT NULL,
   `completed` tinyint(1) DEFAULT NULL
@@ -131,6 +132,7 @@ CREATE TABLE `request` (
   `civ_id` int(11) DEFAULT NULL,
   `date_submitted` datetime DEFAULT NULL,
   `announcement_id` int(11) DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
   `num_people` int(11) DEFAULT NULL,
   `undertaken` tinyint(1) DEFAULT NULL,
   `completed` tinyint(1) DEFAULT NULL
@@ -249,7 +251,8 @@ ALTER TABLE `item`
 ALTER TABLE `offer`
   ADD PRIMARY KEY (`id`),
   ADD KEY `civ_id` (`civ_id`),
-  ADD KEY `announcement_id` (`announcement_id`);
+  ADD KEY `announcement_id` (`announcement_id`),
+  ADD KEY `offer_ibfk_3` (`item_id`);
 
 --
 -- Indexes for table `offer_history`
@@ -264,7 +267,8 @@ ALTER TABLE `offer_history`
 ALTER TABLE `request`
   ADD PRIMARY KEY (`id`),
   ADD KEY `civ_id` (`civ_id`),
-  ADD KEY `announcement_id` (`announcement_id`);
+  ADD KEY `announcement_id` (`announcement_id`),
+  ADD KEY `request_ibfk_3` (`item_id`);
 
 --
 -- Indexes for table `request_history`
@@ -299,7 +303,8 @@ ALTER TABLE `vehicle_item`
 --
 ALTER TABLE `vehicle_task`
   ADD KEY `request_id` (`request_id`),
-  ADD KEY `offer_id` (`offer_id`);
+  ADD KEY `offer_id` (`offer_id`),
+  ADD KEY `vehicle_task_ibfk_3` (`vehicle_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -381,7 +386,8 @@ ALTER TABLE `item`
 --
 ALTER TABLE `offer`
   ADD CONSTRAINT `offer_ibfk_1` FOREIGN KEY (`civ_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `offer_ibfk_2` FOREIGN KEY (`announcement_id`) REFERENCES `announcement` (`id`);
+  ADD CONSTRAINT `offer_ibfk_2` FOREIGN KEY (`announcement_id`) REFERENCES `announcement` (`id`),
+  ADD CONSTRAINT `offer_ibfk_3` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
 
 --
 -- Constraints for table `offer_history`
@@ -395,7 +401,8 @@ ALTER TABLE `offer_history`
 --
 ALTER TABLE `request`
   ADD CONSTRAINT `request_ibfk_1` FOREIGN KEY (`civ_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `request_ibfk_2` FOREIGN KEY (`announcement_id`) REFERENCES `announcement` (`id`);
+  ADD CONSTRAINT `request_ibfk_2` FOREIGN KEY (`announcement_id`) REFERENCES `announcement` (`id`),
+  ADD CONSTRAINT `request_ibfk_3` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
 
 --
 -- Constraints for table `request_history`
@@ -423,7 +430,7 @@ ALTER TABLE `vehicle_item`
 ALTER TABLE `vehicle_task`
   ADD CONSTRAINT `vehicle_task_ibfk_1` FOREIGN KEY (`request_id`) REFERENCES `request` (`id`),
   ADD CONSTRAINT `vehicle_task_ibfk_2` FOREIGN KEY (`offer_id`) REFERENCES `offer` (`id`),
-  ADD CONSTRAINT `vehicle_task_ibfk_3` FOREIGN KEY (`request_id`) REFERENCES `vehicle` (`id`);
+  ADD CONSTRAINT `vehicle_task_ibfk_3` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
