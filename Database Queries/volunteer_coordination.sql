@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 02, 2024 at 05:08 PM
+-- Generation Time: Jan 02, 2024 at 08:43 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -102,7 +102,6 @@ CREATE TABLE `offer` (
   `id` int(11) NOT NULL,
   `civ_id` int(11) DEFAULT NULL,
   `date_submitted` datetime DEFAULT NULL,
-  `announcement_id` int(11) DEFAULT NULL,
   `item_id` int(11) DEFAULT NULL,
   `quantity_offered` int(11) DEFAULT NULL,
   `undertaken` tinyint(1) DEFAULT NULL,
@@ -131,7 +130,6 @@ CREATE TABLE `request` (
   `id` int(11) NOT NULL,
   `civ_id` int(11) DEFAULT NULL,
   `date_submitted` datetime DEFAULT NULL,
-  `announcement_id` int(11) DEFAULT NULL,
   `item_id` int(11) DEFAULT NULL,
   `num_people` int(11) DEFAULT NULL,
   `undertaken` tinyint(1) DEFAULT NULL,
@@ -153,6 +151,18 @@ CREATE TABLE `request_history` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `rescuer_task`
+--
+
+CREATE TABLE `rescuer_task` (
+  `rescuer_id` int(11) NOT NULL,
+  `request_id` int(11) DEFAULT NULL,
+  `offer_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -165,41 +175,6 @@ CREATE TABLE `user` (
   `phone` int(11) DEFAULT NULL,
   `latitude` decimal(10,6) DEFAULT NULL,
   `longitude` decimal(10,6) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `vehicle`
---
-
-CREATE TABLE `vehicle` (
-  `id` int(11) NOT NULL,
-  `driver_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `vehicle_item`
---
-
-CREATE TABLE `vehicle_item` (
-  `vehicle_id` int(11) DEFAULT NULL,
-  `item_id` int(11) NOT NULL,
-  `quantity` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `vehicle_task`
---
-
-CREATE TABLE `vehicle_task` (
-  `vehicle_id` int(11) DEFAULT NULL,
-  `request_id` int(11) DEFAULT NULL,
-  `offer_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -251,8 +226,7 @@ ALTER TABLE `item`
 ALTER TABLE `offer`
   ADD PRIMARY KEY (`id`),
   ADD KEY `civ_id` (`civ_id`),
-  ADD KEY `announcement_id` (`announcement_id`),
-  ADD KEY `offer_ibfk_3` (`item_id`);
+  ADD KEY `offer_ibfk_2` (`item_id`);
 
 --
 -- Indexes for table `offer_history`
@@ -267,8 +241,7 @@ ALTER TABLE `offer_history`
 ALTER TABLE `request`
   ADD PRIMARY KEY (`id`),
   ADD KEY `civ_id` (`civ_id`),
-  ADD KEY `announcement_id` (`announcement_id`),
-  ADD KEY `request_ibfk_3` (`item_id`);
+  ADD KEY `request_ibfk_2` (`item_id`);
 
 --
 -- Indexes for table `request_history`
@@ -278,33 +251,19 @@ ALTER TABLE `request_history`
   ADD KEY `request_id` (`request_id`);
 
 --
+-- Indexes for table `rescuer_task`
+--
+ALTER TABLE `rescuer_task`
+  ADD KEY `rtask_ibfk_1` (`rescuer_id`),
+  ADD KEY `rtask_ibfk_2` (`request_id`),
+  ADD KEY `rtask_ibfk_3` (`offer_id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
-
---
--- Indexes for table `vehicle`
---
-ALTER TABLE `vehicle`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `driver_id` (`driver_id`);
-
---
--- Indexes for table `vehicle_item`
---
-ALTER TABLE `vehicle_item`
-  ADD KEY `vehicle_id` (`vehicle_id`),
-  ADD KEY `vehicle_items_ibfk_2` (`item_id`);
-
---
--- Indexes for table `vehicle_task`
---
-ALTER TABLE `vehicle_task`
-  ADD KEY `request_id` (`request_id`),
-  ADD KEY `offer_id` (`offer_id`),
-  ADD KEY `vehicle_task_ibfk_3` (`vehicle_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -347,12 +306,6 @@ ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `vehicle`
---
-ALTER TABLE `vehicle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- Constraints for dumped tables
 --
 
@@ -386,8 +339,7 @@ ALTER TABLE `item`
 --
 ALTER TABLE `offer`
   ADD CONSTRAINT `offer_ibfk_1` FOREIGN KEY (`civ_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `offer_ibfk_2` FOREIGN KEY (`announcement_id`) REFERENCES `announcement` (`id`),
-  ADD CONSTRAINT `offer_ibfk_3` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
+  ADD CONSTRAINT `offer_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
 
 --
 -- Constraints for table `offer_history`
@@ -401,8 +353,7 @@ ALTER TABLE `offer_history`
 --
 ALTER TABLE `request`
   ADD CONSTRAINT `request_ibfk_1` FOREIGN KEY (`civ_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `request_ibfk_2` FOREIGN KEY (`announcement_id`) REFERENCES `announcement` (`id`),
-  ADD CONSTRAINT `request_ibfk_3` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
+  ADD CONSTRAINT `request_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
 
 --
 -- Constraints for table `request_history`
@@ -412,25 +363,12 @@ ALTER TABLE `request_history`
   ADD CONSTRAINT `request_history_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `request` (`id`);
 
 --
--- Constraints for table `vehicle`
+-- Constraints for table `rescuer_task`
 --
-ALTER TABLE `vehicle`
-  ADD CONSTRAINT `vehicle_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `user` (`id`);
-
---
--- Constraints for table `vehicle_item`
---
-ALTER TABLE `vehicle_item`
-  ADD CONSTRAINT `vehicle_item_ibfk_1` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`id`),
-  ADD CONSTRAINT `vehicle_item_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
-
---
--- Constraints for table `vehicle_task`
---
-ALTER TABLE `vehicle_task`
-  ADD CONSTRAINT `vehicle_task_ibfk_1` FOREIGN KEY (`request_id`) REFERENCES `request` (`id`),
-  ADD CONSTRAINT `vehicle_task_ibfk_2` FOREIGN KEY (`offer_id`) REFERENCES `offer` (`id`),
-  ADD CONSTRAINT `vehicle_task_ibfk_3` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`id`);
+ALTER TABLE `rescuer_task`
+  ADD CONSTRAINT `rtask_ibfk_1` FOREIGN KEY (`rescuer_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `rtask_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `request` (`id`),
+  ADD CONSTRAINT `rtask_ibfk_3` FOREIGN KEY (`offer_id`) REFERENCES `offer` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
