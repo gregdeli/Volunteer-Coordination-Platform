@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 02, 2024 at 08:43 PM
+-- Generation Time: Jan 03, 2024 at 10:30 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -101,22 +101,10 @@ CREATE TABLE `item` (
 CREATE TABLE `offer` (
   `id` int(11) NOT NULL,
   `civ_id` int(11) DEFAULT NULL,
-  `date_submitted` datetime DEFAULT NULL,
   `item_id` int(11) DEFAULT NULL,
   `quantity_offered` int(11) DEFAULT NULL,
-  `undertaken` tinyint(1) DEFAULT NULL,
-  `completed` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `offer_history`
---
-
-CREATE TABLE `offer_history` (
-  `user_id` int(11) DEFAULT NULL,
-  `request_id` int(11) DEFAULT NULL,
+  `date_submitted` datetime DEFAULT NULL,
+  `date_undertaken` datetime DEFAULT NULL,
   `date_completed` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -129,22 +117,10 @@ CREATE TABLE `offer_history` (
 CREATE TABLE `request` (
   `id` int(11) NOT NULL,
   `civ_id` int(11) DEFAULT NULL,
-  `date_submitted` datetime DEFAULT NULL,
   `item_id` int(11) DEFAULT NULL,
   `num_people` int(11) DEFAULT NULL,
-  `undertaken` tinyint(1) DEFAULT NULL,
-  `completed` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `request_history`
---
-
-CREATE TABLE `request_history` (
-  `user_id` int(11) DEFAULT NULL,
-  `request_id` int(11) DEFAULT NULL,
+  `date_submitted` datetime DEFAULT NULL,
+  `date_undertaken` datetime DEFAULT NULL,
   `date_completed` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -229,26 +205,12 @@ ALTER TABLE `offer`
   ADD KEY `offer_ibfk_2` (`item_id`);
 
 --
--- Indexes for table `offer_history`
---
-ALTER TABLE `offer_history`
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `request_id` (`request_id`);
-
---
 -- Indexes for table `request`
 --
 ALTER TABLE `request`
   ADD PRIMARY KEY (`id`),
   ADD KEY `civ_id` (`civ_id`),
   ADD KEY `request_ibfk_2` (`item_id`);
-
---
--- Indexes for table `request_history`
---
-ALTER TABLE `request_history`
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `request_id` (`request_id`);
 
 --
 -- Indexes for table `rescuer_task`
@@ -285,7 +247,7 @@ ALTER TABLE `base`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `offer`
@@ -342,25 +304,11 @@ ALTER TABLE `offer`
   ADD CONSTRAINT `offer_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
 
 --
--- Constraints for table `offer_history`
---
-ALTER TABLE `offer_history`
-  ADD CONSTRAINT `offer_history_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `offer_history_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `offer` (`id`);
-
---
 -- Constraints for table `request`
 --
 ALTER TABLE `request`
   ADD CONSTRAINT `request_ibfk_1` FOREIGN KEY (`civ_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `request_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
-
---
--- Constraints for table `request_history`
---
-ALTER TABLE `request_history`
-  ADD CONSTRAINT `request_history_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `request_history_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `request` (`id`);
 
 --
 -- Constraints for table `rescuer_task`
