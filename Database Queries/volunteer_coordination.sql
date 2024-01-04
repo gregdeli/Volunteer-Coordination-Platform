@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2024 at 10:30 AM
+-- Generation Time: Jan 04, 2024 at 07:38 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -77,6 +77,18 @@ CREATE TABLE `description` (
   `item_id` int(11) NOT NULL,
   `detail_name` varchar(255) NOT NULL,
   `detail_value` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inventory`
+--
+
+CREATE TABLE `inventory` (
+  `rescuer_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -190,6 +202,13 @@ ALTER TABLE `description`
   ADD KEY `description_ibfk_1` (`item_id`);
 
 --
+-- Indexes for table `inventory`
+--
+ALTER TABLE `inventory`
+  ADD KEY `inv_ibfk_1` (`item_id`),
+  ADD KEY `inv_ibfk_2` (`rescuer_id`);
+
+--
 -- Indexes for table `item`
 --
 ALTER TABLE `item`
@@ -289,6 +308,13 @@ ALTER TABLE `announcement_item`
 --
 ALTER TABLE `description`
   ADD CONSTRAINT `description_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
+
+--
+-- Constraints for table `inventory`
+--
+ALTER TABLE `inventory`
+  ADD CONSTRAINT `inv_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
+  ADD CONSTRAINT `inv_ibfk_2` FOREIGN KEY (`rescuer_id`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `item`
