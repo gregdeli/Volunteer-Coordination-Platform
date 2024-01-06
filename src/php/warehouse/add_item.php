@@ -1,6 +1,6 @@
 <?php
 /** @var mysqli $conn */
-include("../config_connection.php");
+include "../config_connection.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -10,10 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Extract the form data
         $item_name = $_POST["itemname"];
         $item_category = $_POST["itemcategory"];
-        
 
-        // Isert item 
-        $sql = "INSERT IGNORE INTO specified_items (item, category_id) VALUES ('$item_name', '$item_category')";
+        // Isert item
+        $sql = "INSERT IGNORE INTO item (name, category_id, quantity) VALUES ('$item_name', '$item_category', '0')";
 
         $conn->query($sql);
 
@@ -22,31 +21,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Loop through posted details and insert them into tha db
         for ($i = 1; $i <= count($_POST) / 2 - 1; $i++) {
-            $detail_name = $_POST['detailname' . $i];
-            $detail_value = $_POST['detailvalue' . $i];
-            if(strlen($detail_name) > 0 || strlen($detail_value) > 0){
-                if($detail_name==""){
-                    header("HTTP/1.1 400 Bad Request");
-                    echo json_encode(array("error" => "No detail_name"));
-                    exit();
-
-                }
-                else if($detail_value==""){
-                    header("HTTP/1.1 400 Bad Request");
-                    echo json_encode(array("error" => "No detail_value"));
-                    exit();
-                }
-                else{
-                    // Insert detail data into specified_items_details table
-                    $sql = "INSERT IGNORE INTO item_details (item_id, name, value) VALUES ('$item_id', '$detail_name', '$detail_value')";
-                    $conn->query($sql);
-                }
-            }
-            else{
-                echo "Item added without details"; 
+            if (isset($_POST["detailname" . $i]) && isset($_POST["detailvalue" . $i])) {
+                $detail_name = $_POST['detailname' . $i];
+                $detail_value = $_POST['detailvalue' . $i];
+                // Insert detail data into specified_items_details table
+                $sql = "INSERT INTO description (item_id, detail_name, detail_value) VALUES ('$item_id', '$detail_name', '$detail_value')";
+                $conn->query($sql);
             }
         }
-        
+
         $conn->close();
     }
 } else {
@@ -54,4 +37,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     header("HTTP/1.1 405 Method Not Allowed");
     echo json_encode(array("error" => "Method not allowed"));
 }
-?>

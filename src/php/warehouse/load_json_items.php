@@ -1,6 +1,6 @@
 <?php
 /** @var mysqli $conn */
-include("../config_connection.php");
+include "../config_connection.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Check if the necessary data is present in the POST request
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $category_name = $category['category_name'];
 
             // Insert category data into item_categories table
-            $sql = "INSERT IGNORE INTO item_categories (id, name) VALUES ('$category_id', '$category_name')";
+            $sql = "INSERT IGNORE INTO category (id, name) VALUES ('$category_id', '$category_name')";
 
             $conn->query($sql);
         }
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $category_id = $item['category'];
 
             // Insert item data into specified_items table
-            $sql = "INSERT IGNORE INTO specified_items (id, item, category_id) VALUES ('$item_id', '$item_name', '$category_id')";
+            $sql = "INSERT IGNORE INTO item (id, name, category_id, quantity) VALUES ('$item_id', '$item_name', '$category_id', '0')";
 
             $conn->query($sql);
 
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $detail_value = $detail['detail_value'];
 
                 // Insert detail data into specified_items_details table
-                $sql = "INSERT IGNORE INTO item_details (item_id, name, value) VALUES ('$item_id', '$detail_name', '$detail_value')";
+                $sql = "INSERT IGNORE INTO description (item_id, detail_name, detail_value) VALUES ('$item_id', '$detail_name', '$detail_value')";
 
                 $conn->query($sql);
             }
@@ -55,5 +55,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     header("HTTP/1.1 405 Method Not Allowed");
     echo json_encode(array("error" => "Method not allowed"));
 }
-
-?>

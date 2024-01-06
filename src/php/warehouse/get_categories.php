@@ -1,9 +1,9 @@
 <?php
 /** @var mysqli $conn */
-include("../config_connection.php");
+include "../config_connection.php";
 
 // Fetch categories from the database
-$sql = "SELECT id, name FROM item_categories"; 
+$sql = "SELECT id, name FROM category";
 
 $result = $conn->query($sql);
 
@@ -21,4 +21,3 @@ if ($result->num_rows > 0) {
 }
 
 $conn->close();
-?>
