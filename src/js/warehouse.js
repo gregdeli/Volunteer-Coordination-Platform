@@ -13,21 +13,33 @@ function sendItem() {
   var xhr = new XMLHttpRequest();
   var data = new FormData();
 
+  // Add the details to the form
+  for (i = 1; i <= detailsTable.childElementCount; i++) {
+    detailName = document.getElementById("itdname" + i.toString()).value;
+    detailValue = document.getElementById("itdvalue" + i.toString()).value;
+    if (detailName.length > 0 || detailValue.length > 0) {
+      // Both fields filled or one field filled
+      if (detailName.length === 0) {
+        // Detail Name not filled
+        alert("Please fill in the Detail Name field");
+        return;
+      } else if (detailValue.length === 0) {
+        // Detail Value not filled
+        alert("Please fill in the Detail Value field");
+        return;
+      } else {
+        data.append("detailname" + i, detailName);
+        data.append("detailvalue" + i, detailValue);
+      }
+    } else {
+      // Both fields are empty
+      continue;
+    }
+  }
+
   // Add the name and category of the item to the form
   data.append("itemname", itemName);
   data.append("itemcategory", itemCategory);
-
-  // Add the details to the form
-  for (i = 1; i <= detailsTable.childElementCount; i++) {
-    data.append(
-      "detailname" + i.toString(),
-      document.getElementById("itdname" + i.toString()).value,
-    );
-    data.append(
-      "detailvalue" + i.toString(),
-      document.getElementById("itdvalue" + i.toString()).value,
-    );
-  }
 
   // Open the request
   xhr.open("POST", "/src/php/warehouse/add_item.php");
@@ -41,13 +53,8 @@ function sendItem() {
         form.reset();
         detailsTable.innerHTML = "";
         addDetail();
-      } else if (xhr.status === 400) {
-        var response = JSON.parse(xhr.responseText);
-        if (response && response.error === "No detail_name") {
-          alert("Please fill in the Detail Name field");
-        } else if (response && response.error === "No detail_value") {
-          alert("Please fill in the Detail Value field");
-        }
+      } else {
+        console.log("Error");
       }
     }
   };
@@ -66,13 +73,25 @@ function addDetail() {
   cell3.innerHTML = 'Item detail value (e.g. "500ml")';
 
   var namebox = document.createElement("input");
-  namebox.setAttribute("name", "itdname" + table.children[0].childElementCount.toString());
-  namebox.setAttribute("id", "itdname" + table.children[0].childElementCount.toString());
+  namebox.setAttribute(
+    "name",
+    "itdname" + table.children[0].childElementCount.toString()
+  );
+  namebox.setAttribute(
+    "id",
+    "itdname" + table.children[0].childElementCount.toString()
+  );
   cell2.appendChild(namebox);
 
   var valuebox = document.createElement("input");
-  valuebox.setAttribute("name", "itdvalue" + table.children[0].childElementCount.toString());
-  valuebox.setAttribute("id", "itdvalue" + table.children[0].childElementCount.toString());
+  valuebox.setAttribute(
+    "name",
+    "itdvalue" + table.children[0].childElementCount.toString()
+  );
+  valuebox.setAttribute(
+    "id",
+    "itdvalue" + table.children[0].childElementCount.toString()
+  );
   cell4.appendChild(valuebox);
 }
 
@@ -104,21 +123,33 @@ function getCategories() {
   };
 }
 
-// Wrap your JavaScript in a function to ensure it runs after the DOM is loaded
+// Runs after the DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
   // Attach an event listener to the itcats select element,
   // to get the items for every new category that gets selected
   var selectCategory = document.getElementById("itcats");
-  selectCategory.addEventListener("change", function () {
-    // Check if a category has been selected
-    if (selectCategory.value !== "") {
-      getSpecifiedItems();
-    } else {
-      // Clear specified items select if no category is selected
-      var selectSpecifiedItem = document.getElementById("specified_item");
-      selectSpecifiedItem.innerHTML = "";
-    }
-  });
+  if (selectCategory) {
+    selectCategory.addEventListener("change", function () {
+      // Check if a category has been selected
+      if (selectCategory.value !== "") {
+        getSpecifiedItems();
+      } else {
+        // Clear specified items select if no category is selected
+        var selectSpecifiedItem = document.getElementById("specified_item");
+        selectSpecifiedItem.innerHTML = "";
+      }
+    });
+  }
+  // Add an event listener for "change" on specified_item to write the items current
+  // quantity on the quanity field
+  if (document.getElementById("specified_item")) {
+    var selectedItem = document.getElementById("specified_item");
+    selectedItem.addEventListener("change", function () {
+      getItemInfo();
+    });
+  } else {
+    console.log("Item 'specified_item' doesn't exist.'");
+  }
 });
 
 // This function populates the specifiedItems select element with the items
@@ -131,7 +162,8 @@ function getSpecifiedItems() {
   var xhr = new XMLHttpRequest();
 
   var url =
-    "/src/php/warehouse/get_specified_items.php?selectedCat=" + encodeURIComponent(selectedCat);
+    "/src/php/warehouse/get_specified_items.php?selectedCat=" +
+    encodeURIComponent(selectedCat);
   xhr.open("GET", url);
   xhr.send();
 
@@ -142,21 +174,57 @@ function getSpecifiedItems() {
       for (i = 0; i < data.length; i++) {
         var opt = document.createElement("option");
         opt.setAttribute("value", data[i]["id"]);
-        opt.innerHTML = data[i]["item"];
+        opt.innerHTML = data[i]["name"];
         select.appendChild(opt);
       }
+      getItemInfo();
     }
   };
 }
 
-function sendAvailItems() {
-  var form = document.getElementById("add_avail_item_form");
+// Fetches the selected item's quantity name and inserts it in the apropriate field
+function getItemInfo() {
+  var selectedItem = document.getElementById("specified_item");
+  var selectedItemIndex = selectedItem.selectedIndex;
+  if (selectedItem.selectedIndex != -1) {
+    var selectedItemId = selectedItem.options[selectedItemIndex].value;
+    var xhr = new XMLHttpRequest();
+    var url =
+      "/src/php/warehouse/get_item_info.php?selectedItem=" +
+      encodeURIComponent(selectedItemId);
+    xhr.open("GET", url);
+    xhr.send();
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == XMLHttpRequest.DONE) {
+        // Parse name and quantity from php
+        received_name = JSON.parse(this.responseText)["item_name"];
+        received_quantity = JSON.parse(this.responseText)["quantity"];
+        // Insert the value in the approprite fields
+        item_name_field = document.getElementById("item_name");
+        item_name_field.setAttribute("value", received_name);
+        quantity_field = document.getElementById("quantity");
+        quantity_field.setAttribute("value", received_quantity);
+      }
+    };
+  }
+}
+
+function sendEditedItem() {
+  var form = document.getElementById("edit_item_form");
   var itemId = document.getElementById("specified_item").value;
+  var itemName = document.getElementById("item_name").value;
   var quantity = document.getElementById("quantity").value;
 
-  // Check if the Item field is empy
+  // Check if the Item field is empty
   if (itemId === undefined || itemId == "") {
     alert("Please select an Item.");
+    return;
+  }
+
+  // Check if the Item Name field is empty
+  if (itemName == "") {
+    alert("Please write a valid Item Name");
     return;
   }
 
@@ -171,18 +239,20 @@ function sendAvailItems() {
 
   // Add the name and category of the item to the form
   data.append("item_id", itemId);
+  data.append("item_name", itemName);
   data.append("quantity", quantity);
 
   // Open the request
-  xhr.open("POST", "/src/php/warehouse/add_avail_item.php");
+  xhr.open("POST", "/src/php/warehouse/update_item.php");
   xhr.send(data);
 
   // Listen for a successful response
   xhr.onreadystatechange = function () {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
-        alert("Available Item submitted successfully!");
+        alert("Item updated successfully!");
         form.reset();
+        getCategories();
       }
     }
   };

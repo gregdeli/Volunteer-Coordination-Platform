@@ -26,11 +26,11 @@
         </tr>
         <tr>
           <td>Item Category</td>
-          <td><select name="itcats" id="itcats" required></td>
+          <td><select name="itcats" id="itcats" required></select></td>
         </tr>
       </table>
       <h3>Item Details</h3>
-      <table id = 'itemdetails'>
+      <table id="itemdetails">
         <!--<tr>
           <td> Item detail name (e.g. "volume") </td>
           <td> <input type="text" name="itdname1" id="itdname1" required> </td>
@@ -39,7 +39,11 @@
           <td> <input type="text" name="itdvalue1" id="itdvalue1" required> </td>
         </tr>-->
       </table>
-      <input type="button" value="Add more details" onclick="addDetail()"/><br><br>
+      <input
+        type="button"
+        value="Add more details"
+        onclick="addDetail()"
+      /><br /><br />
       <input type="button" value="Submit" onclick="sendItem()" />
     </form>
     <hr />
