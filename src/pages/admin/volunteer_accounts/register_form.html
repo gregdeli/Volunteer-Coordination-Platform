@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Volunteer Account</title>
+    <!-- header & footer & style stuff -->
+    <link rel="shortcut icon" href="/src/img/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/src/css/normalize.css">
+    <link rel="stylesheet" href="/src/css/styles.css"/>
+    <script src="/src/js/header_footer.js"></script>
+    <!--  -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/src/js/register.js"></script>
+    <!-- check if user is connected -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/src/js/is_connected.js"></script>
+  </head>
+
+  <body onload="header_footer()">
+
+    <div id="header"></div>
+
+    <h2>Create Volunteer Account</h2>
+      <form method="post" id="form"> 
+
+        <label class="labelLeft" for="uname">Username:</label><br>
+        <input type="text" id="username"placeholder="Enter Username" name="username" required><br>
+
+        <label class="labelLeft" for="pw">Password:</label><br>
+        <input type="password" id="password" placeholder="Enter Password" name="password" required><br>
+
+        <label class="labelLeft" for="pw-repeat">Repeat Password:</label><br>
+        <input type="password" id="repeat-password" placeholder="Repeat Password" name="repeat-password" required><br>
+
+        <label class="labelLeft" for="fname">Fullname:</label><br>
+        <input type="text" id="fullname"placeholder="Enter Fullname" name="fullname" required><br>
+
+        <label class="labelLeft" for="phone">Phone number:</label><br>
+        <input type="text" id="phone"placeholder="Enter Phone number" name="phone" required><br>
+       
+        <button type="submit" onclick="registerCheck(event)">Submit</button><br>
+
+      
+      </form>
+    <p id="message"></p>
+
+    <div id="footer"></div>
+      
+  </body>
+</html>
+
