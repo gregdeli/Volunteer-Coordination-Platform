@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2024 at 08:42 PM
+-- Generation Time: Jan 08, 2024 at 09:25 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -51,7 +51,6 @@ CREATE TABLE `announcement_item` (
 --
 
 CREATE TABLE `base` (
-  `id` int(11) NOT NULL,
   `latitude` decimal(10,6) DEFAULT NULL,
   `longitude` decimal(10,6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -184,12 +183,6 @@ ALTER TABLE `announcement_item`
   ADD KEY `specified_item_id` (`item_id`);
 
 --
--- Indexes for table `base`
---
-ALTER TABLE `base`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `cargo`
 --
 ALTER TABLE `cargo`
@@ -254,12 +247,6 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `announcement`
 --
 ALTER TABLE `announcement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `base`
---
-ALTER TABLE `base`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
