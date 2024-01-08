@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 06, 2024 at 08:49 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Jan 08, 2024 at 08:42 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -59,6 +59,18 @@ CREATE TABLE `base` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cargo`
+--
+
+CREATE TABLE `cargo` (
+  `rescuer_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `category`
 --
 
@@ -77,18 +89,6 @@ CREATE TABLE `description` (
   `item_id` int(11) NOT NULL,
   `detail_name` varchar(255) NOT NULL,
   `detail_value` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `inventory`
---
-
-CREATE TABLE `inventory` (
-  `rescuer_id` int(11) NOT NULL,
-  `item_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -190,6 +190,13 @@ ALTER TABLE `base`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `cargo`
+--
+ALTER TABLE `cargo`
+  ADD KEY `inv_ibfk_1` (`item_id`),
+  ADD KEY `inv_ibfk_2` (`rescuer_id`);
+
+--
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
@@ -200,13 +207,6 @@ ALTER TABLE `category`
 --
 ALTER TABLE `description`
   ADD KEY `description_ibfk_1` (`item_id`);
-
---
--- Indexes for table `inventory`
---
-ALTER TABLE `inventory`
-  ADD KEY `inv_ibfk_1` (`item_id`),
-  ADD KEY `inv_ibfk_2` (`rescuer_id`);
 
 --
 -- Indexes for table `item`
@@ -310,17 +310,17 @@ ALTER TABLE `announcement_item`
   ADD CONSTRAINT `announcement_item_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
 
 --
+-- Constraints for table `cargo`
+--
+ALTER TABLE `cargo`
+  ADD CONSTRAINT `inv_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
+  ADD CONSTRAINT `inv_ibfk_2` FOREIGN KEY (`rescuer_id`) REFERENCES `user` (`id`);
+
+--
 -- Constraints for table `description`
 --
 ALTER TABLE `description`
   ADD CONSTRAINT `description_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `inventory`
---
-ALTER TABLE `inventory`
-  ADD CONSTRAINT `inv_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
-  ADD CONSTRAINT `inv_ibfk_2` FOREIGN KEY (`rescuer_id`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `item`
