@@ -1,6 +1,6 @@
 var valid = false;
 
-function registerCheck(event, type) {
+function registerCheck(event) {
 
     event.preventDefault();
 
@@ -14,10 +14,10 @@ function registerCheck(event, type) {
         $.ajax({
             type: "POST",
             url: "/src/php/register.php",
-            data: {user: type, username: uname, password: pw, r_password: r_pw, fullname: fname, phone: phone},
+            data: {user: 2, username: uname, password: pw, r_password: r_pw, fullname: fname, phone: phone },
             success: function(response) {
                 response = JSON.parse(response);
-                if (response.value) {//if type =2 respone -> redirect
+                if (response.value) {
                     document.getElementById("message").innerHTML = response.message;
                     document.getElementById("username").value = "";
                     document.getElementById("password").value = "";

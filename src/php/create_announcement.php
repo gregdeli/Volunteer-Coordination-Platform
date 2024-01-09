@@ -51,7 +51,7 @@ function getItem($category, $conn){
 
 function createAnnouncement($items, $conn){
     $user = $_COOKIE["user"];
-    $date_time = date('Y-m-d H:i:s');
+    $date_time = date('Y-m-d H:i:s');//now()
     
     $query = " INSERT INTO announcement VALUES (NULL, $user, '$date_time') ";
     $result = mysqli_query($conn, $query);

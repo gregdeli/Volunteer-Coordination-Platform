@@ -17,11 +17,12 @@ function loginCheck(event) {
                 document.getElementById("username").value = "";
                 document.getElementById("password").value = "";
             }
-        },
-        error: function () {
-            console.log("ERROR");
         }
     });
+}
+
+function sign_up(){
+    window.location.href = "/src/pages/civilian/sign_up.html"; 
 }
 
 
