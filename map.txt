@@ -23,14 +23,17 @@ INSERT INTO user(id,username,password,role,full_name,phone,latitude,longitude)
 INSERT INTO category(id,name) VALUES (1,"Liquid");
 INSERT INTO category(id,name) VALUES (2,"Solid");
 
-########################################################################################
+
+
 
 INSERT INTO item(id,name,category_id,quantity)
         VALUES (1,"Water",1,100);
 INSERT INTO item(id,name,category_id,quantity)
         VALUES (2,"Bread",2,200);
+INSERT INTO item(id,name,category_id,quantity)
+        VALUES (3,"Butter",2,300);
 
-########################################################################################
+
 
 INSERT INTO request(id,civ_id,item_id,num_people,date_submitted,date_undertaken,date_completed)
         VALUES (1,5,1,1,"2023-12-01 12:54:19",NULL,NULL);
@@ -57,12 +60,15 @@ INSERT INTO offer(id,civ_id,item_id,quantity_offered,date_submitted,date_underta
 INSERT INTO cargo(rescuer_id,item_id,quantity)
         VALUES (2,1,10);
 INSERT INTO cargo(rescuer_id,item_id,quantity)
-        VALUES (2,2,30);
+        VALUES (2,2,20);
+INSERT INTO cargo(rescuer_id,item_id,quantity)
+        VALUES (2,3,30);
 
 INSERT INTO cargo(rescuer_id,item_id,quantity)
         VALUES (3,1,50);
 
-########################################################################################
+
+
 
 INSERT INTO rescuer_task(rescuer_id,request_id,offer_id)
         VALUES (2,3,NULL);
@@ -72,7 +78,8 @@ INSERT INTO rescuer_task(rescuer_id,request_id,offer_id)
 INSERT INTO rescuer_task(rescuer_id,request_id,offer_id)
         VALUES (3,NULL,3);
 
-########################################################################################
+
+
 
 INSERT INTO base(latitude,longitude)
         VALUES (37.93,21.72);
