@@ -85,7 +85,7 @@ ul.menu_horizontal li {
     width: 50em;
     height: 44em;
 }
-#map-1 {
+#map4distance {
     display:none
 }
 
@@ -150,11 +150,67 @@ ul.menu_horizontal li {
     max-width: 500px;
     overflow-y: auto; /* Enable vertical scrolling */
 }
-  
 .fixed-header {
     position: sticky;
     text-align: center;
     top: 0;
     background-color: #f1f5f8;
 }
-  
+
+
+#cargo_items, #inventory_items {
+    margin-bottom: 2em;
+}
+#cargo_items h3, #inventory_items h3{
+    display:inline-block;
+}
+#cargo_items table, #inventory_items table{
+    display:inline-block;
+}
+
+
+
+#cargo_items td{
+    text-align: left;
+    padding-top:0.5em;
+    padding-bottom:0.5em;
+}
+
+#inventory_items td{
+    text-align: left;
+    min-width: 10em;
+    max-width: 10em;
+    padding-top:0.5em;
+    padding-bottom:0.5em;
+    padding-left:1em;
+    overflow:hidden;
+}
+#inventory_items input{
+    text-align: center;
+    box-sizing: border-box;
+    min-width: 4em;
+    max-width: 4em;
+}
+
+
+.cargo_item{
+    padding-right:1em;
+    min-width: 10em;
+    max-width: 10em;
+}
+
+
+
+
+details {
+    width: 17em;
+    margin: 0 auto;
+    background: #71a0ff;
+    border-radius: 1em;
+    overflow: hidden;
+}
+summary {
+    display: block;
+    background: #b3c3ff;
+}
+
