@@ -8,9 +8,9 @@ $categories = json_decode($_GET['categories']);
 $categoryIds = implode(",", $categories);
 
 $sql = "SELECT it.name AS item_name, it.category_id, it.quantity AS warehouse_quantity,
-    inv.quantity AS vehicles_quantity
+    cargo.quantity AS vehicles_quantity
     FROM item AS it
-    LEFT JOIN inventory AS inv ON it.id = inv.item_id
+    LEFT JOIN cargo ON it.id = cargo.item_id
     WHERE it.category_id IN ($categoryIds)
     ORDER BY it.category_id ASC";
 
