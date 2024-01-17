@@ -15,18 +15,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		if($row["role"] == "ADMIN"){
 			$cookie_name = "admin";
 			$cookie_value = $row["id"];
-			setcookie($cookie_name, $cookie_value, time() + (86400 * 30)); // 86400 = 1 day
+			setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
 			echo json_encode(['value' => true, 'message' => '/src/pages/admin/map.html']);
 		}elseif($row["role"] == "RESCUER"){
 			$cookie_name = "rescuer";
 			$cookie_value = $row["id"];
-			setcookie($cookie_name, $cookie_value, time() + (86400 * 30)); // 86400 = 1 day
+			setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
 			echo json_encode(['value' => true, 'message' => '/src/pages/rescuer/map.html']);
 		}elseif($row["role"] == "CIVILIAN"){
 			$cookie_name = "civilian";
 			$cookie_value = $row["id"];
-			setcookie($cookie_name, $cookie_value, time() + (86400 * 30)); // 86400 = 1 day
-			echo json_encode(['value' => true, 'message' => '/src/pages/civilian/main.html']);//<-notthisurl
+			setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+			echo json_encode(['value' => true, 'message' => '/src/pages/civilian/announcements_list.html']);//<-notthisurl
 		}
 	}else{
 		echo json_encode(['value' => false, 'message' => 'Incorrect Username or Password!']);
