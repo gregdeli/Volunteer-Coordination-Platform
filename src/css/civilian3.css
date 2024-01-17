@@ -1,0 +1,32 @@
+/* offers_list.html */
+
+
+h1 {
+    text-align: center;
+}
+
+.offers-container {
+    max-width: 600px;
+    margin: 20px auto;
+    overflow-y: auto; /* Add a vertical scrollbar */
+    max-height: 350px; /* Set a maximum height for the container */
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.offers {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+.offers:last-child {
+    border-bottom: none; /* Remove border for the last request */
+}
+
+.offers h3 {
+    margin-top: 0;  
+}
+
+.offers p {
+    margin-bottom: 0;  
+}
