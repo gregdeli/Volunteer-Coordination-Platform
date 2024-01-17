@@ -1,90 +1,8 @@
 <?php
-// TEST what happens when civilians move
 @include "../../config_connection.php";
 
-$farr = [];
-$farr["requests_on"] = [];
-$farr["requests_off"] = [];
-$farr["offers_on"] = [];
-$farr["offers_off"] = [];
-$farr["truck"] = [];
-$farr["base"] = [];
-$farr["lines"] = [];
-
-    
-    function get_ids($farr) {
-        $ids=[];
-        for ($i=0; $i < sizeof($farr); $i++) {
-            $ids[] = $farr[$i][3];
-        }
-
-        $ids2=[];
-        for ($i=0; $i < sizeof($ids); $i++) {
-            if (in_array($ids[$i], $ids2)){
-
-            } else {
-            $ids2[] = $ids[$i];
-            }
-        }
-        return $ids2;
-    }
-
-    function unique_records($farr, $ids) {
-        $farr2 = [[]];   #farr2[0] = [int int str [list of strings]]
-
-        $id_i = 0;   # ids index
-        for ($i=0; $i < sizeof($farr); $i++) {
-            if ($farr[$i][3]==$ids[$id_i]) {
-                $farr2[$id_i][0] = $farr[$i][0];
-                $farr2[$id_i][1] = $farr[$i][1];
-                $farr2[$id_i][2] = $farr[$i][2];
-                $farr2[$id_i][3][] = $farr[$i][4];
-            } else {
-                $id_i=$id_i+1;
-                $farr2[] = [];
-                $farr2[$id_i][0] = $farr[$i][0];
-                $farr2[$id_i][1] = $farr[$i][1];
-                $farr2[$id_i][2] = $farr[$i][2];
-                $farr2[$id_i][3][] = $farr[$i][4];
-            }
-        }
-        //echo json_encode($ids);
-        return $farr2;
-    }
-
-    function list_of_str($farr2) {
-        $farr3 = [];   # farr3[0] = [int int [list of string]]
-        for ($i=0; $i < sizeof($farr2); $i++) {
-            $farr3[$i] = [$farr2[$i][0],$farr2[$i][1],[$farr2[$i][2]]];
-            for ($j=0; $j < sizeof($farr2[$i][3]); $j++) { 
-                $farr3[$i][2][] = $farr2[$i][3][$j];
-            }
-        }
-        return $farr3;
-    }
-
-    function one_str($farr3) {
-        $farr4 = [];   # farr4[0] = [int int str]  (str with list embedded)
-        for ($i=0; $i < sizeof($farr3); $i++) { 
-            $farr4[$i] = [$farr3[$i][0],$farr3[$i][1],""];
-            for ($j=0; $j < sizeof($farr3[$i][2]); $j++) {
-                if ($j>0)
-                    $farr4[$i][2] = $farr4[$i][2].", [";
-                $farr4[$i][2] = $farr4[$i][2].$farr3[$i][2][$j];
-                if ($j>0)
-                    $farr4[$i][2] = $farr4[$i][2]."]";
-            }
-        }
-        return $farr4;
-    }
-
-    function fix_records($farr) {
-        $ids = get_ids($farr);
-        $farr2 = unique_records($farr, $ids);
-        $farr3 = list_of_str($farr2);
-        return one_str($farr3);
-    }
-
+[$farr, $farr["requests_on"], $farr["requests_off"], $farr["offers_on"], $farr["offers_off"],
+$farr["truck"], $farr["base"], $farr["lines"]] = [[],[],[],[],[],[],[],[]];
 
 // Requests on
 $sql = "SELECT full_name, phone, latitude, longitude, num_people, date_submitted, name, civ_id, request.id as r_id
@@ -94,14 +12,12 @@ $sql = "SELECT full_name, phone, latitude, longitude, num_people, date_submitted
 $result = $conn->query($sql);
 if ($result->num_rows > 0)
     while($row = $result->fetch_assoc())
-        $farr["requests_on"][] = [floatval($row["latitude"]), floatval($row["longitude"]),
-                    $row["full_name"].", ".$row["phone"],
-                    intval($row["civ_id"]),
-                    $row["date_submitted"].", ".$row["name"].", ".$row["num_people"]."|".$row["r_id"]];
-
-if (sizeof($farr["requests_on"])>0){
-    $farr["requests_on"] = fix_records($farr["requests_on"]);
-}
+        $farr["requests_on"][] = array(
+            "id" => intval($row["civ_id"]),
+            "coo" => [floatval($row["latitude"]), floatval($row["longitude"])],
+            "common_per_id" => $row["full_name"].", ".$row["phone"].", ",
+            "special_per_id" => "[".$row["date_submitted"].", ".$row["name"].":".$row["num_people"]."|".$row["r_id"]."]"
+            );
 
 // Requests off
 $sql = "SELECT civ.full_name as full_name, civ.phone as phone, civ.latitude as latitude,
@@ -116,15 +32,13 @@ $sql = "SELECT civ.full_name as full_name, civ.phone as phone, civ.latitude as l
 $result = $conn->query($sql);
 if ($result->num_rows > 0)
     while($row = $result->fetch_assoc())
-        $farr["requests_off"][] = [floatval($row["latitude"]), floatval($row["longitude"]),
-                    $row["full_name"].", ".$row["phone"],
-                    intval($row["civ_id"]),
-                    $row["date_submitted"].", ".$row["name"].", ".$row["num_people"].
-                    ", ".$row["rescuer_username"].", ".$row["date_undertaken"]."|".$row["r_id"]];
-
-if (sizeof($farr["requests_off"])>0){
-    $farr["requests_off"] = fix_records($farr["requests_off"]);
-}
+        $farr["requests_off"][] = array(
+            "id" => intval($row["civ_id"]),
+            "coo" => [floatval($row["latitude"]), floatval($row["longitude"])],
+            "common_per_id" => $row["full_name"].", ".$row["phone"].", ",
+            "special_per_id" => "[".$row["date_submitted"].", ".$row["rescuer_username"].", "
+                .$row["date_undertaken"].", ".$row["name"].":".$row["num_people"]."|".$row["r_id"]."]"
+            );
 
 // Offers on
 $sql = "SELECT full_name, phone, latitude, longitude, quantity_offered, date_submitted, name, civ_id, offer.id as o_id
@@ -134,14 +48,12 @@ $sql = "SELECT full_name, phone, latitude, longitude, quantity_offered, date_sub
 $result = $conn->query($sql);
 if ($result->num_rows > 0)
     while($row = $result->fetch_assoc())
-        $farr["offers_on"][] = [floatval($row["latitude"]), floatval($row["longitude"]),
-                    $row["full_name"].", ".$row["phone"],
-                    intval($row["civ_id"]),
-                    $row["date_submitted"].", ".$row["name"].", ".$row["quantity_offered"]."|".$row["o_id"]];
-
-if (sizeof($farr["offers_on"])>0){
-    $farr["offers_on"] = fix_records($farr["offers_on"]);
-}
+    $farr["offers_on"][] = array(
+        "id" => intval($row["civ_id"]),
+        "coo" => [floatval($row["latitude"]), floatval($row["longitude"])],
+        "common_per_id" => $row["full_name"].", ".$row["phone"].", ",
+        "special_per_id" => "[".$row["date_submitted"].", ".$row["name"].":".$row["quantity_offered"]."|".$row["o_id"]."]"
+        );
 
 // Offers off
 $sql = "SELECT civ.full_name, civ.phone, civ.latitude, civ.longitude, quantity_offered, date_submitted,
@@ -155,15 +67,13 @@ $sql = "SELECT civ.full_name, civ.phone, civ.latitude, civ.longitude, quantity_o
 $result = $conn->query($sql);
 if ($result->num_rows > 0)
     while($row = $result->fetch_assoc())
-        $farr["offers_off"][] = [floatval($row["latitude"]), floatval($row["longitude"]),
-                    $row["full_name"].", ".$row["phone"],
-                    intval($row["civ_id"]),
-                    $row["date_submitted"].", ".$row["name"].", ".$row["quantity_offered"].
-                    ", ".$row["rescuer_username"].", ".$row["date_undertaken"]."|".$row["o_id"]];
-
-if (sizeof($farr["offers_off"])>0){
-    $farr["offers_off"] = fix_records($farr["offers_off"]);
-}
+        $farr["requests_off"][] = array(
+            "id" => intval($row["civ_id"]),
+            "coo" => [floatval($row["latitude"]), floatval($row["longitude"])],
+            "common_per_id" => $row["full_name"].", ".$row["phone"].", ",
+            "special_per_id" => "[".$row["date_submitted"].", ".$row["rescuer_username"].", "
+                .$row["date_undertaken"].", ".$row["name"].":".$row["quantity_offered"]."|".$row["o_id"]."]"
+            );
 
 // Trucks
 $sql = "SELECT latitude, longitude FROM user WHERE role='RESCUER' AND id=".$_GET["id"].";";
@@ -173,7 +83,6 @@ if ($result->num_rows > 0) {
     $farr["truck"] = [floatval($row["latitude"]), floatval($row["longitude"])];
 }
 
-
 // Base
 $sql = "SELECT latitude, longitude FROM base";
 $result = $conn->query($sql);
@@ -181,7 +90,6 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $farr["base"] = [floatval($row["latitude"]), floatval($row["longitude"]), "Base"];
 }
-
 
 // Lines
 $sql = "SELECT re.latitude as la1, re.longitude as lo1, civ.latitude as la2, civ.longitude as lo2

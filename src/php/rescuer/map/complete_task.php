@@ -31,9 +31,13 @@ if ($deleted==1){   // for safety (ex. double-click)
     } else if ($_GET["task"]=="offer") {
         $new_cargo_quantity = $cargo_quantity + $task_quantity;
     }
-    echo $new_cargo_quantity;
-    $sql = "UPDATE cargo SET quantity=".$new_cargo_quantity.
-        " WHERE rescuer_id=".$_GET["id"]." AND item_id=".$item_id;
+    if ($new_cargo_quantity==0) {
+        $sql = "DELETE FROM cargo WHERE item_id=".$item_id.
+               " AND rescuer_id=".$_GET["id"];
+    } else {
+        $sql = "UPDATE cargo SET quantity=".$new_cargo_quantity.
+               " WHERE rescuer_id=".$_GET["id"]." AND item_id=".$item_id;
+    }
     $result = $conn->query($sql);
 }
 
