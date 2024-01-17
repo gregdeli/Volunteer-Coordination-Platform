@@ -1,56 +1,53 @@
-let id = 2;
+let global_map;
 
-fetch('/src/php/rescuer/map/map.php?id='+id).then(response => {return response.text();})
-    .then(fileContents => {
-        let data = JSON.parse(fileContents);
-        // requests_on -> 38,21.5,Full Name 5, 2100000005, 
-        // [2023-12-01 12:54:19, Water, 1|1], [2023-12-02 12:54:19, Bread, 2|2]
-        map(data.requests_on, data.requests_off, data.offers_on,
-        data.offers_off, data.truck, data.base, data.lines);
-});
+wrapper();
 
 
-function get_description_part(description, part){
-    // Gets requests_on[i][2]
-    // Like: "Full Name 5, 2100000005,
-    // [2023-12-01 12:54:19, Water, 1|1], [2023-12-02 12:54:19, Bread, 2|2]"
-    // Splits it on "|"
-    let parts = description.split("]");
-    let part1 = "";
-    let part2 = [];
-    for (let i = 0; i < parts.length; i++) {
-        part1 = part1 + parts[i].split("|")[0]+"]";
-        part2.push(parts[i].split("|")[1]);
-    }
-    if (part==1)
-        return part1.slice(0,-1);
-    else if (part==2)
-        return part2.join(" ").slice(0,-1);
+function wrapper(){
+    let id = 2;
+    get_map_and_tasks(id);
 }
 
-function tasks_from_popup_description(description) {
-    // description: <b name="1 2 ">Full Name 5, 2100000005, 
-    // [2023-12-01 12:54:19, Water, 1], [2023-12-02 12:54:19, Bread, 2]</b>
-    // returns a list with task ids and task descriptions
-    let ids = description.split('"')[1].split(" ");
-    let fd = [];
-    let common_start_of_desc = description.split('>')[1].split('<')[0].split('[')[0];
-    let descs = description.split('>')[1].split('<')[0].split('[');
-    descs=descs.slice(1,descs.length);
-    for (let i = 0; i < descs.length; i++) {
-        fd.push(common_start_of_desc + descs[i].split(']')[0]);
-    }
-    return [ids,fd];
+function get_map_and_tasks(id){
+    fetch('/src/php/rescuer/map/map.php?id='+id).then(response => response.text())
+        .then(fileContents => {
+            let data = JSON.parse(fileContents);
+            let requests_on = get_unique_list(data.requests_on);
+            let requests_off = get_unique_list(data.requests_off);
+            let offers_on = get_unique_list(data.offers_on);
+            let offers_off = get_unique_list(data.offers_off);
+            
+            // requests_on -> 38,21.5,Full Name 5, 2100000005,
+            // [2023-12-01 12:54:19, Water, 1|1], [2023-12-02 12:54:19, Bread, 2|2]
+            let map = present_map(id, requests_on, requests_off, offers_on,
+                                offers_off, data.truck, data.base, data.lines);
+            present_current_tasks(id, map, requests_off, offers_off, data.truck);
+            global_map = map;
+    });
 }
 
 
-function map(requests_on, requests_off, offers_on, offers_off, truck, base, lines){
-    const map = L.map('map').setView([37.9, 22], 9);
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
+function present_map(id, requests_on, requests_off, offers_on, offers_off, truck, base, lines){
+    let map;
+    try {
+        map = L.map('map').setView([37.9, 22], 9);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+    } catch (error) {
+        global_map.remove();
+        map = L.map('map').setView([37.9, 22], 9);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+    }
+        
+    
+    
+    
 
     // images of pins
     let iconSize = [40, 40];
@@ -106,8 +103,8 @@ function map(requests_on, requests_off, offers_on, offers_off, truck, base, line
             marker5.setLatLng(markxy)
         } else {
             markxy = [marker5.getLatLng().lat, marker5.getLatLng().lng];
-            fetch('/src/php/rescuer/map/truck.php?id='+id+'&lat='+markxy[0]+'&lon='+markxy[1]);
-            location.reload();
+            fetch('/src/php/rescuer/map/truck.php?id='+id+'&lat='+markxy[0]+'&lon='+markxy[1]).then(response => {}).then(txt => {get_map_and_tasks(id);});
+            
         }
     });
 
@@ -118,13 +115,10 @@ function map(requests_on, requests_off, offers_on, offers_off, truck, base, line
     }
 
 
-
     // Make form disapear when not needed
     let close = 0;
     function close_form(e) {
-        if (document.getElementById('rescuer_tasks_field').style.display == "block" && close==0)
-            close = 1;
-
+        if (document.getElementById('rescuer_tasks_field').style.display == "block" && close==0) {close = 1;}
         if (close==1) {
             close = 2;
         } else if (close==2) {
@@ -145,8 +139,8 @@ function map(requests_on, requests_off, offers_on, offers_off, truck, base, line
         let html_str = "<legend>| <h3 style=\"display:inline\">Tasks</h3> |</legend>";
         for (let i = 0; i < ids.length; i++) {
             html_str = html_str + "<label>" + descs[i] + "</label>";
-            html_str = html_str + "<input value=\"Choose Task\" type=\"submit\" \
-                onclick=\"fetch('/src/php/rescuer/map/undertake_task.php?res_id="+id+"&task_id="+ids[i]+"&task="+t+"');\"/><br/>";
+            html_str = html_str + "<button \
+                onclick=\"fetch('/src/php/rescuer/map/undertake_task.php?res_id="+id+"&task_id="+ids[i]+"&task="+t+"').then(response => {}).then(txt => {get_map_and_tasks("+id+");});\"/>Choose Task</button><br/>";
         }
         document.getElementById("rescuer_tasks_field").innerHTML = html_str;
         document.getElementById('rescuer_tasks_field').style.display = "block";
@@ -178,75 +172,164 @@ function map(requests_on, requests_off, offers_on, offers_off, truck, base, line
         }
     });
 
-
-    // form with all the current tasks
-    if (requests_off.length!=0 || offers_off.length!=0){
-        document.getElementById('rescuer_tasks_field2').style.display = "grid";
-    }
-    let html_str = "<legend>| <h3 style=\"display:inline\">Current Tasks</h3> |</legend>";
-    // requests
-    for (let i = 0; i < requests_off.length; i++) {
-        let ids = get_description_part(requests_off[i][2],2).split(" ");
-        let fd=[];
-        let descs = get_description_part(requests_off[i][2],1);
-        let common_start_of_desc = descs.split('[')[0];
-        let descs_end = descs.split('[');   // : Water, 3, username2, 2023-12-03 13:54:19]
-        descs_end=descs_end.slice(1,descs_end.length);
-        for (let j = 0; j < descs_end.length; j++) {
-            let d = descs_end[j].split(']')[0]
-            // choose only date, item and quantity
-            fd.push(common_start_of_desc + d.split(", ")[0] + ", " + d.split(", ")[1] + ", " + d.split(", ")[2]);
-        }
-        let dist = map.distance([truck[0],truck[1]],[requests_off[i][0],requests_off[i][1]]);
-        for (let j = 0; j < fd.length; j++) {
-            html_str = html_str + '<label>'+fd[j]+'</label>';
-            if (dist<=50) {
-                html_str = html_str + "<input id=\"check"+ids[i]+"\" class=\"check\" type=\"image\" src=\"/src/img/check_button.png\" \
-                    onclick=\"fetch('/src/php/rescuer/map/complete_task.php?id="+id+"&task_id="+ids[j]+"&task=request');\"/>";
-
-                fetch('/src/php/rescuer/map/has_item.php?id='+id+'&task_id='+ids[i]+'&task=request')
-                    .then((response) => {return response.json();})
-                    .then((data) => {
-                        if (data==0) 
-                            document.getElementById("check"+ids[i]).onclick = function(){alert("Items not in cargo.");};
-                    });
-            }
-            html_str = html_str + "<input class=\"x\" type=\"image\" src=\"/src/img/x_button.png\" \
-            onclick=\"fetch('/src/php/rescuer/map/cancel_task.php?task_id="+ids[j]+"&task=request');\"/>";
-        }
-    }
-    // offers
-    for (let i = 0; i < offers_off.length; i++) {
-        let ids = get_description_part(offers_off[i][2],2).split(" ");
-        let fd=[];
-        let descs = get_description_part(offers_off[i][2],1);
-        let common_start_of_desc = descs.split('[')[0];
-        let descs_end = descs.split('[');   // : Water, 3, username2, 2023-12-03 13:54:19]
-        descs_end=descs_end.slice(1,descs_end.length);
-        for (let j = 0; j < descs_end.length; j++) {
-            let d = descs_end[j].split(']')[0]
-            // choose only date, item and quantity
-            fd.push(common_start_of_desc + d.split(", ")[0] + ", " + d.split(", ")[1] + ", " + d.split(", ")[2]);
-        }
-        let dist = map.distance([truck[0],truck[1]],[offers_off[i][0],offers_off[i][1]]);
-        for (let j = 0; j < fd.length; j++) {
-            html_str = html_str + '<label>'+fd[j]+'</label>';
-            if (dist<=50)
-                html_str = html_str + "<input class=\"check\" type=\"image\" src=\"/src/img/check_button.png\" \
-                onclick=\"fetch('/src/php/rescuer/map/complete_task.php?id="+id+"&task_id="+ids[j]+"&task=offer');\"/>";
-            html_str = html_str + "<input class=\"x\" type=\"image\" src=\"/src/img/x_button.png\" \
-            onclick=\"fetch('/src/php/rescuer/map/cancel_task.php?task_id="+ids[j]+"&task=offer');\"/>";
-        }
-    }
-
-    document.getElementById("rescuer_tasks_field2").innerHTML = html_str;
-
-    
-
     const layerControl = L.control.layers().addTo(map);
     layerControl.addOverlay(requests_on_layer, 'Requests_on');
     layerControl.addOverlay(requests_off_layer, 'Requests_off');
     layerControl.addOverlay(offers_on_layer, 'Offers_on');
     layerControl.addOverlay(offers_off_layer, 'Offers_off');
     layerControl.addOverlay(lines_layer, 'Lines');
+
+    return map;
+}
+
+
+function present_current_tasks(id, map, requests_off, offers_off, truck){
+    
+    // form with all the current tasks
+    if (requests_off.length!=0 || offers_off.length!=0){
+        document.getElementById('rescuer_tasks_field2').style.display = "grid";
+    } else {
+        document.getElementById('rescuer_tasks_field2').style.display = "none";
+    }
+    let html_str = "<legend>| <h3>Current Tasks</h3> |</legend>";
+    // requests
+    for (let i = 0; i < requests_off.length; i++) {
+        let ids = get_description_part(requests_off[i][2],2).split(" ");
+        let fd=[];   // final descriptions to show
+        let descs = get_description_part(requests_off[i][2],1);   // Full Name 6, 2100000006, [2023-12-03 12:54:19, username2, 2023-12-03 13:54:19, Water:3]
+        let common_start_of_desc = descs.split('[')[0];
+        let descs_end = descs.split('[');   // : 2023-12-03 12:54:19, username2, 2023-12-03 13:54:19, Water:3]
+        descs_end=descs_end.slice(1,descs_end.length);
+        for (let j = 0; j < descs_end.length; j++) {
+            let d = descs_end[j].split(']')[0]
+            // choose only date, item and quantity
+            fd.push(common_start_of_desc + d.split(", ")[0] + ", " + d.split(", ")[3]);
+        }
+        let dist = map.distance([truck[0],truck[1]],[requests_off[i][0],requests_off[i][1]]);
+        for (let j = 0; j < fd.length; j++) {
+            html_str = html_str + '<label>'+fd[j]+'</label>';
+            if (dist<=50) {
+                html_str = html_str + "<img id=\"check"+ids[j]+"\" class=\"check\" src=\"/src/img/check_button.png\" \
+                    onclick=\"fetch('/src/php/rescuer/map/complete_task.php?id="+id+"&task_id="+ids[j]+"&task=request').then(response => {}).then(txt => {get_map_and_tasks("+id+");});\"/>";
+
+                fetch('/src/php/rescuer/map/has_item.php?id='+id+'&task_id='+ids[j]+'&task=request')
+                    .then((response) => response.text())
+                    .then((data) => {
+                        if (data==0){
+                            document.getElementById("check"+ids[j]).onclick = function(){alert("Items not in cargo.");};
+                        }
+                    });
+            }
+            html_str = html_str + "<img role=\"button\" class=\"x\" type=\"image\" src=\"/src/img/x_button.png\" \
+            onclick=\"fetch('/src/php/rescuer/map/cancel_task.php?task_id="+ids[j]+"&task=request').then(response => {}).then(txt => {get_map_and_tasks("+id+");});\"/>";
+        }
+    }
+    // offers
+    for (let i = 0; i < offers_off.length; i++) {
+        let ids = get_description_part(offers_off[i][2],2).split(" ");
+        let fd=[];   // final descriptions to show
+        let descs = get_description_part(offers_off[i][2],1);    // Full Name 6, 2100000006, [2023-12-03 12:54:19, username2, 2023-12-03 13:54:19, Water:3]
+        let common_start_of_desc = descs.split('[')[0];
+        let descs_end = descs.split('[');   // : 2023-12-03 12:54:19, username2, 2023-12-03 13:54:19, Water:3]
+        descs_end=descs_end.slice(1,descs_end.length);
+        for (let j = 0; j < descs_end.length; j++) {
+            let d = descs_end[j].split(']')[0]
+            // choose only date, item and quantity
+            fd.push(common_start_of_desc + d.split(", ")[0] + ", " + d.split(", ")[3]);
+        }
+        let dist = map.distance([truck[0],truck[1]],[offers_off[i][0],offers_off[i][1]]);
+        for (let j = 0; j < fd.length; j++) {
+            html_str = html_str + '<label>'+fd[j]+'</label>';
+            if (dist<=50)
+                html_str = html_str + "<img class=\"check\" src=\"/src/img/check_button.png\" \
+                onclick=\"fetch('/src/php/rescuer/map/complete_task.php?id="+id+"&task_id="+ids[j]+"&task=offer').then(response => {}).then(txt => {get_map_and_tasks("+id+");});\"/>";
+            html_str = html_str + "<img class=\"x\" src=\"/src/img/x_button.png\" \
+            onclick=\"fetch('/src/php/rescuer/map/cancel_task.php?task_id="+ids[j]+"&task=offer').then(response => {}).then(txt => {get_map_and_tasks("+id+");});\"/>";
+        }
+    }
+
+    document.getElementById("rescuer_tasks_field2").innerHTML = html_str; 
+}
+
+
+// --- helper functions --- //
+
+function get_unique_list(ilist) {
+    if (ilist.length<1) {
+        return [];
+    }
+    let flist = [];
+
+    // get unique ids
+    let ids = [];
+    for (let i = 0; i < ilist.length; i++) {
+        if (!ids.includes(ilist[i]["id"])) {
+            ids.push(ilist[i]["id"]);
+        }
+    }
+    // get final data
+    let met_ids = [];
+    for (let i = 0; i < ilist.length; i++) {
+        let new_id = ilist[i]["id"];
+        if (!met_ids.includes(new_id)) {
+            flist.push([ilist[i]["coo"][0], ilist[i]["coo"][1], get_description(ilist,new_id)]);
+            met_ids.push(new_id);
+        }
+    }
+    return flist;
+}
+
+
+function get_description(ilist, given_id) {   // for combining stuff with same id
+    // start of the description
+    let start = "";
+    for (let i = 0; i < ilist.length; i++) {
+        if (ilist[i]["id"]==given_id) {
+            start = ilist[i]["common_per_id"];
+            break;
+        }
+    }
+    // end of the description
+    let end = "";
+    for (let i = 0; i < ilist.length; i++) {
+        if (ilist[i]["id"]==given_id) {
+            end+=ilist[i]["special_per_id"]+", ";
+        }
+    }
+    return start+end.slice(0,-2);
+}
+
+
+function get_description_part(description, part){
+    // Gets requests_on[i][2]
+    // Like: "Full Name 5, 2100000005,
+    // [2023-12-01 12:54:19, Water, 1|1], [2023-12-02 12:54:19, Bread, 2|2]"
+    // Splits it on "|"
+    let parts = description.split("]");
+    let part1 = "";
+    let part2 = [];
+    for (let i = 0; i < parts.length; i++) {
+        part1 = part1 + parts[i].split("|")[0]+"]";
+        part2.push(parts[i].split("|")[1]);
+    }
+    if (part==1)
+        return part1.slice(0,-1);
+    else if (part==2)
+        return part2.join(" ").slice(0,-1);
+}
+
+
+function tasks_from_popup_description(description) {
+    // description: <b name="1 2 ">Full Name 5, 2100000005,
+    // [2023-12-01 12:54:19, Water, 1], [2023-12-02 12:54:19, Bread, 2]</b>
+    // returns a list with task ids and task descriptions
+    let ids = description.split('"')[1].split(" ");
+    let fd = [];
+    let common_start_of_desc = description.split('>')[1].split('<')[0].split('[')[0];
+    let descs = description.split('>')[1].split('<')[0].split('[');
+    descs=descs.slice(1,descs.length);
+    for (let i = 0; i < descs.length; i++) {
+        fd.push(common_start_of_desc + descs[i].split(']')[0]);
+    }
+    return [ids,fd];
 }
