@@ -9,32 +9,33 @@ function registerCheck(event, type) {
     var r_pw = document.getElementById("repeat-password").value;
     var fname = document.getElementById("fullname").value;
     var phone = document.getElementById("phone").value;
+    var latitude = document.getElementById("latitude");
+    var longitude = document.getElementById("longitude");
+    if (document.contains(latitude) && document.contains(longitude)) {
+        latitude = latitude.value; 
+        longitude = longitude.value;
+    } else {
+        latitude = 'NULL'; 
+        longitude = 'NULL';
+    }
+           
  
     if(valid){
         $.ajax({
             type: "POST",
             url: "/src/php/authentication/register.php",
-            data: {user: type, username: uname, password: pw, r_password: r_pw, fullname: fname, phone: phone},
+            data: {user: type, username: uname, password: pw, r_password: r_pw, fullname: fname, phone: phone, latitude: latitude, longitude: longitude},
             success: function(response) {
                 response = JSON.parse(response);
-                if (response.value) {//if type =2 respone -> redirect
-                    document.getElementById("message").innerHTML = response.message;
-                    document.getElementById("username").value = "";
-                    document.getElementById("password").value = "";
-                    document.getElementById("repeat-password").value = "";
-                    document.getElementById("fullname").value = "";
-                    document.getElementById("phone").value = "";
-                }else if (!response.value){
-                    document.getElementById("message").innerHTML = response.message;
-                    document.getElementById("username").value = "";
-                    document.getElementById("password").value = "";
-                    document.getElementById("repeat-password").value = "";
-                    document.getElementById("fullname").value = "";
-                    document.getElementById("phone").value = "";
-                }else {
-                    document.getElementById("message").innerHTML = "Invalid inputs. Try again";
-                    document.getElementById("password").value = "";
-                    document.getElementById("repeat-password").value = "";
+                alert(response.message);
+                document.getElementById("username").value = "";
+                document.getElementById("password").value = "";
+                document.getElementById("repeat-password").value = "";
+                document.getElementById("fullname").value = "";
+                document.getElementById("phone").value = "";
+                if (document.contains(document.getElementById("latitude")) && document.contains(document.getElementById("longitude"))) {
+                    document.getElementById("latitude").value = "";
+                    document.getElementById("longitude").value = "";
                 }
             }
         });
@@ -44,6 +45,10 @@ function registerCheck(event, type) {
         document.getElementById("repeat-password").value = "";
         document.getElementById("fullname").value = "";
         document.getElementById("phone").value = "";
+        if (document.contains(document.getElementById("latitude")) && document.contains(document.getElementById("longitude"))) {
+            document.getElementById("latitude").value = "";
+            document.getElementById("longitude").value = "";
+        }
     }
 
 }
@@ -64,6 +69,15 @@ function invoker(){
     document.getElementById("phone").addEventListener('input', function(){
         validatePhone();
     });
+    if (document.contains(document.getElementById("latitude")) && document.contains(document.getElementById("longitude"))) {
+        document.getElementById("latitude").addEventListener('input', function(){
+            validateCoordinates("latitude");
+        });
+        document.getElementById("longitude").addEventListener('input', function(){
+            validateCoordinates("longitude");
+        });
+    }
+    
 
 }
 
@@ -124,4 +138,14 @@ function validatePhone(){
     }
 }
     
-  
+function validateCoordinates(coordinate){
+    var coordin = document.getElementById(coordinate).value;
+
+    if(!coordin.match(/^\d{1,4}(\.\d{1,6})?$/) || coordin.length == 0){
+        document.getElementById(coordinate+"_").innerHTML = `*invalid ${coordinate}: positive decimal`;
+        valid = false;
+    }else{
+       document.getElementById(coordinate+"_").innerHTML = "";
+       valid = true;
+    }
+}
