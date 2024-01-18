@@ -14,6 +14,7 @@ function update_cargo(vehicle,base,cargo){
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
+    document.getElementById('map4distance').style.display = "none";
 
     let dist = map.distance([vehicle[0],vehicle[1]],[base[0],base[1]]);
     document.getElementById('distance').innerHTML = "<p>Distance to Base: "+Math.round(dist)+"m</p>";
