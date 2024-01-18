@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- check if user is connected -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="/src/js/authentication/is_connected.js"></script>
+    <script src="/src/js/authentication/is_connected.js" async></script>
     <!-- script -->
     <script src="/src/js/admin/create_announcement.js"></script>
   </head>
@@ -24,25 +24,19 @@
     <h2>Create Announcement</h2>
 
     <form>
-        <label for="dynamicdropdown">Select an Option:</label>
-        <select id="dynamicdropdown" onchange="changeItemsList()"></select>
+        <label for="dropdown">Select an Option:</label>
+        <select id="dropdown" onchange="changeListItems()"></select>
 
         <ul id="itemslist">
             <!-- Display items here -->
         </ul>
 
         <script>
+          	initializeDropDown();
             
-            document.addEventListener("DOMContentLoaded", async function(){
-                await getCategories();
-                dynamicDropDown();
-                itemsList();
-            });
-
             document.addEventListener("change", function(){
                 storeCheckedCheckboxes();
             });
-            
         </script>
 
         <button type="button" onclick="createAnnouncement()">Create Announcement</button>
