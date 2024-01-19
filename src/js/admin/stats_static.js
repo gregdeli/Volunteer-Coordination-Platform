@@ -1,3 +1,6 @@
+stats();
+
+function stats(){
 let date1;
 let date2;
 
@@ -10,8 +13,8 @@ if (date1===null || date2===null){
     date2 = "2023-12-04 12:54:19";
 }
 
-document.getElementById('start_d').innerText = document.getElementById('start_d').innerText + " " + date1;
-document.getElementById('end_d').innerText = document.getElementById('end_d').innerText + " " + date2;
+document.getElementById('start_d').innerText = " " + date1;
+document.getElementById('end_d').innerText = " " + date2;
 
 
 fetch('/src/php/admin/stats.php').then(response => {return response.text();})
@@ -53,4 +56,5 @@ function plot_stats(newr, newo, undr, undo, date1, date2) {
     const layout = {title:"Statistics for the given time range."};
 
     Plotly.newPlot("Plot", data, layout);
+}
 }
