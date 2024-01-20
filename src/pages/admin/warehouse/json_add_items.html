@@ -17,9 +17,12 @@
         <div id="add_items_menu"></div>
 
         <form id="json_form">
+        <fieldset id="json_field">
+            <legend>| Load Items From JSON |</legend>
             <label for="json_file">Select JSON file:</label>
             <input type="file" id="json_file" name="json_file" accept=".json" required /> <br />
             <button type="button" onclick="addJsonItems()">Submit</button>
+        </fieldset>
         </form>
 
         <div id="footer"></div>

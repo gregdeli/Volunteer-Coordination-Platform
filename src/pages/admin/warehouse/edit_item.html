@@ -13,26 +13,27 @@
 
         <div id="warehouse_main_menu"></div>
 
-        <h2>Edit Item</h2>
-        <form id="edit_item_form" action="" method="post">
+        
+        <form id="edit_item_form">
+        <fieldset id="edit_item_field">
+            <legend>| Edit Item |</legend>
+
             <label for="itcats">Select Category:</label>
-            <select name="itcats" id="itcats" required></select>
-            <br /><br />
+            <select name="itcats" id="itcats" required></select><br/>
 
             <label for="specified_item">Select Specified Item:</label>
-            <select id="specified_item" name="specified_item"></select>
-            <br /><br />
+            <select id="specified_item" name="specified_item"></select><br/>
 
             <label for="item_name">Item Name:</label>
-            <input type="text" id="item_name" name="item_name" required />
-            <br /><br />
+            <input type="text" id="item_name" name="item_name" required /><br/>
 
             <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" name="quantity" min="0" required />
-            <br /><br />
+            <input type="number" id="quantity" name="quantity" min="0" required /><br/>
 
             <input type="button" value="Submit" onclick="sendEditedItem()" />
+        </fieldset>
         </form>
+        
 
         <div id="footer"></div>
     </body>
