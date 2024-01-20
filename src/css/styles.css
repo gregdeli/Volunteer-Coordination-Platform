@@ -285,6 +285,54 @@ ul.menu_horizontal li {
 }
 
 
+
+/* -------- Volunteer Accounts -------- */
+#volunteer_acc_field{
+    margin:0 auto;
+    margin-top:3rem;
+    margin-bottom:9rem;
+    width:45rem;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:0.6rem;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+    justify-items: start;
+}
+#volunteer_acc_field legend{
+    font-size: var(--font-legend-field);
+}
+#volunteer_acc_field label{
+    display: inline-block;
+    grid-column: 1;
+    margin-left:5rem;
+}
+#volunteer_acc_field input{
+    display: inline-block;
+    grid-column: 2;
+    justify-self: center;
+    width:10rem;
+}
+#volunteer_acc_field span{
+    display: inline-block;
+    grid-column: 3;
+}
+#volunteer_acc_field button{
+    display: inline-block;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    justify-self: center;
+    margin-top: 2.7rem;
+}
+
+
+/* -------- Create Announcements -------- */
+
+
+
+
+
+
 /* ################### RESCUER ################### */
 /* Rescuer choose task */
 #rescuer_tasks_field{
