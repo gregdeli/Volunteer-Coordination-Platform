@@ -1,138 +1,329 @@
-/*:root {
-    --color-primary-100: hsl(184,88%, 94%);
+:root {
+    /* --color-primary-100: hsl(184,88%, 94%);
     --color-primary-200: #87EAF2;
     --color-primary-300: #38BEC9;
     --color-primary-400: #14919B;
-    --color-primary-500: #0A6C74;
+    --color-primary-500: #0A6C74; */
+    --font-legend-field: 1.6rem;
 }
-header {
+/* header {
     background-color: var(--color-primary-500);
     color: var(--color-primary-100);
-}
-*/
-html,
-body {
-    background-color: #f1f5f8;
+} */
+
+
+
+html, body {
+    background-color: #F1F5F8;
     height: 100%;
     margin: 0;
     text-align: center;
+    /*font-size:0.7rem;*/
 }
 
-* {
-    font-family: Cambria, Georgia, "Times New Roman", serif;
-}
+
+* { font-family: Cambria, Georgia, "Times New Roman", serif; }
+
 
 /* Page menu */
-.menu_horizontal {
+.menu_horizontal{
     text-align: center;
     background-color: orange;
     box-sizing: border-box;
-    border: solid 0.1em;
-    border-color: black orange;
-    padding: 1.2em;
+    border: solid 0.17rem;
+    border-color: black orange ;
+    padding: 1rem;
     margin: 0;
+    font-size:1.2rem;
 }
-.menu_horizontal a:link,
-.menu_horizontal a:visited,
-.menu_horizontal a:hover,
-.menu_horizontal a:active {
+.menu_horizontal a:link, .menu_horizontal a:visited, .menu_horizontal a:hover, .menu_horizontal a:active{
     color: black;
     text-decoration: none;
 }
 ul.menu_horizontal li {
     display: inline-block;
     list-style-type: none;
-    padding-right: 3em;
+    padding-right: 4rem;
 }
+
 
 .page_title {
     text-align: center;
-    font-size: x-large;
     font-weight: bold;
-    margin: 2em;
+    margin-top:3rem;
+    margin-bottom:4rem;
+    font-size:1.7rem;
 }
 
 #main {
-    padding-bottom: 6em; /* footer height */
+    padding-bottom: 5rem   /* footer height */
 }
 
 /* Footer */
 #footer {
-    width: 100%;
+    width:100%;
 }
+
+
 
 /* Site logo */
 #logo {
     margin: 0 auto;
-    padding: 30px;
-    width: 200px;
-    font-size: 2.5em;
-    font-weight: bold;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    font-size: 4rem;
+    /*font-weight: bold;*/
+}
+#logo img {
+    width: 2rem;
+    height: 2rem;
 }
 #logo_container {
     box-sizing: border-box;
     background-color: #ffe5b4;
 }
 
-/* Mapa  */
+ /* Maps  */
 .leaflet-container {
     margin: 0 auto;
-    width: 50em;
-    height: 44em;
+    width: 50rem;
+    height: 35rem;
     max-width: 100%;
     max-height: 100%;
     text-align: left;
 }
 #map {
-    width: 50em;
-    height: 44em;
+    width: 50rem;
+    height: 35rem;
 }
-#map4distance {
-    display: none;
-}
+
+/* ################### ADMIN ################### */
+/* ----- Stats ----- */
 
 #Plot {
-    width: 100%;
-    max-width: 40em;
-    margin: auto;
+    width:100%;
+    max-width:45rem;
+    margin:auto;
+    font-size:1.2rem;
 }
 
-/* form lields */
+/* Dates on top of page */
+#stats_dates{
+    font-size:1.4rem;
+    font-weight: 500;
+    margin-bottom:2rem;
+}
+#stats_dates div {
+    display:inline;
+}
+
+
+/* Stats field to choose date */
 #stats_field {
-    width: 25em;
+    width: 33rem;
     margin: auto;
-    margin-top: 2em;
+    margin-top: 3rem;
+    padding-top: 1.3rem;
+    font-size: 1.2rem;
+}
+#stats_field legend {
+    font-size: var(--font-legend-field);
+}
+#stats_field label{
+    padding-right:2rem;
+}
+#stats_submit{
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
 }
 
-#rescuer_tasks_field {
-    width: 35em;
+
+
+
+/* -------- WAREHOUSE -------- */
+/* Add category */
+#category_field {
+    margin:0 auto;
+    margin-top:3rem;
+    margin-bottom:9rem;
+    width:25rem;
+}
+#category_field input[type="button"]{
+    margin-top:1.2rem;
+    margin-bottom:0.6rem;
+}
+#category_field label{
+    display: inline-block;
+    margin-top:0.5rem;
+    margin-bottom:0.5rem;
+}
+#category_field legend{
+    font-size: var(--font-legend-field);
+}
+
+/* Edit item */
+#edit_item_field {
+    margin:0 auto;
+    margin-top:3rem;
+    margin-bottom:9rem;
+    width:25rem;
+    display:grid;
+    grid-template-columns: 2;
+    gap:0.6rem;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+    justify-items: start;
+}
+#edit_item_field legend{
+    font-size: var(--font-legend-field);
+}
+#edit_item_field label{
+    display: inline-block;
+    grid-column: 1;
+    margin-left:3rem;
+}
+#edit_item_field select, #edit_item_field input{
+    display: inline-block;
+    grid-column: 2;
+    width:9rem;
+    margin-left:2rem;
+}
+#edit_item_field input[type="button"]{
+    display: inline-block;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    justify-self: center;
+    margin-top: 1.7rem;
+}
+
+/* Load JSON */
+#json_field {
+    margin:0 auto;
+    margin-top:3rem;
+    margin-bottom:9rem;
+    width:25rem;
+    padding:2em;
+    padding-top:3em;
+}
+#json_field button {
+    margin-top:2rem;
+}
+#json_field legend{
+    font-size: var(--font-legend-field);
+}
+
+#url_form {
+    margin-top:4rem;
+    margin-bottom:19rem;
+}
+
+
+/* Warehouse Status */
+#warehouse_status_main{
+    margin:0 auto;
+    margin-top: 4rem;
+    margin-bottom: 6rem;
+    width:50rem;
+}
+#warehouse_status_main legend{
+    font-size: var(--font-legend-field);
+}
+#warehouse_status_main label{
+    font-size: 1.2rem;
+    display: block;
+    margin-top:1.8rem;
+    margin-bottom:0.4rem;
+}
+#catsmult{
+    height: 8rem;
+    margin-bottom: 1.5rem;
+}
+
+#status-table-container {
+    height: 20rem;
+    max-width: 40rem;
+    overflow-y: auto; /* Enable vertical scrolling */
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+#status_table {
+    width: 100%;
+}
+#fixed-table-header {
+    position: sticky;
+    text-align: center;
+    top: 0;
+    background-color: #f1f5f8;
+}
+
+/* Add item menu */
+#add_item_menu_links {
+    margin:0 auto;
+    border: 0.1rem solid black;
+    box-sizing: border-box;
+    width:33.5rem;
+    height:1.55rem;
+    font-size:1.1rem;
+}
+#add_item_menu_links a:link, #add_item_menu_links a:visited, #add_item_menu_links a:hover, #add_item_menu_links a:active{
+    color: black;
+    text-decoration: none;
+}
+/* Warehouse main menu */
+#warehouse_main_menu_links {
+    display: block;
+    margin:0 auto;
+    border: 0.1rem solid black;
+    box-sizing: border-box;
+    width:26rem;
+    height:1.55rem;
+    font-size:1.1rem;
+}
+#warehouse_main_menu_links a:link, #warehouse_main_menu_links a:visited, #warehouse_main_menu_links a:hover, #warehouse_main_menu_links a:active{
+    color: black;
+    text-decoration: none;
+}
+
+
+/* ################### RESCUER ################### */
+/* Rescuer choose task */
+#rescuer_tasks_field{
+    width: 35rem;
     margin: auto;
-    margin-top: 2em;
+    margin-top: 2rem;
     display: none;
 }
-#rescuer_tasks_field input {
-    margin-left: 1em;
-    margin-bottom: 0.3em;
+#rescuer_tasks_field button{
+    margin-left: 1rem;
+    margin-bottom: 0.3rem;
+
 }
 
+/* Rescuer complete/cancel task */
 #rescuer_tasks_field2 {
-    width: 35em;
+    width: 35rem;
     margin: auto;
-    margin-top: 2em;
+    margin-top: 3rem;
     display: grid;
 }
-#rescuer_tasks_field2 label {
-    margin-top: 0.5em;
-    margin-left: 1em;
+#rescuer_tasks_field2 label{
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
     grid-column: 1;
     justify-self: start;
 }
-#rescuer_tasks_field2 input {
-    margin-top: 0.7em;
-    margin-bottom: 0.5em;
-    width: 1em;
-    height: 1em;
+#rescuer_tasks_field2 img{
+    margin-top: 0.7rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+    width: 1rem;
+    height: 1rem;
 }
+#rescuer_tasks_field2 legend h3{
+    display:inline;
+}
+
+
 .check {
     grid-column: 2;
     justify-self: end;
@@ -142,76 +333,63 @@ ul.menu_horizontal li {
     justify-self: center;
 }
 
-/* WAREHOUSE */
-#status-table-container {
-    max-height: 20vw; /* Set a maximum height for the container */
-    max-width: 500px;
-    overflow-y: auto; /* Enable vertical scrolling */
-    margin: 0 auto;
+
+
+
+
+#cargo_items, #inventory_items {
+    margin-bottom: 2rem;
 }
-#status_table {
-    margin-top: 20px;
-    width: 100%;
+#cargo_items h3, #inventory_items h3{
+    display:inline-block;
 }
-#fixed-table-header {
-    position: sticky;
-    text-align: center;
-    top: 0;
-    background-color: #f1f5f8;
-}
-.table {
-    margin: 0 auto;
+#cargo_items table, #inventory_items table{
+    display:inline-block;
 }
 
-#cargo_items,
-#inventory_items {
-    margin-bottom: 2em;
-}
-#cargo_items h3,
-#inventory_items h3 {
-    display: inline-block;
-}
-#cargo_items table,
-#inventory_items table {
-    display: inline-block;
-}
 
-#cargo_items td {
+
+#cargo_items td{
     text-align: left;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    padding-top:0.5rem;
+    padding-bottom:0.5rem;
 }
 
-#inventory_items td {
+#inventory_items td{
     text-align: left;
-    min-width: 10em;
-    max-width: 10em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    padding-left: 1em;
-    overflow: hidden;
+    min-width: 10rem;
+    max-width: 10rem;
+    padding-top:0.5rem;
+    padding-bottom:0.5rem;
+    padding-left:1rem;
+    overflow:hidden;
 }
-#inventory_items input {
+#inventory_items input{
     text-align: center;
     box-sizing: border-box;
-    min-width: 4em;
-    max-width: 4em;
+    min-width: 4rem;
+    max-width: 4rem;
 }
 
-.cargo_item {
-    padding-right: 1em;
-    min-width: 10em;
-    max-width: 10em;
+
+.cargo_item{
+    padding-right:1rem;
+    min-width: 10rem;
+    max-width: 10rem;
 }
+
+
+
 
 details {
-    width: 17em;
+    width: 17rem;
     margin: 0 auto;
     background: #71a0ff;
-    border-radius: 1em;
+    border-radius: 1rem;
     overflow: hidden;
 }
 summary {
     display: block;
     background: #b3c3ff;
 }
+
