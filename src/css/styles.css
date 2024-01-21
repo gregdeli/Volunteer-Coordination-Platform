@@ -328,7 +328,32 @@ ul.menu_horizontal li {
 
 /* -------- Create Announcements -------- */
 
+#itemslist {
+    margin: 3rem auto;
+    width: 12rem;
+    list-style-type: none;
+    display: grid;
+    justify-items: start;
+    padding:0;
+}
 
+#create_announcement_field{
+    margin:0 auto;
+    margin-top:3rem;
+    margin-bottom:9rem;
+    width:35rem;
+    padding-top: 3rem;
+    padding-bottom: 2.5rem;
+    font-size:1.2rem;
+}
+#create_announcement_field legend{
+    font-size: var(--font-legend-field);
+}
+#create_announcement_field input{
+    display: inline-block;
+    margin-right:1.5rem;
+    margin-bottom:0.4rem;
+}
 
 
 
@@ -428,15 +453,14 @@ ul.menu_horizontal li {
 
 
 
-
-details {
+#cargo_items details, #inventory_items details {
     width: 17rem;
     margin: 0 auto;
     background: #71a0ff;
     border-radius: 1rem;
     overflow: hidden;
 }
-summary {
+#cargo_items summary, #inventory_items summary {
     display: block;
     background: #b3c3ff;
 }
