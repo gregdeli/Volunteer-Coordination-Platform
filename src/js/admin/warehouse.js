@@ -14,7 +14,7 @@ function sendItem() {
     var data = new FormData();
 
     // Add the details to the form
-    for (i = 1; i <= detailsTable.childElementCount; i++) {
+    for (i = 1; i <= detailsTable.childElementCount - 1; i++) {
         detailName = document.getElementById("itdname" + i.toString()).value;
         detailValue = document.getElementById("itdvalue" + i.toString()).value;
         if (detailName.length > 0 || detailValue.length > 0) {
@@ -51,7 +51,11 @@ function sendItem() {
             if (xhr.status === 200) {
                 alert("Item submitted successfully!");
                 form.reset();
+                // Remove all rows from the details table
                 detailsTable.innerHTML = "";
+                // Add the table headers back in
+                detailsTable.innerHTML =
+                    '<th>Item detail name (e.g. "volume")</th><th>Item detail value (e.g. "500ml")</th>';
                 addDetail();
             } else {
                 console.log("Error");
@@ -65,22 +69,27 @@ function sendItem() {
 function addDetail() {
     var table = document.getElementById("itemdetails");
     var row = table.insertRow(-1);
+    //var cell1 = row.insertCell(0);
+    //var cell2 = row.insertCell(1);
     var cell1 = row.insertCell(0);
+    //var cell3 = row.insertCell(2);
+    //var cell4 = row.insertCell(3);
     var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    var cell4 = row.insertCell(3);
-    cell1.innerHTML = 'Item detail name (e.g. "volume")';
-    cell3.innerHTML = 'Item detail value (e.g. "500ml")';
+    //cell1.innerHTML = 'Item detail name (e.g. "volume")';
+    //cell3.innerHTML = 'Item detail value (e.g. "500ml")';
 
+    var detail_num = table.children[0].childElementCount - 1;
     var namebox = document.createElement("input");
-    namebox.setAttribute("name", "itdname" + table.children[0].childElementCount.toString());
-    namebox.setAttribute("id", "itdname" + table.children[0].childElementCount.toString());
-    cell2.appendChild(namebox);
+    namebox.setAttribute("name", "itdname" + detail_num.toString());
+    namebox.setAttribute("id", "itdname" + detail_num.toString());
+    //cell2.appendChild(namebox);
+    cell1.appendChild(namebox);
 
     var valuebox = document.createElement("input");
-    valuebox.setAttribute("name", "itdvalue" + table.children[0].childElementCount.toString());
-    valuebox.setAttribute("id", "itdvalue" + table.children[0].childElementCount.toString());
-    cell4.appendChild(valuebox);
+    valuebox.setAttribute("name", "itdvalue" + detail_num.toString());
+    valuebox.setAttribute("id", "itdvalue" + detail_num.toString());
+    //cell4.appendChild(valuebox);
+    cell2.appendChild(valuebox);
 }
 
 function getCategories() {
@@ -140,9 +149,11 @@ document.addEventListener("DOMContentLoaded", function () {
             if (selectCategories.value !== "") {
                 getWarehouseStatus();
             } else {
-                // Clear existing table content
+                // Clear existing table content except first row
                 var statusTable = document.getElementById("status_table");
-                statusTable.innerHTML = "";
+                while (statusTable.rows.length > 1) {
+                    statusTable.deleteRow(1);
+                }
             }
         });
     }
@@ -364,7 +375,6 @@ function getWarehouseStatus() {
     var xhr = new XMLHttpRequest();
     var url =
         "/src/php/admin/warehouse/get_status.php?categories=" + JSON.stringify(selectedCategories);
-    console.log(JSON.stringify(selectedCategories));
     xhr.open("GET", url);
     xhr.send();
 
@@ -372,25 +382,32 @@ function getWarehouseStatus() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 var statusData = JSON.parse(xhr.responseText);
+                if (statusData.response === "No items found") {
+                    // Clear existing table content except first row
+                    var statusTable = document.getElementById("status_table");
+                    while (statusTable.rows.length > 1) {
+                        statusTable.deleteRow(1);
+                    }
+                } else {
+                    // Clear existing table content except first row
+                    var statusTable = document.getElementById("status_table");
+                    while (statusTable.rows.length > 1) {
+                        statusTable.deleteRow(1);
+                    }
+                    // Add new rows based on received data
+                    for (var i = 0; i < statusData.length; i++) {
+                        var row = statusTable.insertRow(-1);
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+                        var cell3 = row.insertCell(2);
 
-                // Clear existing table content except first row
-                var statusTable = document.getElementById("status_table");
-                while (statusTable.rows.length > 1) {
-                    statusTable.deleteRow(1);
-                }
-                // Add new rows based on received data
-                for (var i = 0; i < statusData.length; i++) {
-                    var row = statusTable.insertRow(-1);
-                    var cell1 = row.insertCell(0);
-                    var cell2 = row.insertCell(1);
-                    var cell3 = row.insertCell(2);
-
-                    cell1.innerHTML = statusData[i].item;
-                    cell2.innerHTML = statusData[i].quantity_warehouse;
-                    cell3.innerHTML =
-                        statusData[i].quantity_vehicles === null
-                            ? 0
-                            : statusData[i].quantity_vehicles;
+                        cell1.innerHTML = statusData[i].item;
+                        cell2.innerHTML = statusData[i].quantity_warehouse;
+                        cell3.innerHTML =
+                            statusData[i].quantity_vehicles === null
+                                ? 0
+                                : statusData[i].quantity_vehicles;
+                    }
                 }
             } else {
                 console.log("Error fetching data");
