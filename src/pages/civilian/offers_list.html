@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    <title>Offers</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- header & footer & style stuff -->
+    <link rel="shortcut icon" href="/src/img/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/src/css/normalize.css">
+    <link rel="stylesheet" href="/src/css/styles.css"/>
+    <script src="/src/js/header_footer.js"></script>
+    <link rel="stylesheet" href="/src/css/civilian2.css"/>
+    <!-- check if user is connected -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/src/js/authentication/is_connected.js" async></script>
+    <!-- script -->
+    <script src="/src/js/civilian/offers_list.js"></script>
+</head>
+<body onload="header_footer('civilian')">
+    <div id="header"></div>
+    <h1>Offers</h1>
+
+    <div id="offers-container">
+   <!-- 
+        <div id="offer">
+            <h2>...</h2>
+            <p>...</p>
+            <p>...</p>
+        </div> 
+    -->
+    </div>
+    <script>
+        fetchOffers();
+    </script>
+    <div id="footer"></div>
+</body>
+</html>
