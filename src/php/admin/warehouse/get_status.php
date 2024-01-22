@@ -30,7 +30,7 @@ if ($result->num_rows > 0) {
     // Sending the status data as JSON response
     echo json_encode($statusData);
 } else {
-    echo "No items found";
+    echo json_encode(array("response"=>"No items found"));
 }
 
 $conn->close();
