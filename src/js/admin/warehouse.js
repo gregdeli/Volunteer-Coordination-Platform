@@ -54,8 +54,20 @@ function sendItem() {
                 // Remove all rows from the details table
                 detailsTable.innerHTML = "";
                 // Add the table headers back in
-                detailsTable.innerHTML =
-                    '<th>Item detail name (e.g. "volume")</th><th>Item detail value (e.g. "500ml")</th>';
+                detailsTable.innerHTML = "<th>Item detail name</th><th>Item detail value</th>";
+                addDetail();
+            } else if (xhr.status === 400) {
+                var response = JSON.parse(xhr.responseText);
+                if (response && response.error === "Duplicate item name") {
+                    alert("Item already exists. Please choose a different name.");
+                } else if (response && response.error === "Max item name lenght exceeded") {
+                    alert("Please use an Item Name with less tha 31 characters.");
+                }
+                form.reset();
+                // Remove all rows from the details table
+                detailsTable.innerHTML = "";
+                // Add the table headers back in
+                detailsTable.innerHTML = "<th>Item detail name</th><th>Item detail value</th>";
                 addDetail();
             } else {
                 console.log("Error");
@@ -76,13 +88,13 @@ function addDetail() {
     var namebox = document.createElement("input");
     namebox.setAttribute("name", "itdname" + detail_num.toString());
     namebox.setAttribute("id", "itdname" + detail_num.toString());
-    namebox.setAttribute("placeholder", "e.g. \"volume\"");
+    namebox.setAttribute("placeholder", 'e.g. "volume"');
     cell1.appendChild(namebox);
 
     var valuebox = document.createElement("input");
     valuebox.setAttribute("name", "itdvalue" + detail_num.toString());
     valuebox.setAttribute("id", "itdvalue" + detail_num.toString());
-    valuebox.setAttribute("placeholder", "e.g. \"500ml\"");
+    valuebox.setAttribute("placeholder", 'e.g. "500ml"');
     cell2.appendChild(valuebox);
 }
 
@@ -286,13 +298,16 @@ function sendCategory() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
-                alert("Category submitted successfully");
+                alert("Category submitted successfully!");
                 form.reset();
             } else if (xhr.status === 400) {
                 var response = JSON.parse(xhr.responseText);
                 if (response && response.error === "Duplicate category name") {
                     alert("Category already exists. Please choose a different name.");
+                } else if (response && response.error === "Max category name lenght exceeded") {
+                    alert("Please use a Categoy name with less tha 31 characters.");
                 }
+                form.reset();
             } else {
                 console.log("Error in form submission");
             }
@@ -383,7 +398,7 @@ function getWarehouseStatus() {
                         statusTable.deleteRow(1);
                     }
                 } else {
-                    document.getElementById("fixed-table-header").style.display = 'table-row';
+                    document.getElementById("fixed-table-header").style.display = "table-row";
                     // Clear existing table content except first row
                     var statusTable = document.getElementById("status_table");
                     while (statusTable.rows.length > 1) {

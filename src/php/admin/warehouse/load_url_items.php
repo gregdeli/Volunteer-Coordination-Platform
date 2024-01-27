@@ -1,6 +1,8 @@
 <?php
+
 /** @var mysqli $conn */
 include "../../config_connection.php";
+include "constants.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -17,10 +19,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $category_id = $category['id'];
             $category_name = $category['category_name'];
 
-            // Insert category data into item_categories table
-            $sql = "INSERT IGNORE INTO category (id, name) VALUES ('$category_id', '$category_name')";
+            // Insert the categories
+            foreach ($data['categories'] as $category) {
+                $category_id = $category['id'];
+                $category_name = $category['category_name'];
 
-            $conn->query($sql);
+                // Check if the category name is not empty before inserting and doesnt exceed the maximum length
+                if (!empty($category_name) && strlen($category_name) <= MAX_LENGTH) {
+                    // Insert category data into item_categories table
+                    $sql = "INSERT IGNORE INTO category (id, name) VALUES ('$category_id', '$category_name')";
+                    $conn->query($sql);
+                }
+            }
         }
 
         // Insert the items
@@ -29,10 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $item_name = $item['name'];
             $category_id = $item['category'];
 
-            // Iinsert item data into specified_items table
-            $sql = "INSERT IGNORE INTO item (id, name, category_id, quantity) VALUES ('$item_id', '$item_name', '$category_id', '0')";
-
-            $conn->query($sql);
+            // Check if the item name is not empty before inserting
+            if (!empty($item_name) && strlen($item_name) <= MAX_LENGTH) {
+                $sql = "INSERT IGNORE INTO item (id, name, category_id, quantity) VALUES ('$item_id', '$item_name', '$category_id', '0')";
+                $conn->query($sql);
+            }
 
             // Insert details if they exists
             foreach ($item['details'] as $detail) {

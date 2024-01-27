@@ -1,14 +1,23 @@
 <?php
+
 /** @var mysqli $conn */
 include "../../config_connection.php";
+include "constants.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Check if the necessary data is present in the POST request
     if (isset($_POST["catname"])) {
-
         // Extract the form data
         $category_name = $_POST["catname"];
+
+        // Check if the item name exceeds the maximum length
+        if (strlen($category_name) > MAX_LENGTH) {
+            header("HTTP/1.1 400 Bad Request");
+            echo json_encode(array("error" => "Max category name lenght exceeded"));
+            $conn->close();
+            exit();
+        }
 
         // Check for duplicate category names
         $check_sql = "SELECT name FROM category WHERE name = '$category_name'";
