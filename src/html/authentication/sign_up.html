@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Volunteer Account</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- header & footer & style stuff -->
+        <link rel="shortcut icon" href="/src/img/favicon.svg" type="image/x-icon">
+        <link rel="stylesheet" href="/src/css/form.css">
+        <!-- script -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" defer></script>
+        <script src="/src/js/authentication/register.js" defer></script>
+    </head>
+
+    <body>
+        <h1 class="signup_header">Create Civilian Account</h1>
+        <form id="form">
+
+            <label class="labelLeft" for="username">Username:</label>
+            <input type="text" id="username"placeholder="Enter Username" name="username" required>
+            <span id="username_"></span><br>
+
+            <label class="labelLeft" for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter Password" name="password" pattern=".{5,}" required>
+            <span id="password_"></span><br>
+
+            <label class="labelLeft" for="repeat-password">Repeat Password:</label>
+            <input type="password" id="repeat-password" placeholder="Repeat Password" name="repeat-password" pattern=".{5,}" required>
+            <span id="repeat-password_"></span><br>
+
+            <label class="labelLeft" for="fullname">Fullname:</label>
+            <input type="text" id="fullname" placeholder="Enter Fullname" name="fullname" required>
+            <span id="fullname_"></span><br>
+
+            <label class="labelLeft" for="phone">Phone number:</label>
+            <input type="text" id="phone" placeholder="Enter Phone number" name="phone" required>
+            <span id="phone_"></span><br>
+
+            <label class="labelLeft" for="latitude">Latitude:</label>
+            <input type="text" id="latitude" placeholder="Enter latitude" name="latitude" required>
+            <span id="latitude_"></span><br>
+
+            <label class="labelLeft" for="longitude">Longitude:</label>
+            <input type="text" id="longitude" placeholder="Enter longitude" name="longitude" required>
+            <span id="longitude_"></span><br><br>
+
+            <button type="submit" onclick="registerCheck(event, 2)">Submit</button><br>
+
+            <script>
+            getGeolocation();
+            </script>
+
+        </form>
+        <p id="message"></p>
+    </body>
+</html>
