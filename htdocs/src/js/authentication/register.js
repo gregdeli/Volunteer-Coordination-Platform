@@ -161,3 +161,7 @@ function getGeolocation() {
         longitude.value = position.coords.longitude;
     }
 }
+
+function log_in(){
+    window.location.href = "/src/html/authentication/log_in.html"; 
+}
