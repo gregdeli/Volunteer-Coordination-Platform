@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="el">
+    <head>
+        <title>Load From JSON - VolEx</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Initialize default styling -->
+        <link rel="stylesheet" href="/src/css/normalize.css">
+        
+        <!-- Our css -->
+        <link rel="stylesheet" href="/src/css/styles.css" />
+
+        <script src="/src/js/header.js"></script>
+        <script src="/src/js/admin/element_replacements.js"></script>
+        <script src="/src/js/admin/warehouse.js"></script>
+
+        <!-- favicon -->
+        <link rel="shortcut icon" href="/src/img/favicon.svg" type="image/x-icon">
+    </head>
+
+    <body onload="header('admin'); addItemsMenu();">
+        <div id="header"></div>
+
+        <div id="add_items_menu"></div>
+
+        <form id="json_form">
+            <fieldset id="json_field">
+                <legend>| Load Items From JSON |</legend>
+                <label for="json_file">Select JSON file:</label>
+                <input type="file" id="json_file" name="json_file" accept=".json" required /> <br />
+                <button type="button" onclick="addJsonItems()">Submit</button>
+            </fieldset>
+        </form>
+    </body>
+</html>
