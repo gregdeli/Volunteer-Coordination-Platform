@@ -11,20 +11,25 @@
 
 #signup_header{
     margin-left: 40px;
+	margin-bottom: 3px;
+	margin-top: 3px;
 }
 
 #paragraph_right{
     text-align: right;
     margin-right: 20px;
+	margin-bottom: 0;
 }
 
-#authentication-form {
+#login-form,
+#signup-form  {	
 	max-width: 400px;
 	margin: 50px auto;
 	padding: 20px;
 	background-color: #ffe5b4;
 	border-radius: 8px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	margin-top:5px;
 }
 
 #label-authentication {
@@ -34,22 +39,27 @@
 	font-weight: bold;
 }
 
-#username,#password,
-#repeat-password,
-#fullname,#phone,
-#latitude,#longitude {
+#login-form input {
 	width: 100%;
 	padding: 10px;
-	margin-bottom: 6px;
+	margin-top: 8px;
+	margin-bottom: 25px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	box-sizing: border-box;
 }
 
-#username_,#password_,
-#repeat-password_,
-#fullname_,#phone_,
-#latitude_,#longitude_ {
+#signup-form input {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+#login-form span,
+#signup-form span {
     color: rgb(163, 84, 38);
 }
 
