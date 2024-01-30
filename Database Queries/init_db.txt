@@ -52,26 +52,26 @@ INSERT INTO item(id,name,category_id,quantity)
 
 
 INSERT INTO request(id,civ_id,item_id,num_people,date_submitted,date_undertaken,date_completed)
-        VALUES (1,5,1,1,"2023-12-01 12:54:19",NULL,NULL);
+        VALUES (1,5,1,1,"2024-01-25 12:54:00",NULL,NULL);
 INSERT INTO request(id,civ_id,item_id,num_people,date_submitted,date_undertaken,date_completed)
-        VALUES (2,5,6,2,"2023-12-02 12:54:19",NULL,NULL);
+        VALUES (2,5,6,2,"2024-01-26 13:54:00",NULL,NULL);
 INSERT INTO request(id,civ_id,item_id,num_people,date_submitted,date_undertaken,date_completed)
-        VALUES (3,6,8,3,"2023-12-03 12:54:19",NULL,NULL);
+        VALUES (3,6,8,3,"2024-01-27 14:54:00",NULL,NULL);
 INSERT INTO request(id,civ_id,item_id,num_people,date_submitted,date_undertaken,date_completed)
-        VALUES (4,7,1,4,"2023-12-04 12:54:19",NULL,NULL);
+        VALUES (4,7,1,4,"2024-01-28 15:54:00",NULL,NULL);
 
 
 INSERT INTO offer(id,civ_id,item_id,quantity_offered,date_submitted,date_undertaken,date_completed)
-        VALUES (1,8,1,6,"2023-12-05 12:54:19",NULL,NULL);
+        VALUES (1,8,1,6,"2024-01-28 12:23:00",NULL,NULL);
 INSERT INTO offer(id,civ_id,item_id,quantity_offered,date_submitted,date_undertaken,date_completed)
-        VALUES (2,8,6,2,"2023-12-06 12:54:19",NULL,NULL);
+        VALUES (2,8,6,2,"2024-01-29 13:23:00",NULL,NULL);
 INSERT INTO offer(id,civ_id,item_id,quantity_offered,date_submitted,date_undertaken,date_completed)
-        VALUES (3,9,8,5,"2023-12-07 12:54:19",NULL,NULL);
+        VALUES (3,9,8,5,"2024-01-30 14:23:00",NULL,NULL);
 
 
 
 INSERT INTO announcement(id, admin_id, date_announced)
-        VALUES (1,1,'2023-12-07 12:54:19');
+        VALUES (1,1,'2024-01-28 07:00:00');
 
 INSERT INTO announcement_item(announcement_id, item_id)
         VALUES (1,1);
