@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="el">
+    <head>
+        <title>Load From URL - VolEx</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Initialize default styling -->
+        <link rel="stylesheet" href="/src/css/normalize.css">
+        
+        <!-- Our css -->
+        <link rel="stylesheet" href="/src/css/styles.css" />
+
+        <script src="/src/js/header.js"></script>
+        <script src="/src/js/admin/element_replacements.js"></script>
+        <script src="/src/js/admin/warehouse.js"></script>
+
+        <!-- favicon -->
+        <link rel="shortcut icon" href="/src/img/favicon.svg" type="image/x-icon">
+    </head>
+
+    <body onload="header('admin'); addItemsMenu();">
+        <div id="header"></div>
+
+        <div id="add_items_menu"></div>
+
+        <form id="url_form">
+            <label for="url_input">Enter URL:</label>
+            <input
+                type="text"
+                id="url_input"
+                name="url_input"
+                required
+                value="http://usidas.ceid.upatras.gr/web/2023/export.php"
+            />
+            <button type="button" onclick="addUrlItems()">Submit</button>
+        </form>
+    </body>
+</html>

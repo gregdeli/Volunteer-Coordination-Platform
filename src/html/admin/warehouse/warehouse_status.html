@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="el">
+    <head>
+        <title>Warehouse Status - VolEx</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Initialize default styling -->
+        <link rel="stylesheet" href="/src/css/normalize.css">
+        
+        <!-- Our css -->
+        <link rel="stylesheet" href="/src/css/styles.css" />
+
+        <script src="/src/js/header.js"></script>
+        <script src="/src/js/admin/element_replacements.js"></script>
+        <script src="/src/js/admin/warehouse.js"></script>
+
+        <!-- favicon -->
+        <link rel="shortcut icon" href="/src/img/favicon.svg" type="image/x-icon">
+    </head>
+
+    <body onload="header('admin'); warehouseMainMenu(); getCategories();">
+        <div id="header"></div>
+
+        <div id="warehouse_main_menu"></div>
+
+        <fieldset id="warehouse_status_main">
+            <legend>| Warehouse Status |</legend>
+
+            <label>Select Category</label>
+            <select name="catsmult" id="catsmult" multiple></select>
+
+            <div id="status-table-container">
+                <table id="status_table">
+                    <tr id="fixed-table-header" style="display:none;">
+                        <th>Item</th>
+                        <th>Quantity(Warehouse)</th>
+                        <th>Quantity(Vehicles)</th>
+                    </tr>
+                </table>
+            </div>
+        </fieldset>
+    </body>
+</html>

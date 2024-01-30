@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create Announcement - VolEx</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Initialize default styling -->
+        <link rel="stylesheet" href="/src/css/normalize.css">
+
+        <!-- Our css -->
+        <link rel="stylesheet" href="/src/css/styles.css"/>
+        
+        <script src="/src/js/header.js"></script>
+        <script src="/src/js/admin/create_announcement.js" defer></script>
+
+        <!-- favicon -->
+        <link rel="shortcut icon" href="/src/img/favicon.svg" type="image/x-icon">
+    </head>
+
+    <body onload="header('admin')">
+
+        <div id="header"></div>
+
+        <form>
+            <fieldset id="create_announcement_field">
+                <legend>| Create Announcement |</legend>
+                <label for="dropdown">Select Category:</label>
+                <select id="dropdown" onchange="changeListItems()"></select>
+
+                <ul id="itemslist">
+                    <!-- Display items here -->
+                </ul>
+
+                <button type="button" onclick="createAnnouncement()">Create Announcement</button>
+            </fieldset>
+        </form>
+    </body>
+</html>
