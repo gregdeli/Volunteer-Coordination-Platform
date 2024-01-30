@@ -70,7 +70,6 @@ INSERT INTO offer(id,civ_id,item_id,quantity_offered,date_submitted,date_underta
 
 
 
-
 INSERT INTO announcement(id, admin_id, date_announced)
         VALUES (1,1,'2023-12-07 12:54:19');
 
@@ -87,5 +86,3 @@ INSERT INTO announcement_item(announcement_id, item_id)
 
 
 INSERT INTO base(latitude,longitude) VALUES (38.279359,21.752501);
-
-
