@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Volunteer Account - VolEx</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- header & footer & style stuff -->
+        <link rel="shortcut icon" href="/src/img/favicon.svg" type="image/x-icon">
+        <link rel="stylesheet" href="/src/css/styles.css">
+        <!-- script -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" defer></script>
+        <script src="/src/js/authentication/register.js"></script>
+
+    </head>
+
+    <body id="authentication-body" onload="getGeolocation();invoker();">
+        <p id="paragraph_right">
+            <button id="authentication-button" onclick="log_in()">Log in</button>
+        </p>
+        <h1 id="signup_header">Create Civilian Account</h1>
+
+        <form id="signup-form">
+
+            <label id="label-authentication" for="username">Username:</label>
+            <input type="text" id="username"placeholder="Enter Username" name="username" required>
+            <span id="username_"></span><br>
+
+            <label id="label-authentication" for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter Password" name="password" pattern=".{5,}" required>
+            <span id="password_"></span><br>
+
+            <label id="label-authentication" for="repeat-password">Repeat Password:</label>
+            <input type="password" id="repeat-password" placeholder="Repeat Password" name="repeat-password" pattern=".{5,}" required>
+            <span id="repeat-password_"></span><br>
+
+            <label id="label-authentication" for="fullname">Fullname:</label>
+            <input type="text" id="fullname" placeholder="Enter Fullname" name="fullname" required>
+            <span id="fullname_"></span><br>
+
+            <label id="label-authentication" for="phone">Phone number:</label>
+            <input type="text" id="phone" placeholder="Enter Phone number" name="phone" required>
+            <span id="phone_"></span><br>
+
+            <label id="label-authentication" for="latitude">Latitude:</label>
+            <input type="text" id="latitude" placeholder="Enter latitude" name="latitude" required>
+            <span id="latitude_"></span><br>
+
+            <label id="label-authentication" for="longitude">Longitude:</label>
+            <input type="text" id="longitude" placeholder="Enter longitude" name="longitude" required>
+            <span id="longitude_"></span><br><br>
+
+            <button id="authentication-button" type="submit" onclick="registerCheck(event, 2)">Submit</button><br>
+
+        </form>
+        <p id="message"></p>
+    </body>
+</html>

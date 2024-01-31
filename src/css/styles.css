@@ -1,0 +1,1075 @@
+:root {
+    /* --color-primary-100: hsl(184,88%, 94%);*/
+    --color-primary: orange;
+    --color-secondary: #ffe5b4;
+
+    --background-color: #F1F5F8;
+    --font-legend-field: 1.6rem;
+}
+
+
+
+body {
+    background-color: #F1F5F8;
+    height: 100%;
+    margin: 0;
+    text-align: center;
+}
+
+
+
+* { font-family: Cambria, Georgia, "Times New Roman", serif; }
+
+
+/* Page menu */
+.menu_horizontal{
+    text-align: center;
+    background-color: orange;
+    box-sizing: border-box;
+    border: solid 0.17rem;
+    border-color: black orange ;
+    padding: 1rem;
+    margin: 0;
+    font-size:1.2rem;
+}
+.menu_horizontal a:link, .menu_horizontal a:visited, .menu_horizontal a:hover, .menu_horizontal a:active{
+    color: black;
+    text-decoration: none;
+}
+ul.menu_horizontal li {
+    display: inline-block;
+    list-style-type: none;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+
+.page_title {
+    text-align: center;
+    font-weight: bold;
+    margin-top:3rem;
+    margin-bottom:4rem;
+    font-size:1.7rem;
+}
+
+
+
+/* Site logo */
+#logo {
+    margin: 0 auto;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    font-size: 4rem;
+    /*font-weight: bold;*/
+}
+#logo img {
+    width: 2rem;
+    height: 2rem;
+}
+#logo_container {
+    box-sizing: border-box;
+    background-color: #ffe5b4;
+}
+
+ /* Maps  */
+.leaflet-container {
+    margin: 0 auto;
+    width: 50rem;
+    height: 35rem;
+    max-width: 100%;
+    max-height: 100%;
+    text-align: left;
+}
+#map {
+    width: 50rem;
+    height: 35rem;
+}
+
+/* ################### ADMIN ################### */
+/* Map */
+#admin_map_body{
+    margin-bottom: 7rem;
+}
+
+/* ----- Stats ----- */
+
+#Plot {
+    width:100%;
+    max-width:45rem;
+    margin:auto;
+    font-size:1.2rem;
+}
+
+/* Dates on top of page */
+#stats_dates{
+    font-size:1.4rem;
+    font-weight: 500;
+    margin-bottom:2rem;
+}
+#stats_dates div {
+    display:inline;
+}
+
+
+/* Stats field to choose date */
+#stats_field {
+    width: 33rem;
+    margin: auto;
+    margin-top: 3rem;
+    margin-bottom:7rem;
+    padding-top: 1.3rem;
+    font-size: 1.2rem;
+}
+#stats_field legend {
+    font-size: var(--font-legend-field);
+}
+#stats_field label{
+    padding-right:2rem;
+}
+#stats_submit{
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+
+
+
+/* -------- WAREHOUSE -------- */
+/* Add category */
+#category_field {
+    margin:0 auto;
+    margin-top:3rem;
+    margin-bottom:9rem;
+    width:25rem;
+}
+#category_field input[type="button"]{
+    margin-top:1.2rem;
+    margin-bottom:0.6rem;
+}
+#category_field label{
+    display: inline-block;
+    margin-top:0.5rem;
+    margin-bottom:0.5rem;
+}
+#category_field legend{
+    font-size: var(--font-legend-field);
+}
+
+/*Add new item*/
+#adm_add_item_field {
+    margin: 0 auto;
+    width: 30rem;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+}
+#adm_add_item_field table {
+    margin: 0 auto;
+}
+#adm_add_item_field legend{
+    font-size: var(--font-legend-field);
+}
+
+#itname-table {
+    text-align: left;
+    padding-bottom:2rem;
+}
+#itname-table td:nth-child(2n+1) {
+    padding-right:1rem;
+}
+#itname-table #itname, #itname-table #itcats {
+    width:9rem;
+}
+
+table#itemdetails{
+    border-collapse: collapse;
+    margin-bottom:2rem;
+}
+#itemdetails td:nth-child(2n+1) {
+    border: 1px solid black;
+    border-right: 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 0.7rem;
+}
+#itemdetails td:nth-child(2n) {
+    border: 1px solid black;
+    border-left: 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.7rem;
+}
+#itemdetails th {
+    padding: 0.7rem;
+}
+#itemdetails input {
+    margin:0.2rem;
+}
+
+#adm_add_item_field input[type="button"]{
+    display: block;
+    margin: 0 auto;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+#adm_add_item_field #s_b {
+    font-size: 1.2rem;
+    margin-top:2.5rem;
+}
+
+
+/* Edit item */
+#edit_item_field {
+    margin:0 auto;
+    margin-top:3rem;
+    margin-bottom:9rem;
+    width:25rem;
+    display:grid;
+    grid-template-columns: 2;
+    gap:0.6rem;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+    justify-items: start;
+}
+#edit_item_field legend{
+    font-size: var(--font-legend-field);
+}
+#edit_item_field label{
+    display: inline-block;
+    grid-column: 1;
+    margin-left:3rem;
+}
+#edit_item_field select, #edit_item_field input{
+    display: inline-block;
+    grid-column: 2;
+    width:9rem;
+    margin-left:2rem;
+}
+#edit_item_field input[type="button"]{
+    display: inline-block;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    justify-self: center;
+    margin-top: 1.7rem;
+}
+
+/* Load JSON */
+#json_field {
+    margin:0 auto;
+    margin-top:3rem;
+    margin-bottom:9rem;
+    width:25rem;
+    padding:2em;
+    padding-top:3em;
+}
+#json_field button {
+    margin-top:2rem;
+}
+#json_field legend{
+    font-size: var(--font-legend-field);
+}
+
+#url_form {
+    margin-top:4rem;
+    margin-bottom:19rem;
+}
+
+
+/* Warehouse Status */
+#warehouse_status_main{
+    margin:0 auto;
+    margin-top: 4rem;
+    margin-bottom: 6rem;
+    width:50rem;
+}
+#warehouse_status_main legend{
+    font-size: var(--font-legend-field);
+}
+#warehouse_status_main label{
+    font-size: 1.2rem;
+    display: block;
+    margin-top:1.8rem;
+    margin-bottom:0.4rem;
+}
+#catsmult{
+    height: 8rem;
+    margin-bottom: 1.5rem;
+    min-width: 8rem;
+}
+
+#status-table-container {
+    height: 20rem;
+    max-width: 40rem;
+    overflow-y: auto; /* Enable vertical scrolling */
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+#status-table-container #fixed-table-header{
+    display: none;
+}
+#status_table {
+    width: 100%;
+    text-align:left;
+}
+#fixed-table-header {
+    position: sticky;
+    text-align: left;
+    top: 0;
+    background-color: #f1f5f8;
+}
+
+/* Add item menu */
+#add_item_menu_links {
+    margin:0 auto;
+    border: 0.1rem solid black;
+    box-sizing: border-box;
+    width:34rem;
+    height:1.55rem;
+    font-size:1.1rem;
+}
+#add_item_menu_links a:link, #add_item_menu_links a:visited, #add_item_menu_links a:hover, #add_item_menu_links a:active{
+    color: black;
+    text-decoration: none;
+}
+/* Warehouse main menu */
+#warehouse_main_menu_links {
+    display: block;
+    margin:0 auto;
+    border: 0.1rem solid black;
+    box-sizing: border-box;
+    width:25.5rem;
+    height:1.55rem;
+    font-size:1.1rem;
+}
+#warehouse_main_menu_links a:link, #warehouse_main_menu_links a:visited, #warehouse_main_menu_links a:hover, #warehouse_main_menu_links a:active{
+    color: black;
+    text-decoration: none;
+}
+
+
+
+/* -------- Volunteer Accounts -------- */
+#volunteer_acc_field{
+    margin:0 auto;
+    margin-top:3rem;
+    margin-bottom:9rem;
+    width:45rem;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:0.6rem;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+    justify-items: start;
+}
+#volunteer_acc_field legend{
+    font-size: var(--font-legend-field);
+}
+#volunteer_acc_field label{
+    display: inline-block;
+    grid-column: 1;
+    margin-left:5rem;
+}
+#volunteer_acc_field input{
+    display: inline-block;
+    grid-column: 2;
+    justify-self: center;
+    width:10rem;
+}
+#volunteer_acc_field span{
+    display: inline-block;
+    grid-column: 3;
+}
+#volunteer_acc_field button{
+    display: inline-block;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    justify-self: center;
+    margin-top: 2.7rem;
+}
+
+
+/* -------- Create Announcements -------- */
+
+#itemslist {
+    margin: 3rem auto;
+    width: 12rem;
+    list-style-type: none;
+    display: grid;
+    justify-items: start;
+    padding:0;
+}
+
+#create_announcement_field{
+    margin:0 auto;
+    margin-top:3rem;
+    margin-bottom:9rem;
+    width:35rem;
+    padding-top: 3rem;
+    padding-bottom: 2.5rem;
+    font-size:1.2rem;
+}
+#create_announcement_field legend{
+    font-size: var(--font-legend-field);
+}
+#create_announcement_field input{
+    display: inline-block;
+    margin-right:1.5rem;
+    margin-bottom:0.4rem;
+}
+
+#create_announcement_field #itemslist {
+    text-align: left;
+}
+#create_announcement_field #itemslist li{
+    display: grid;
+    grid-template-columns: 1fr 8fr;
+    align-items: center;
+}
+#create_announcement_field #itemslist input{
+    display: block;
+    margin-top:0.3rem;
+    margin-bottom:0.3rem;
+}
+#create_announcement_field #itemslist span{
+    display: block;
+    padding-top:0.3rem;
+    padding-bottom:0.3rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ################### RESCUER ################### */
+#resc_body{
+    margin-bottom: 7rem;
+}
+/* Rescuer choose task */
+#rescuer_tasks_field{
+    width: 35rem;
+    max-width: 90vw;
+    margin: auto;
+    margin-top: 2rem;
+    display: none;
+    padding-top:1rem;
+    justify-items: center;
+}
+#rescuer_tasks_field legend h3{
+    display:inline
+}
+#rescuer_tasks_field label{
+    margin-top:0.8rem;
+}
+#rescuer_tasks_field button{
+    margin-left: 1rem;
+    margin-bottom: 0.8rem;
+    margin-top: 0.5rem;
+
+}
+
+/* Rescuer complete/cancel task */
+#rescuer_tasks_field2 {
+    width: 35rem;
+    max-width: 90vw;
+    margin: 0 auto;
+    margin-top: 3rem;
+    display: grid;
+    justify-items: start;
+}
+
+#rescuer_tasks_field2 label{
+    text-align: left;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 0.5rem;
+    grid-column: 1;
+}
+#rescuer_tasks_field2 img{
+    display:inline-block;
+    margin-top: 1.1rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+}
+#rescuer_tasks_field2 label img{
+    margin: 0;
+    padding-right:0.3rem;
+
+    margin-bottom: -0.15rem;
+}
+
+#rescuer_tasks_field2 legend h3{
+    display:inline;
+}
+
+
+.check {
+    grid-column: 2;
+    justify-self: end;
+}
+.x {
+    grid-column: 3;
+    justify-self: center;
+}
+
+
+
+
+/* Cargo, Inventory */
+#cargo, #load_form {
+    font-size:1.15rem;
+}
+#cargo_items, #inventory_items {
+    margin: 0 auto;
+    margin-bottom: 3rem;
+    display:grid;
+    max-width: 55rem;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap:2rem;
+}
+#cargo_items h3, #inventory_items h3{
+    display:inline-block;
+}
+#cargo_items table, #inventory_items table{
+    display:block;
+}
+
+
+
+#cargo_items td{
+    text-align: left;
+    padding-top:0.5rem;
+    padding-bottom:0.5rem;
+    padding-left:1.5rem;
+    overflow: hidden;
+}
+
+#inventory_items td:nth-child(2n+1){
+    display:inline-block;
+    width: 10rem;
+    text-align: left;
+    width: 9.5rem;
+    padding-top:0.5rem;
+    padding-bottom:0.5rem;
+    padding-left:1rem;
+    overflow:hidden;
+}
+#inventory_items td:nth-child(2n){
+    display: inline-block;
+    text-align: center;
+}
+#inventory_items input{
+    display: inline-block;
+    text-align: center;
+    width: 4rem;
+    margin-left:0.5rem;
+}
+
+
+.cargo_item{
+    padding-right:1rem;
+    min-width: 10rem;
+    max-width: 10rem;
+}
+
+
+#cargo_load_button {
+    margin-right:0.3rem;
+    display:inline-block;
+}
+#cargo_unload_button {
+    margin-left:0.3rem;
+    display:inline-block;
+}
+
+
+#inventory_load_button {
+    display:inline-block;
+}
+#inventory_load_button #no_inventory{
+    font-size:1.2rem;
+}
+#back_to_cargo {
+    display:inline-block;
+    margin-left:1rem;
+    margin-top:2rem;
+    margin-bottom:4rem;
+}
+
+
+#distance{
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+    font-size:1.2rem;
+}
+
+
+
+#cargo_items details, #inventory_items details {
+    width: 17rem;
+    margin: 0 auto;
+    background: #71a0ff;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+#cargo_items summary, #inventory_items summary {
+    display: block;
+    background: #b3c3ff;
+}
+
+
+
+
+
+/* ################### CIVILIAN ################### */
+#civilian-title{
+    margin: 3rem 0;
+}
+/* announcements_list.html */
+
+#announcements-container {
+    max-width: 38rem;
+    margin: 1.2rem auto;
+    overflow-y: auto;
+    max-height: 40rem; 
+    padding: 0.6rem;
+    margin-bottom: 5rem;
+}
+#announcement-expand {
+    max-width: 25rem;
+    margin: 0rem auto;
+    padding: 0.06rem;
+    border-radius: 0.3rem;
+}
+
+#announcement-expand h3 {
+    margin-top:0rem;
+}
+
+#announcements-container label {
+    display: block;
+    justify-self: center;
+}
+
+#announcements-container input {
+    justify-self: center;
+    width: 10rem; 
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    box-sizing: border-box;
+    border: 0.06rem solid #ccc;
+    border-radius: 0.25rem;    
+}
+
+#create-offer-button {
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+    margin: 0.3rem;
+    margin-top:1rem;
+    margin-bottom: 1rem;
+}
+
+#announcement-details {
+    width: 36rem;
+    margin:0;
+    background-color: #F1F5F8;
+    overflow: hidden;
+}
+#announcement-summary {
+    display: block;
+    background: white;
+    border: none;
+    border-radius: 1.25rem;
+    margin-bottom: 1rem;
+    padding: 0.6rem;
+}
+
+@media screen and (max-width: 700px) {
+    #announcements-container, 
+    #announcement-expand {
+        max-width: 100%;
+    }
+    #announcements-container input {
+        width: 70%; 
+    }
+    #announcement-details {
+        width: 100%; 
+    }
+}
+
+/* create_request.html */
+#div-dropdown-cat,
+#div-autocomplete,
+#div-list {
+    max-width: 36rem; 
+    margin: 1.2rem auto; 
+    background-color: #fff;
+    padding: 1.2rem; 
+    border: 1px solid #ccc;
+    border-radius: 0.3rem; 
+    box-shadow: 0 0.12rem 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+#div-final {
+    max-width: 36rem; 
+    margin: 1.2rem auto; 
+    background-color: #fff;
+    padding: 1.2rem; 
+    border: 1px solid #ccc;
+    border-radius: 0.3rem; 
+    box-shadow: 0 0.12rem 0.25rem rgba(0, 0, 0, 0.1);
+    margin-bottom:5rem;
+}
+
+#div-dropdown-cat label,
+#div-final label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+#create-request-dropdown,
+#input-search,
+#input-num {
+    width: 60%;
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    box-sizing: border-box;
+    border: 0.06 solid #ccc;
+    border-radius: 0.2rem;
+}
+
+.autocomplete {
+    position: relative;
+    display: inline-block;
+    width: 40%;
+}
+.autocomplete-items {
+    position: absolute;
+    border: 0.06rem solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-items div {
+    padding: 0.6rem;
+    cursor: pointer;
+    background-color: #fff; 
+    border-bottom: 0.06px solid #d4d4d4; 
+}
+
+.autocomplete-items div:hover {
+    background-color: #e9e9e9; 
+}
+
+#input-search {
+    width: 75%; 
+    margin: 0rem;
+}
+
+#select-autocomplete {
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+    margin-top: 0.3rem;
+}
+
+#itemslist {
+    list-style: none;
+    padding: 0;
+}
+
+#itemslist li {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+#itemslist li input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+#div-final button {
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+    margin: 0.3rem;
+    margin-top: 0.8rem;
+}
+
+@media screen and (max-width: 300px) {
+    .autocomplete {
+        width: 65%;
+    }
+}
+
+
+/* offers_list.html */
+
+#offers-container {
+    background: white;
+    max-width: 38rem;
+    margin: 1.2rem auto;
+    overflow-y: auto;
+    max-height: 40rem; 
+    padding: 0.6rem;
+    margin-bottom: 5rem;
+    border-radius: 1.25rem;
+}
+
+#offer {
+    border: 0.1rem solid #ccc;
+    border-radius: 1.25rem;
+    padding: 0.6rem;
+}
+
+#offer p {
+    margin-bottom: 0;  
+}
+
+#cancel-button-offer {
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+    margin: 0.3rem;
+    margin-top:0.8rem;
+}
+
+/* requests_list.html */
+
+
+#requests-container {
+    background: white;
+    max-width: 38rem;
+    margin: 1.2rem auto;
+    overflow-y: auto;
+    max-height: 40rem; 
+    padding: 0.6rem;
+    margin-bottom: 5rem;
+    border-radius: 1.25rem;
+}
+
+#request {
+    border: 0.1rem solid #ccc;
+    border-radius: 1.25rem;
+    padding: 0.6rem;
+}
+
+#request p {
+    margin-bottom: 0;
+}
+
+
+/* civilian interface: Message NOT FOUND */
+#message-not-found {
+    margin-bottom: 10rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Civilian */
+
+@media screen and (max-width: 768px){
+    #civ_body .menu_horizontal {
+        width:100%;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap:0rem;
+        padding-right: 0.6rem;
+        padding-left: 0.1rem;
+    }
+    #civ_body ul.menu_horizontal li{
+        margin-right: 0rem;
+        margin-left:0rem;
+        padding-left: 0rem;
+    }
+    #civ_body #menu-logout {
+        grid-column: 2;
+    }
+}
+
+@media screen and (max-width: 333px) {
+    #civ_body ul.menu_horizontal {
+        font-size:1rem;
+    }
+    #civ_body ul.menu_horizontal li {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+
+
+
+
+/* Menu Rescuer */
+@media screen and (max-width: 400px){
+    ul#rescuer_menu_horiz li{
+            padding-left: 0.8rem;
+            padding-right: 0.8rem;
+    }
+}
+
+/* Rescuer */
+@media only screen and (max-width: 530px) and (min-width: 401px) {
+    #resc_body {
+        font-size: 0.8rem;
+    }
+    #rescuer_tasks_field2 img{
+        width: 0.5rem;
+        height: 0.5rem;
+    }
+    .leaflet-container {
+        max-height: 60vh;
+    }
+    #map {
+        max-height: 60vh;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #resc_body {
+        font-size: 0.6rem;
+    }
+    #rescuer_tasks_field2 img{
+        width: 0.5rem;
+        height: 0.5rem;
+    }
+    .leaflet-container {
+        max-height: 55vh;
+    }
+    #map {
+        max-height: 55vh;
+    }
+}
+
+
+
+
+/* Sign_in/up Form */
+#authentication-body {
+    text-align: left;
+    font-family: 'Arial', sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+#login_header{
+    text-align: center;
+}
+#login_header img{
+    width:1.8rem;
+    height:1.8rem;
+}
+
+#signup_header{
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+#paragraph_right{
+    text-align: right;
+    margin-right: 1.25rem;
+    margin-bottom: 4rem;
+}
+
+#login-form,
+#signup-form  {
+    max-width: 25rem;
+    margin: 50px auto;
+    padding: 1.25rem;
+    background-color: #ffe5b4;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+    margin-top:0.3125rem;
+}
+
+#label-authentication {
+    display: block;
+    font-family: 'Lato', Calibri, Arial, sans-serif;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+#login-form input {
+    width: 100%;
+    padding: 0.625rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5625rem;
+    border: 0.0625px solid #ccc;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+}
+
+#signup-form input {
+    width: 100%;
+    padding: 0.625rem;
+    margin-bottom: 0.625rem;
+    border: 0.0625rem solid #ccc;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+}
+
+#login-form span,
+#signup-form span {
+    color: rgb(163, 84, 38);
+}
+
+#authentication-button {
+    background-color: rgb(163, 84, 38);
+    color: #fff;
+    padding: 0.625rem 0.9375rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+#authentication-button:hover {
+    background-color: rgb(77, 38, 16);
+}
+
+@media only screen and (max-width: 600px) {
+    #authentication-form {
+        max-width: 100%;
+    }
+}
+
+
+
+
+
+
+
+
+
+button {
+    border-radius: 0.5rem;
+    background-color: orange;
+}
+input[type="button"]{
+    border-radius: 0.5rem;
+    background-color: orange;
+}
+input[type="submit"]{
+    border-radius: 0.5rem;
+    background-color: orange;
+}
