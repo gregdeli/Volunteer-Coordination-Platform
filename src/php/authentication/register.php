@@ -5,7 +5,7 @@
     $min_length_password = 5;
     $min_length_fullname = 1;
     $min_length_phone = 10;
-    $regex = '/^\d{1,20}(\.\d{1,20})?$/';
+    $regex = '/^\d{1,4}(\.\d{1,6})?$/';
 
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -27,7 +27,7 @@
             $result = mysqli_query($conn, $query);
             $row = mysqli_fetch_array($result);
             $latitude = $row['latitude'];
-            $longitude = $row['longitude'] + 0.005;
+            $longitude = $row['longitude'] + rand(1, 9)/10000;
         }
 
         $valid_coordinates = TRUE;
@@ -56,7 +56,7 @@
                 }else{
                    $insert = "INSERT INTO user VALUES (NULL, '$username', '$password', '$user', '$fullname', '$phone', $latitude, $longitude)";  
                     mysqli_query($conn, $insert);  
-                    echo json_encode(['value' => true, 'message' => 'Success']); 
+                echo json_encode(['value' => true, 'message' => 'Success']); 
                 }        
             }
         } else {
