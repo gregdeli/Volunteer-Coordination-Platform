@@ -147,8 +147,8 @@ function validateCoordinates(coordinate){
 }
 
 function getGeolocation() {
-    var latitude = document.getElementById("latitude");
-    var longitude = document.getElementById("longitude");
+    let latitude = document.getElementById("latitude");
+    let longitude = document.getElementById("longitude");
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -157,8 +157,8 @@ function getGeolocation() {
     }
 
     function showPosition(position) {
-        latitude.value = position.coords.latitude;
-        longitude.value = position.coords.longitude;
+        latitude.value = parseFloat(position.coords.latitude.toFixed(6));
+        longitude.value = parseFloat(position.coords.longitude.toFixed(6));
     }
 }
 
