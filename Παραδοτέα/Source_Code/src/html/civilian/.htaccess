@@ -1,0 +1,5 @@
+<Files "*.html">
+    RewriteEngine On
+    RewriteCond %{HTTP_COOKIE} !civilian= [NC]
+    RewriteRule ^ ../src/html/authentication/log_in.html [R,L]
+</Files>

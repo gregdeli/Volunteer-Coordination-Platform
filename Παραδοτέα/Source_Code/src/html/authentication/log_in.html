@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login - VolEx</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="/src/img/favicon.svg" type="image/x-icon">
+        <link rel="stylesheet" href="/src/css/styles.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="/src/js/authentication/login.js"></script>
+    </head>
+    <body id="authentication-body">
+        <p id="paragraph_right">Don't have an account?
+            <button id="authentication-button" onclick="sign_up()">SIGN UP</button>
+        </p>
+        <h1 id="login_header">Volunteer Express
+            <img src="/src/img/favicon.svg" />
+        </h1>
+    
+        <form id="login-form"> 
+
+            <label id="label-authentication" for="username">Username:</label>
+            <input type="text" id="username"placeholder="Enter Username" name="username" required><br>
+
+            <label id="label-authentication" for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter Password" name="password" required><br>
+
+            <button id="authentication-button" type="submit" onclick="loginCheck(event)">Log in</button>
+        
+        </form>
+    </body>
+</html>

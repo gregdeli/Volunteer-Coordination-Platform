@@ -1,6 +1,5 @@
 1. Κάντε create database ('volunteer_coordination") manually στο phpmyadmin, πατώντας το κουμπί "New" τέρμα αριστερά πάνω.
 
-2. Επιλέξτε το νέο database, πατήστε Import και επιλέξτε το αρχείο volunteer_coordination_queries.zip
+2. Επιλέξτε το νέο database, πατήστε "SQL", επικολλήστε το περιεχόμενο του αρχείου db_export.sql και πατήστε "Go".
 
-3. Για να κάνετε insert δεδομένα, μπορείτε να τρέξετε το php script php/load_rep_items.php
-Αυτό το script κάνει INSERT τα δεδομένα του repository που έφτιαξε ο κ. Κομνηνός.
+** H βάση είναι αρχικοποιημένη με κάποιες καταχωρήσεις, τις οποίες μπορείτε να δείτε στο αρχείο "init_db.txt". Γίνεται και περιγραφή της αρχικοποιήσης αυτής στην αναφορά.

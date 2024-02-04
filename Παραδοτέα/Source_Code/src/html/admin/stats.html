@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="el">
+    <head>
+        <title>Statistics - VolEx</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Initialize default styling -->
+        <link rel="stylesheet" href="/src/css/normalize.css">
+
+        <!-- Our css -->
+        <link rel="stylesheet" href="/src/css/styles.css"/>
+
+        <!-- Our js -->
+        <script src="/src/js/header.js"></script>
+        <script src="/src/js/admin/stats_dyn.js"></script>
+        <script src="/src/js/admin/stats_static.js" defer></script>
+        
+        <!-- Chart js -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+        <!-- favicon -->
+        <link rel="shortcut icon" href="/src/img/favicon.svg" type="image/x-icon">
+    </head>
+
+    <body onload="header('admin')">
+        <div id="header"></div>
+
+        <div class="page_title">
+                Statistics
+        </div>
+
+        <div id="stats_dates">
+            <div>Starting Date:</div>
+            <div id="start_d"></div><br/>
+            <div>Ending Date:&nbsp&nbsp</div>
+            <div id="end_d"></div>
+        </div>
+
+        <div id="Plot"></div>
+
+        <fieldset id="stats_field">
+            <legend>| Choose Period |</legend>
+            <p>
+                <label>Choose starting date:</label>
+                <input id="date1" type="datetime-local" /> <br/>
+            </p>
+            <p>
+                <label>Choose ending date: &nbsp</label> 
+                <input id="date2" type="datetime-local"/> <br/>
+            </p>
+            <input id="stats_submit" type="submit" onclick="on_click_js();stats();"/>
+        </fieldset>
+    </body>
+</html>

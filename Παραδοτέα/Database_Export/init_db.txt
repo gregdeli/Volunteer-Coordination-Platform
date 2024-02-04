@@ -1,0 +1,88 @@
+INSERT INTO user(id,username,password,role,full_name,phone,latitude,longitude)
+        VALUES (1,"admin","7c6a180b36896a0a8c02787eeafb0e4c",'ADMIN',"John Admin",6900000001,NULL,NULL);
+INSERT INTO user(id,username,password,role,full_name,phone,latitude,longitude)
+        VALUES (2,"resc1","6cb75f652a9b52798eb6cf2201057c73",'RESCUER',"Tim Radcliff",6900000002,38.285946,21.809167);
+INSERT INTO user(id,username,password,role,full_name,phone,latitude,longitude)
+        VALUES (3,"resc2","819b0643d6b89dc9b579fdfc9094f28e",'RESCUER',"Toula Roberts",6900000003,38.237624,21.731185);
+INSERT INTO user(id,username,password,role,full_name,phone,latitude,longitude)
+        VALUES (4,"resc3","34cc93ece0ba9e3f6f235d4af979b16c",'RESCUER',"Takis Reynolds",6900000004,38.264684,21.806641);
+
+INSERT INTO user(id,username,password,role,full_name,phone,latitude,longitude)
+        VALUES (5,"civ1","db0edd04aaac4506f7edab03ac855d56",'CIVILIAN',"Tina Cooper",6900000005,38.278856,21.809778);
+INSERT INTO user(id,username,password,role,full_name,phone,latitude,longitude)
+        VALUES (6,"civ2","218dd27aebeccecae69ad8408d9a36bf",'CIVILIAN',"Grigorios Carter",6900000006,38.296733,21.805340);
+INSERT INTO user(id,username,password,role,full_name,phone,latitude,longitude)
+        VALUES (7,"civ3","00cdb7bb942cf6b290ceb97d6aca64a3",'CIVILIAN',"Bob Clark",6900000007,38.236510,21.769867);
+
+INSERT INTO user(id,username,password,role,full_name,phone,latitude,longitude)
+        VALUES (8,"civ4","b25ef06be3b6948c0bc431da46c2c738",'CIVILIAN',"Spyros Clayton",6900000008,38.234203,21.752501);
+INSERT INTO user(id,username,password,role,full_name,phone,latitude,longitude)
+        VALUES (9,"civ5","5d69dd95ac183c9643780ed7027d128a",'CIVILIAN',"Kallinikos Connor",6900000009,38.257114,21.802274);
+
+
+INSERT INTO category(id,name) VALUES (1,"Water");
+INSERT INTO category(id,name) VALUES (2,"Bread");
+INSERT INTO category(id,name) VALUES (3,"Blankets");
+
+
+
+INSERT INTO item(id,name,category_id,quantity)
+        VALUES (1,"Water Bottle 500ml",1,0);
+INSERT INTO item(id,name,category_id,quantity)
+        VALUES (2,"Water Bottle 1L",1,0);
+INSERT INTO item(id,name,category_id,quantity)
+        VALUES (3,"Water Bottle 1.5L",1,0);
+INSERT INTO item(id,name,category_id,quantity)
+        VALUES (4,"Water Bottle 2L",1,0);
+
+INSERT INTO item(id,name,category_id,quantity)
+        VALUES (5,"White Bread",2,0);
+INSERT INTO item(id,name,category_id,quantity)
+        VALUES (6,"Whole Wheat Bread",2,0);
+INSERT INTO item(id,name,category_id,quantity)
+        VALUES (7,"Beer Bread",2,0);
+
+INSERT INTO item(id,name,category_id,quantity)
+        VALUES (8,"Long Blanket",3,0);
+INSERT INTO item(id,name,category_id,quantity)
+        VALUES (9,"Medium Blanket",3,0);
+INSERT INTO item(id,name,category_id,quantity)
+        VALUES (10,"Short Blanket",3,0);
+
+
+
+INSERT INTO request(id,civ_id,item_id,num_people,date_submitted,date_undertaken,date_completed)
+        VALUES (1,5,1,1,"2024-01-25 12:54:00",NULL,NULL);
+INSERT INTO request(id,civ_id,item_id,num_people,date_submitted,date_undertaken,date_completed)
+        VALUES (2,5,6,2,"2024-01-26 13:54:00",NULL,NULL);
+INSERT INTO request(id,civ_id,item_id,num_people,date_submitted,date_undertaken,date_completed)
+        VALUES (3,6,8,3,"2024-01-27 14:54:00",NULL,NULL);
+INSERT INTO request(id,civ_id,item_id,num_people,date_submitted,date_undertaken,date_completed)
+        VALUES (4,7,1,4,"2024-01-28 15:54:00",NULL,NULL);
+
+
+INSERT INTO offer(id,civ_id,item_id,quantity_offered,date_submitted,date_undertaken,date_completed)
+        VALUES (1,8,1,6,"2024-01-28 12:23:00",NULL,NULL);
+INSERT INTO offer(id,civ_id,item_id,quantity_offered,date_submitted,date_undertaken,date_completed)
+        VALUES (2,8,6,2,"2024-01-29 13:23:00",NULL,NULL);
+INSERT INTO offer(id,civ_id,item_id,quantity_offered,date_submitted,date_undertaken,date_completed)
+        VALUES (3,9,8,5,"2024-01-30 14:23:00",NULL,NULL);
+
+
+
+INSERT INTO announcement(id, admin_id, date_announced)
+        VALUES (1,1,'2024-01-28 07:00:00');
+
+INSERT INTO announcement_item(announcement_id, item_id)
+        VALUES (1,1);
+INSERT INTO announcement_item(announcement_id, item_id)
+        VALUES (1,3);
+INSERT INTO announcement_item(announcement_id, item_id)
+        VALUES (1,4);
+INSERT INTO announcement_item(announcement_id, item_id)
+        VALUES (1,6);
+INSERT INTO announcement_item(announcement_id, item_id)
+        VALUES (1,8);
+
+
+INSERT INTO base(latitude,longitude) VALUES (38.279359,21.752501);

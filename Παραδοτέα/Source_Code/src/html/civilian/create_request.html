@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <title>Create Request - VolEx</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- header & footer & style stuff -->
+        <link rel="stylesheet" href="/src/css/normalize.css">
+        <link rel="stylesheet" href="/src/css/styles.css"/>
+        <script src="/src/js/header.js"></script>
+        <script src="/src/js/civilian/create_request.js" defer></script>
+        <!-- favicon -->
+        <link rel="shortcut icon" href="/src/img/favicon.svg" type="image/x-icon">
+    </head>
+    <body id="civ_body" onload="header('civilian')">
+        <div id="header"></div>
+
+        <h1 id="civilian-title">Create Request</h1>
+        <div id="div-dropdown-cat">
+            <label for="create-request-dropdown">Select a Category:</label>
+            <select id="create-request-dropdown" onchange="getCatItems()"></select>
+        </div>
+        <div id="div-autocomplete">
+            <form autocomplete="off">
+                <div class="autocomplete">
+                <input id="input-search" type="text" placeholder="Search item">
+                </div>
+                <input id="select-autocomplete" type="submit" onclick="getSearchedItem(event)" value="Select">
+            </form>
+        </div>
+        <div id="div-list">
+            <ul id="itemslist">
+                <!-- Display items here -->
+            </ul>
+        </div>
+        <div id="div-final">
+            <label for="input-num">Number of people:</label>
+            <input type="number" id="input-num" placeholder="Set number of people"  required min="1"><br>
+
+            <button type="submit" onclick="createRequest(event)">Create Request</button>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="el">
+    <head>
+        <title>Load - VolEx</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Initialize default styling -->
+        <link rel="stylesheet" href="/src/css/normalize.css">
+
+        <!-- Map stuff -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+        
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+        
+        <!-- Our css -->
+        <link rel="stylesheet" href="/src/css/styles.css"/>
+
+        <!-- Our js -->
+        <script src="/src/js/header.js"></script>
+        <script src="/src/js/rescuer/load.js" defer></script>
+
+        <!-- favicon -->
+        <link rel="shortcut icon" href="/src/img/favicon.svg" type="image/x-icon">
+    </head>
+
+    <body onload="header('rescuer')">
+
+        <div id="header"></div>
+
+        <div class="page_title">
+                Load From Base
+        </div>
+
+        <form id="load_form" method="post" action="/src/php/rescuer/cargo/load.php">
+            <section id="inventory_items"></section>
+
+            <input id="inventory_load_button" type="submit" value="Load"></input>
+            <button id="back_to_cargo" onclick="location.replace(location.href+'/../cargo.html');">Back</button>
+        </form>
+    </body>
+</html>

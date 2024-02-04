@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create Volunteer Account - VolEx</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Initialize default styling -->
+        <link rel="stylesheet" href="/src/css/normalize.css">
+        <!-- Our css -->
+        <link rel="stylesheet" href="/src/css/styles.css"/>
+
+        <script src="/src/js/header.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="/src/js/authentication/register.js"></script>
+
+        <!-- favicon -->
+        <link rel="shortcut icon" href="/src/img/favicon.svg" type="image/x-icon">
+    </head>
+    <body onload="header('admin'); invoker();">
+
+        <div id="header"></div>
+
+            <fieldset id="volunteer_acc_field">
+                <legend>| Create Volunteer Account |</legend>
+
+                <label class="labelLeft" for="username">Username:</label>
+                <input type="text" id="username"placeholder="Enter Username" name="username" required>
+                <span id="username_"></span>
+
+                <label class="labelLeft" for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter Password" name="password" pattern=".{5,}" required>
+                <span id="password_"></span>
+
+                <label class="labelLeft" for="repeat-password">Repeat Password:</label>
+                <input type="password" id="repeat-password" placeholder="Repeat Password" name="repeat-password" pattern=".{5,}" required>
+                <span id="repeat-password_"></span>
+
+                <label class="labelLeft" for="fullname">Fullname:</label>
+                <input type="text" id="fullname" placeholder="Enter Fullname" name="fullname" required>
+                <span id="fullname_"></span>
+
+                <label class="labelLeft" for="phone">Phone number:</label>
+                <input type="text" id="phone" placeholder="Enter Phone number" name="phone" required>
+                <span id="phone_"></span>
+
+                <button type="submit" onclick="registerCheck(event, 1)">Submit</button>
+
+            </fieldset>
+    </body>
+</html>
