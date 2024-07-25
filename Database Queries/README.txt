@@ -1,4 +1,4 @@
-1. Κάντε create database ('volunteer_coordination") manually στο phpmyadmin, πατώντας το κουμπί "New" τέρμα αριστερά πάνω.
+1. Κάντε create database ("volunteer_coordination") manually στο phpmyadmin, πατώντας το κουμπί "New" τέρμα αριστερά πάνω.
 
 2. Επιλέξτε το νέο database, πατήστε "SQL", επικολλήστε το περιεχόμενο του αρχείου db_export.sql και πατήστε "Go".
 
