@@ -31,11 +31,3 @@ This project involves the development of a comprehensive **Disaster Management S
 - **Database**: Not specified (consider mentioning the database used)
 - **Additional Libraries**: chart.js for data visualization
 
-## Installation
-
-(Provide steps here for installing the project locally, if applicable.)
-
-## License
-
-(Include your project's license information here.)
-
